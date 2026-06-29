@@ -38,7 +38,7 @@ AI时代最好的使用方式，不是让它帮你写更多的代码，而是让
 
 从 Java 转向 C++ 底层，第一站选在网络。ARP 抓包、TCP 状态机、epoll 源码、Reactor 框架——每一层都要被拆到底。
 
-📘 **[网络协议与Linux网络编程笔记](./网络/READMME.md)** · 覆盖《TCP/IP详解 卷一》+《Linux高性能服务器编程》核心章节
+📘 **[网络协议与Linux网络编程笔记](./网络/README.md)** · 覆盖《TCP/IP详解 卷一》+《Linux高性能服务器编程》核心章节
 
 ---
 
@@ -57,7 +57,7 @@ AI时代最好的使用方式，不是让它帮你写更多的代码，而是让
 
 ## 写得比较深的一篇
 
-[**挖穿Java并发底层：一个30年前的历史妥协，如何坑了三代程序员**](./articles/volatile-lfence.md)
+[**挖穿Java volatile并发底层：一个30年前的历史妥协，如何坑了三代程序员**](./小文章/Java的volatile 可见性如何实现.md)
 
 翻Intel手册、JDK源码和ARM指令集，把volatile读的lfence问题从头拆穿。
 
