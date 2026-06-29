@@ -47,11 +47,12 @@ AI时代最好的使用方式，不是让它帮你写更多的代码，而是让
 | 模块          | 说明                                                       |
 | :------------ | :--------------------------------------------------------- |
 | **CSAPP**     | 计算机系统基础：内存、汇编、缓存、虚拟内存、并发底层原理   |
-| **Java 并发** | JMM、volatile、synchronized、AQS、线程池，两本原著全量学习 |
 | **JVM**       | 内存布局、GC、类加载、JIT，基于《深入理解Java虚拟机》      |
+| **Java 并发** | JMM、volatile、synchronized、AQS、线程池，两本原著全量学习 |
 
-📙 **[Java并发笔记](./并发/README.md)**
-📗 **[JVM笔记](./JVM/README.md)**
+📘 **[CSAPP笔记](./csapp/README.md)**📗 **[JVM笔记](./JVM/README.md)**📙 **[Java并发笔记](./并发/README.md)**
+
+
 
 ---
 
