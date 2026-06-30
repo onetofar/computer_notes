@@ -6,6 +6,7 @@ tags:
   - networking
 difficulty: 深入
 source: "TCP/IP详解"
+link: ["[[4-1 流量控制以及滑动窗口|滑动窗口]]"]
 ---
 > RTO 重传超时时间 Retransmission Timeout, RTO
 > RTT 基于连接的往返时间 Round-Trip Time, RTT

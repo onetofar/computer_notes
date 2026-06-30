@@ -7,6 +7,7 @@ tags:
   - jvm/gc-impl
 difficulty: 深入
 source: "深入理解Java虚拟机"
+link: ["[[经典垃圾收集器与G1收集器深度全解|经典收集器总览]]"]
 ---
 # G1(Garbage-First) 垃圾收集器 深度全解
 ## 🎯 G1 核心定位与前世今生

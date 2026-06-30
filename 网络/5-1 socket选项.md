@@ -6,6 +6,7 @@ tags:
   - networking
 difficulty: 进阶
 source: "自整理"
+link: ["[[2-3 linux下的socket函数|socket函数]]"]
 ---
 ## socket选项
 复习一下状态机: [[3-2 TCP的连接建立与终止]] 

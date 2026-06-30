@@ -6,6 +6,7 @@ tags:
   - networking
 difficulty: 深入
 source: "自整理"
+link: ["[[5-2 IO复用相关技术|IO复用]]"]
 ---
 # epoll 核心流程详解（学习笔记）
 适用场景：Linux 高性能 IO 多路复用，Netty、Redis、Nginx、游戏服务器、网关底层核心技术。

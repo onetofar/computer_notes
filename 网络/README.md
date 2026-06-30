@@ -76,7 +76,11 @@
 - [IO 复用应用：非阻塞 connect](./5-2-4 IO复用的应用之一-非阻塞的connect.md)
 
 **实验与踩坑**
-- [epoll 非阻塞 connect 性能对比](./5-a epoll下非阻塞connect性能差异.md)
+- [epoll 非阻塞 connect 性能差异](./5-2-a epoll下非阻塞connect性能差异.md)
+
+**定时器**
+- [SIGALRM 信号高性能定时器：时间轮](./5-3 SIGALRM信号高性能定时器——时间轮.md)
+- [升序链表的定时器服务器源码分析](./5-3-a 升序链表的定时器服务器源码分析.md)
 
 ### 六、附录：参考与工具
 

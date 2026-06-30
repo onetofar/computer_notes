@@ -6,6 +6,7 @@ tags:
   - networking
 difficulty: 进阶
 source: "自整理"
+link: ["[[5-1 socket选项|socket选项]]"]
 ---
 # 总体流程图
 ```mermaid

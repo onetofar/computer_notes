@@ -7,6 +7,7 @@ tags:
 difficulty: 进阶
 source: "TCP/IP详解"
 总览:
+link: ["[[3-2 TCP的连接建立与终止|TCP连接管理]]"]
 ---
 <img src="./md_pict/image-20260525225321684.png" alt="image-20260525225321684" style="zoom:67%;" />	
 ## 一、TCP连接唯一标识

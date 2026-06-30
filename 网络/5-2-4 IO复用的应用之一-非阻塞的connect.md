@@ -1,3 +1,13 @@
+---
+title: "5-2-4 非阻塞 connect 实现"
+category: 计算机网络
+tags:
+  - net/ip
+  - networking
+difficulty: 进阶
+source: "Linux高性能服务器编程"
+link: ["[[5-2-a epoll下非阻塞connect性能差异|非阻塞connect性能]]"]
+---
 
 ## 一、问题：阻塞 `connect` 为什么不行
 

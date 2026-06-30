@@ -6,6 +6,7 @@ tags:
   - networking
 difficulty: 进阶
 source: "TCP/IP详解"
+link: ["[[3-3 TCP的重传与超时|TCP重传]]"]
 ---
 ## 正常的TCP建立与终止
 ### 状态图变化总览

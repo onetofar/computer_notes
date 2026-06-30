@@ -6,6 +6,7 @@ tags:
   - networking
 difficulty: 进阶
 source: "自整理"
+link: ["[[A skynet源码指南|Skynet框架]]"]
 ---
 ## 1. Reactor 架构深化：目前还缺多 Reactor / 多 I/O 线程
 现在看起来你的游戏服务器更像是：

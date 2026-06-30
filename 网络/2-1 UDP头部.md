@@ -6,6 +6,7 @@ tags:
   - networking
 difficulty: 基础
 source: "TCP/IP详解"
+link: ["[[2-2 IP分片|IP分片]]"]
 ---
 # UDP的前置知识
 <img src="./md_pict/image-20260519121856112.png" alt="image-20260519121856112" style="zoom:67%;" />

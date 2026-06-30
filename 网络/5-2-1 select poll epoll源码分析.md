@@ -1,3 +1,13 @@
+---
+title: "5-2-1 select poll epoll 源码分析"
+category: 计算机网络
+tags:
+  - net/io
+  - networking
+difficulty: 深入
+source: "Linux高性能服务器编程"
+link: ["[[5-2 IO复用相关技术|IO复用概念]]","[[5-2-2 epoll下LT和ET的具体差别|LT/ET模式]]"]
+---
 #### 性能差距
 ##### 一次调用的完整开销对比（三者横向）
 **统一基准**：监听总 fd 数 = n，本次就绪 fd 数 = k；典型网络服务场景下 n >> k（大量长连接、低活跃度），这也是多路复用性能差异最显著的场景。

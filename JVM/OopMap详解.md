@@ -5,6 +5,7 @@ tags:
   - jvm
 difficulty: 深入
 source: "自整理"
+link: ["[[逃逸分析（Escape Analysis）【字节码执行引擎·JIT核心优化】|逃逸分析]]"]
 ---
 # OopMap详解
 #### 1. 完全正确的部分

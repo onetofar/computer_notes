@@ -7,6 +7,7 @@ tags:
   - networking
 difficulty: 进阶
 source: "自整理"
+link: ["[[2-3 linux下的socket函数|Linux socket函数]]"]
 ---
 
 # 创建RAII socket类 发请求

@@ -6,6 +6,7 @@ tags:
   - networking
 difficulty: 进阶
 source: "自整理"
+link: ["[[4-2 拥塞控制|拥塞控制]]"]
 ---
 ```sh
 #!/bin/bash

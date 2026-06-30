@@ -7,6 +7,7 @@ tags:
   - networking
 difficulty: 深入
 source: "自整理"
+link: ["[[5-2 IO复用相关技术|IO复用]]"]
 ---
 # 4种I/O前置知识
 [[A Netty的演进]]

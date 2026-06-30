@@ -7,6 +7,7 @@ tags:
   - networking
 difficulty: 进阶
 source: "自整理"
+link: ["[[3-2 TCP的连接建立与终止|TCP连接管理]]"]
 ---
 ```cpp
     SeqAckSimulator() {

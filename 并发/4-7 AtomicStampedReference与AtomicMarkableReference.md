@@ -1,12 +1,13 @@
 ---
-title: "AtomicStampedReference & AtomicMarkableReference"
+title: "4-7 AtomicStampedReference 与 AtomicMarkableReference"
 category: 并发编程
 tags:
   - concurrency
 difficulty: 进阶
 source: "JCiP"
+link: ["[[4-4 原子变量与非阻塞算法|原子变量与非阻塞算法]]"]
 ---
-# AtomicStampedReference & AtomicMarkableReference 文档
+# 4-7 AtomicStampedReference 与 AtomicMarkableReference
 （基于 JCiP / JDK 并发包，解决 ABA 问题核心工具）
 ## 一、核心概述
 这两个类是 **JDK 为无锁 CAS 操作解决 ABA 问题**提供的官方实现，均为 `AtomicReference` 的增强类：

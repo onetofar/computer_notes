@@ -7,6 +7,7 @@ tags:
   - jvm/gc-impl
 difficulty: 深入
 source: "自整理"
+link: ["[[Shenandoah 收集器 深度全解|Shenandoah收集器]]"]
 ---
 # ZGC 收集器 深度全解
 ## 🎯 核心定位与前世今生

@@ -6,6 +6,7 @@ tags:
   - networking
 difficulty: 基础
 source: "自整理"
+link: ["[[3-1 TCP头部|TCP头部]]"]
 ---
 ```c++
 正在监听网卡: loopback0

@@ -7,6 +7,7 @@ tags:
   - jvm/jit
 difficulty: 深入
 source: "自整理"
+link: ["[[字节码执行引擎下的方法调用（架构师底层全链路笔记）|字节码执行引擎]]"]
 ---
 # 逃逸分析（Escape Analysis）【字节码执行引擎·JIT核心优化】
 【**关键前置澄清**】

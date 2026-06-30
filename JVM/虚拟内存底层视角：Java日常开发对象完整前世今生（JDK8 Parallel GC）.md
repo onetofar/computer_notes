@@ -8,6 +8,7 @@ tags:
   - jvm/mem
 difficulty: 深入
 source: "自整理 / CSAPP"
+link: ["[[JVM运行时内存模型 ↔ CSAPP存储器结构 贯通笔记|JVM内存模型]]"]
 ---
 
 # 虚拟内存底层视角：Java日常开发对象完整前世今生（JDK8 Parallel GC）

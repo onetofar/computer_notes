@@ -12,25 +12,54 @@
 
 ### 一、并发基础（1 阶段）
 
-- [并发基础：线程、内存模型与可见性](./1阶段-并发基础.md)
+**理论**
+- [并发基础理论](./1-1%20并发基础理论笔记.md) — 并发本质、JMM、happens-before、线程安全、volatile/final、对象共享与组合
+- [DCL专题与内存模型](./1-2%20DCL专题与内存模型笔记.md) — DCL五种方案对比、多CPU内存模型、MESI缓存一致性协议
+
+**总结与贯通**
+- [全链路打通与易错点](./1-a%20全链路打通与易错点.md) — 三层联动映射表、10大终极易错点、知识闭环
 
 ### 二、锁与同步核心（2 阶段）
 
-- [锁与同步核心机制](./2阶段-锁与同步核心.md)
-- [AQS 队列同步器（全量源码+流程图）](./2阶段-Java并发编程艺术·AQS队列同步器 全量源码+流程图+实战手册.md)
-- [AQS 队列同步器（思想+极简版）](./2阶段-Java并发编程艺术·AQS队列同步器（思想+极简源码流程版）.md)
-- [ConcurrentHashMap 深度解析](./2阶段-Java并发容器和框架：ConcurrentHashMap.md)
-- [JDK1.7 HashMap 死循环根源](./2阶段-JDK1.7 HashMap 死循环的唯一根源：.md)
+**理论**
+- [锁体系核心理论](./2-1%20锁体系核心理论笔记.md) — synchronized底层、Lock/AQS/ReentrantLock/读写锁
+- [并发工具与活跃性问题](./2-2%20并发工具与活跃性问题笔记.md) — 阻塞队列、死锁/活锁/饥饿、同步工具类
+
+**总结与贯通**
+- [全链路打通与易错点](./2-a%20全链路打通与易错点.md) — 三层联动映射表、10大易错点、知识闭环
+
+**专题深入**
+- [AQS 核心理论](./2-4%20AQS核心理论笔记.md) — 核心组件、数据结构、内存语义、面试题
+- [AQS 独占模式源码分析](./2-c%20AQS独占模式源码分析笔记.md) — acquire/release/可中断/超时源码全流程
+- [AQS 共享模式与实战](./2-d%20AQS共享模式与实战笔记.md) — 共享模式源码、工具方法、ReentrantLock/Semaphore/CountDownLatch拆解、TwinsLock实战
+- [ConcurrentHashMap 理论+架构](./2-3%20ConcurrentHashMap理论+架构笔记.md) — 为什么需要CHM、JDK1.7底层架构、初始化、哈希定位
+- [CHM 源码分析笔记](./2-b%20ConcurrentHashMap源码分析笔记.md) — get/put/size/rehash 完整源码+流程图
+- [JDK1.7 HashMap 死循环根源](./2-5_JDK1.7_HashMap_死循环根源分析.md)
 
 ### 三、任务执行与线程池（3 阶段）
 
-- [任务执行与线程池源码级整合](./3阶段-任务执行与线程池 源码级深度整合文档.md)
-- [JUC Executor 框架与 FutureTask](./3阶段-JUC Executor 框架与 FutureTask 完整详解.md)
+**理论**
+- [线程池核心理论与执行流程](./3-1%20线程池核心理论与执行流程.md) — Executor框架、ThreadPoolExecutor核心(ctl/execute/addWorker)
+- [Worker与FutureTask笔记](./3-2%20Worker与FutureTask笔记.md) — Worker生命周期、线程复用、FutureTask状态机
+- [线程池关闭与调优](./3-3%20线程池关闭与调优.md) — 优雅关闭、核心参数配置、拒绝策略、线程饥饿
+- [Executor框架与四大线程池笔记](./3-4%20Executor框架与四大线程池笔记.md) — Fixed/Single/Cached/Scheduled四大标准线程池
+
+**实验与源码分析**
+- [CompletionService与定时线程池](./3-a%20CompletionService与定时线程池.md) — CompletionService、ScheduledThreadPoolExecutor核心设计
+- [监控排查与最佳实践](./3-b%20监控排查与最佳实践.md) — 扩展钩子、异常处理、JVM/CSAPP底层联动、易错点
+- [FutureTask源码分析笔记](./3-c%20FutureTask源码分析笔记.md) — FutureTask整体执行流程分析
 
 ### 四、性能优化与全体系闭环（4 阶段）
 
-- [性能优化与全体系闭环](./4阶段- 性能优化与全体系闭环.md)
-- [并发性能优化全景图](./4阶段-并发性能优化全景图.md)
-- [AtomicReferenceFieldUpdater 详解](./4阶段-AtomicReferenceFieldUpdater 详解.md)
-- [AtomicStampedReference & AtomicMarkableReference](./4阶段-AtomicStampedReference & AtomicMarkableReference 文档.md)
-- [并发程序测试方法](./4阶段-并发程序测试-简单.md)
+**核心知识体系（JCiP 第10-16章拆分）**
+- [活跃性问题与死锁治理](./4-1%20活跃性问题与死锁治理.md) — 死锁四大条件、避免策略、饥饿与活锁
+- [性能与可伸缩性优化](./4-2%20性能与可伸缩性优化.md) — Amdahl定律、锁竞争优化、JMH基准测试
+- [AQS同步器与状态依赖管理](./4-3%20AQS同步器与状态依赖管理.md) — 模板方法模式、条件队列、状态依赖
+- [原子变量与非阻塞算法](./4-4%20原子变量与非阻塞算法.md) — CAS指令、ABA问题、无锁数据结构
+- [JMM与并发安全发布](./4-5%20JMM与并发安全发布.md) — 重排序、Happens-Before、安全发布
+
+**专题深入**
+- [AtomicReferenceFieldUpdater 详解](./4-6%20AtomicReferenceFieldUpdater详解.md) — 原子字段更新器深度解析
+- [AtomicStampedReference 与 AtomicMarkableReference](./4-7%20AtomicStampedReference与AtomicMarkableReference.md) — ABA问题解决与版本号机制
+- [并发性能优化全景图](./4-8%20并发性能优化全景图.md) — 三大瓶颈与三大优化方向逻辑闭环
+- [并发程序测试方法](./4-9%20并发程序测试方法.md) — JCiP并发测试基准与实践

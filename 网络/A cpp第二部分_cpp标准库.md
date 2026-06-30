@@ -5,6 +5,7 @@ tags:
   - networking
 difficulty: 进阶
 source: "自整理"
+link: ["[[A cpp第一部分_cpp基础笔记|C++基础]]","[[C++ 可调用对象的统一理论框架|可调用对象]]"]
 ---
 # 8.1 IO类
 ## 先用csapp视角拆解IO流:

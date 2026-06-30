@@ -5,6 +5,7 @@ tags:
   - networking
 difficulty: 进阶
 source: "自整理"
+link: ["[[2-3 linux下的socket函数|socket函数]]"]
 ---
 # C++ 阻塞式多线程 vs Netty EventLoop：深度对比与演进
 ## 一、核心模型对比图 (Mermaid)

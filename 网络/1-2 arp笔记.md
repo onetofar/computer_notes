@@ -6,6 +6,7 @@ tags:
   - networking
 difficulty: 基础
 source: "TCP/IP详解"
+link: ["[[1-1 链路层与网络基础|链路层]]"]
 ---
 
 arp:地址解码协议 ARP仅用于IPv4, IPv6使用邻居发现协议,它被合并人ICMPv61. 

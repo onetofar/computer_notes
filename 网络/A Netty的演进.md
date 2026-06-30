@@ -6,6 +6,7 @@ tags:
   - networking
 difficulty: 深入
 source: "自整理"
+link: ["[[3-4 netty的eventloop模型衍生cpp|Netty EventLoop模型]]"]
 ---
 # IO模型核心原理
 > 内核视角 | 无晦涩ASCII图 | Mermaid标准时序图 | 打通Java与C++底层

@@ -1,3 +1,12 @@
+---
+title: "Java volatile 可见性实现"
+category: 并发编程
+tags:
+  - concurrency
+  - jmm
+difficulty: 进阶
+source: "自整理"
+---
 # 挖穿Java volatile关键字并发底层：一个30年前的历史妥协，如何坑了三代程序员
 
 本文首发于 GitHub，转载请注明出处。

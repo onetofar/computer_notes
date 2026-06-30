@@ -1,12 +1,13 @@
 ---
-title: "AtomicReferenceFieldUpdater 详解"
+title: "4-6 AtomicReferenceFieldUpdater 详解"
 category: 并发编程
 tags:
   - concurrency
 difficulty: 进阶
 source: "JCiP"
+link: ["[[4-4 原子变量与非阻塞算法|原子变量与非阻塞算法]]"]
 ---
-# AtomicReferenceFieldUpdater 详解
+# 4-6 AtomicReferenceFieldUpdater 详解
 （基于 Java 并发编程实践 JCiP + JDK `ConcurrentLinkedQueue` 源码）
 ## 一、组件概述
 `AtomicReferenceFieldUpdater` 是 **J.U.C（java.util.concurrent）** 提供的**反射式原子字段更新工具**，基于 **Unsafe + CAS** 实现原子操作。

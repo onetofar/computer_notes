@@ -1,3 +1,13 @@
+---
+title: "5-2-2 epoll LT 与 ET 触发模式"
+category: 计算机网络
+tags:
+  - net/ip
+  - networking
+difficulty: 进阶
+source: "Linux高性能服务器编程"
+link: ["[[5-2-3 epoll下EPOLLONESHOT 具体实现|EPOLLONESHOT]]"]
+---
 # epoll ET vs LT：内核就绪链表管理机制的全链路源码分析
 
 > 核心问题：ET 和 LT 在源码层面到底哪里不同？就绪链表上的 fd 分别在什么时候、在哪个函数里、通过什么条件被删除？

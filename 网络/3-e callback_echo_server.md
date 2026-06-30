@@ -6,6 +6,7 @@ tags:
   - networking
 difficulty: 进阶
 source: "自整理"
+link: ["[[3-d blocking_echo_server|阻塞式Echo]]"]
 ---
 # 回调函数
 ```c++

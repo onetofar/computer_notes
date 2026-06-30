@@ -7,6 +7,7 @@ tags:
   - networking
 difficulty: 基础
 source: "自整理"
+link: ["[[2-1 UDP头部|UDP头部]]"]
 ---
 ![image-20260519224011253](C:\Users\wzy\AppData\Roaming\Typora\typora-user-images\image-20260519224011253.png)
 Frame 89688: Packet, 51 bytes on wire (408 bits), 51 bytes captured (408 bits) on interface \Device\NPF_Loopback, id 0

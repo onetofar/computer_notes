@@ -1,3 +1,13 @@
+---
+title: "5-2-3 epoll EPOLLONESHOT 实现"
+category: 计算机网络
+tags:
+  - net/ip
+  - networking
+difficulty: 进阶
+source: "Linux高性能服务器编程"
+link: ["[[5-2-2 epoll下LT和ET的具体差别|LT/ET模式]]"]
+---
 # EPOLLONESHOT 源码级全链路分析
 
 > 核心问题：`EPOLLONESHOT` 在内核中如何实现？它在哪些函数中生效？它能解决什么并发问题，不能解决什么？

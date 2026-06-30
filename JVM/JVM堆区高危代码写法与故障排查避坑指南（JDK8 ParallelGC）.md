@@ -9,6 +9,7 @@ tags:
   - jvm/mem
 difficulty: 进阶
 source: "自整理"
+link: ["[[JVM运行时内存模型 ↔ CSAPP存储器结构 贯通笔记|JVM内存模型]]"]
 ---
 
 # JVM堆区高危代码写法与故障排查避坑指南（JDK8 ParallelGC）

@@ -6,6 +6,7 @@ tags:
   - networking
 difficulty: 深入
 source: "自整理 / CSAPP"
+link: ["[[A cpp第二部分_cpp标准库|C++标准库]]"]
 ---
 # C++ 可调用对象的统一理论框架（ELF/内存视角 · 最终版）
 ## 1. 核心统一公式
