@@ -21,11 +21,14 @@ link: ["[[A cpp第一部分_cpp基础笔记|C++基础]]","[[C++ 可调用对象�
 【 内核 】      文件描述符表、内核缓冲区、设备驱动
 底层（硬件）
 ```
-| C++ 流 | 含义               | 绑定的 Unix 文件描述符 (fd) | C stdio 对应 | 系统调用 |
-|  | ------------------ | --------------------------- | ------------ | -------- |
-| `cin`  | 标准输入           | `0 (STDIN_FILENO)`          | `stdin`      | `read`   |
-| `cout` | 标准输出           | `1 (STDOUT_FILENO)`         | `stdout`     | `write`  |
-| `cerr` | 标准错误（无缓冲） | `2 (STDERR_FILENO)`         | `stderr`     | `write`  |
+
+| C++ 流对象 | 含义          | 绑定 Unix 文件描述符       | C stdio 对应 FILE* | 底层系统调用  | 缓冲特性补充                     |
+| ------- | ----------- | ------------------- | ---------------- | ------- | -------------------------- |
+| `cin`   | 标准输入流       | `0 (STDIN_FILENO)`  | `stdin`          | `read`  | 行缓冲 / 全缓冲，默认同步 `stdio`     |
+| `cout`  | 标准输出流       | `1 (STDOUT_FILENO)` | `stdout`         | `write` | 行缓冲；终端输出遇换行刷新，默认同步 `stdio` |
+| `cerr`  | 标准错误输出（无缓冲） | `2 (STDERR_FILENO)` | `stderr`         | `write` | **完全无缓冲**，输出立即刷入 fd        |
+| `clog`  | 标准错误输出（带缓冲） | `2 (STDERR_FILENO)` | `stderr`         | `write` | 全缓冲，积累数据后批量输出              |
+
 `cout <<` 就能打印，**因为它默认写 fd=1（控制台）**
 CSAPP 核心：**缓冲机制**（`cin/cout` 快 / 慢的根源）
 C++ 流 **完全继承 C stdio 的 3 种缓冲策略**：
@@ -2341,4 +2344,843 @@ flowchart LR
 - **协议解析中的应用**：在编写**高性能网络网关、游戏服务器协议解析**时，经常会从数据包（`vector<char>` 或 `string`）的**末尾向前解析附加字段**（如变长数据尾部提取校验和、时间戳）。此时直接使用 `rbegin()` 配合 `find_if` 非常高效。
 - **`base()` 工程的坑点**：现代 C++ 工程中，很多新手在调用 `rbegin()` 做 `erase` 时，直接传入 `rcomma` 会引发崩溃，必须使用 `vec.erase(rcomma.base())`。务必牢记：**标准库中的范围 `[begin, end)` 性质决定了反向迭代器和普通迭代器之间永远错开一个位置。**
 
-### 
+# 12.1 动态内存与智能指针
+为了更容易(同时也更安全)地使用动态内存，新的标准库提供了两种智能指针(smartpointer)类型来管理动态对象。
+>**智能指针的行为类似常规指针，重要的区别是它负责自动释放所指向的对象。**
+
+新标准库提供的这两种智能指针的区别在于管理底层指针的方式:
+- shared_ptr允许多个指针指向同一个对象
+- unique_ptr则“独占”所指向的对象
+- 标准库还定义了一个名为weak_ptr的伴随类，它是一种弱引用，指向shared_ptr所管理的对象。
+>这三种类型都定义在memory头文件中。
+
+## 12.1.1 shared_ptr 类
+
+### 核心定义
+`shared_ptr` 是一种**引用计数智能指针**，多个 `shared_ptr` 可指向同一个对象，当最后一个指向该对象的 `shared_ptr` 被销毁时，对象自动释放。
+
+### 支持操作
+
+| 操作 | 说明 |
+| --- | --- |
+| `shared_ptr<T> p` | 空智能指针，可指向类型为 `T` 的对象 |
+| `make_shared<T>(args)` | 返回一个 shared_ptr，动态分配并构造 `T` 对象（**推荐方式**） |
+| `shared_ptr<T> p(q)` | p 是 q 的拷贝；递增 q 中的计数器 |
+| `p = q` | p 和 q 都是 shared_ptr，递减 p 原引用、递增 q 引用 |
+| `p.use_count()` | 返回与 p 共享对象的智能指针数量（调试用，低性能） |
+| `p.unique()` | `use_count() == 1` 时返回 true |
+| `p.get()` | 返回 p 中保存的裸指针（**危险**，仅用于兼容裸指针 API） |
+| `p.reset()` | 若 p 是唯一指向对象的 shared_ptr，释放对象并置空 |
+| `p.reset(q)` | 令 p 指向新对象 q（裸指针），释放原引用 |
+| `*p` | 解引用，获得所指向对象的引用 |
+| `p->mem` | 等价于 `(*p).mem` |
+
+### 教材标准表格（P438-439）
+
+**表12.1：shared_ptr 和 unique_ptr 都支持的操作**
+
+| 操作 | 说明 |
+| --- | --- |
+| `shared_ptr<T> sp` / `unique_ptr<T> up` | 空智能指针，可以指向类型为 `T` 的对象 |
+| `p` | 将 `p` 用作一个条件判断，若 `p` 指向一个对象，则为 `true` |
+| `*p` | 解引用 `p`，获得它指向的对象 |
+| `p->mem` | 等价于 `(*p).mem` |
+| `p.get()` | 返回 `p` 中保存的指针。**要小心使用**：若智能指针释放了其对象，返回的指针就变成无效了 |
+| `swap(p, q)` / `p.swap(q)` | 交换 `p` 和 `q` 中的指针 |
+
+> `p.get()` 返回的裸指针仅用于**需要裸指针的旧接口**，不要用它初始化另一个智能指针，否则会导致 **double free**。
+
+**表12.2：shared_ptr 独有的操作**
+
+| 操作 | 说明 |
+| --- | --- |
+| `make_shared<T>(args)` | 返回一个 `shared_ptr`，指向一个动态分配的类型为 `T` 的对象。使用 `args` 初始化此对象 |
+| `shared_ptr<T> p(q)` | `p` 是 `shared_ptr q` 的拷贝；此操作会**递增** `q` 中的计数器。`q` 中的指针必须能转换为 `T*` |
+| `p = q` | `p` 和 `q` 都是 `shared_ptr`，所保存的指针必须能相互转换。此操作会**递减** `p` 的引用计数、**递增** `q` 的引用计数；若 `p` 的引用计数变为 0，将其管理的原内存释放 |
+| `p.unique()` | 若 `p.use_count()` 为 1，返回 `true`；否则返回 `false` |
+| `p.use_count()` | 返回与 `p` 共享对象的智能指针数量；可能很慢，**主要用于调试** |
+
+> `make_shared` 是**推荐创建方式**：一次分配、异常安全、性能最优。
+> `use_count()` 性能较差，生产代码中不应该用于逻辑判断。
+
+### 引用计数原理
+
+```cpp
+#include <memory>
+#include <iostream>
+
+int main() {
+    // 1. make_shared 是最安全的创建方式
+    // 在堆上分配一个 int 值为 42，并返回 shared_ptr
+    auto p1 = std::make_shared<int>(42);
+    // p1 引用计数 = 1
+
+    // 2. 拷贝使引用计数递增
+    auto p2 = p1;   // 引用计数 = 2
+    auto p3 = p2;   // 引用计数 = 3
+
+    // 3. 离开作用域自动递减
+    // p3 销毁 → 引用计数 = 2
+    // p2 销毁 → 引用计数 = 1
+    // p1 销毁 → 引用计数 = 0 → 自动 delete 对象
+
+    return 0;
+}
+```
+
+### 引用计数内部机制
+
+```
+堆内存（控制块 + 对象）
+┌─────────────────────────────┐
+│  int value = 42             │  ← 管理的对象
+├─────────────────────────────┤
+│  reference_count = 3        │  ← 控制块中的引用计数
+│  weak_count = 0             │
+└─────────────────────────────┘
+        ↑      ↑      ↑
+       p1     p2     p3       ← 栈上的 shared_ptr 对象
+```
+
+- 引用计数是**原子操作**，多线程安全（但所指对象本身非线程安全）
+- 拷贝构造 / 拷贝赋值递增计数，析构递减计数
+- 计数降为 0 时，`delete` 对象 + 释放控制块
+
+### make_shared 为何是推荐方式？
+
+```cpp
+// ✅ 推荐：make_shared 一次分配，异常安全
+auto p = std::make_shared<int>(42);
+
+// ❌ 不推荐：先 new 再传 shared_ptr 构造函数
+// 若在 new 和构造 shared_ptr 之间抛出异常，内存泄漏
+std::shared_ptr<int> p2(new int(42));
+```
+
+`make_shared` 将对象和控制块**一次分配在一块连续内存**中，性能更高、异常安全。
+
+### 💡 工程权重：⭐⭐⭐⭐⭐
+
+- **优先使用 `make_shared`**：单次分配、异常安全、更简洁
+- **不要混用裸指针和 shared_ptr**：`shared_ptr<int> p(new int(42))` 后不要再拿 `p.get()` 创建另一个 shared_ptr，会导致**双 delete**
+- **引用计数的性能成本**：原子操作比裸指针慢。高频热点代码中（如每帧数万次分配的场景），考虑用 `unique_ptr` 或 `new/delete` + 内存池
+
+```cpp
+// ⚠️ 危险：两个独立的 shared_ptr 管理同一裸指针 → double free
+int* raw = new int(42);
+std::shared_ptr<int> p1(raw);
+std::shared_ptr<int> p2(raw); // ❌ p1 和 p2 各自引用计数为 1
+// 两者析构时都会 delete raw → 未定义行为
+```
+
+---
+
+## 12.1.2 直接管理内存
+
+### new 与 delete
+
+C++ 通过 `new` 运算符分配动态内存，`delete` 运算符释放。
+
+```cpp
+#include <iostream>
+
+int main() {
+    // ========== new 的多种形式 ==========
+
+    // 1. 默认初始化：内置类型未定义值（int = 未定义）
+    int* pi = new int;          // *pi 的值未定义
+
+    // 2. 值初始化：加空括号或花括号 → 0 初始化
+    int* pi2 = new int();       // *pi2 = 0
+    int* pi3 = new int{};       // *pi3 = 0 （C++11 起）
+    int* pi4 = new int(42);     // *pi4 = 42
+
+    // 3. 对象初始化
+    std::string* ps = new std::string(10, 'x');  // "xxxxxxxxxx"
+
+    // 4. auto 推导（C++11）
+    auto p1 = new auto(*pi4);   // p1 类型为 int*，值为 42 的拷贝
+    // auto p2 = new auto{pi4}; // ❌ 不能使用花括号列表推导
+
+    // 5. const 对象
+    const int* pci = new const int(1024);  // const 动态对象
+
+    // 6. 定位 new（不分配内存，仅构造）
+    // 见第 19 章
+
+    // ========== delete ==========
+    delete pi;      // 销毁对象 + 释放内存
+    delete pi2;     // 注意：delete 后指针变成悬空指针 (dangling pointer)
+    pi = nullptr;   // 显式置空，避免误用
+
+    return 0;
+}
+```
+
+### new/delete 管理的三大陷阱
+
+```cpp
+void pitfalls() {
+    // 陷阱 1：忘记 delete → 内存泄漏
+    int* p = new int(42);
+    // 没有 delete p → 内存泄漏
+
+    // 陷阱 2：使用已释放的指针（悬空指针）
+    int* q = new int(10);
+    delete q;
+    *q = 42;  // ❌ 未定义行为：使用已释放内存
+
+    // 陷阱 3：重复 delete
+    int* r = new int(20);
+    delete r;
+    delete r; // ❌ 未定义行为：double free
+}
+```
+
+### new/delete 执行流程
+
+```
+new int(42)：
+  1. operator new 分配 sizeof(int) 字节内存（底层调用 malloc）
+  2. 在分配的内存上构造 int，值为 42（调用构造函数 / 直接赋值）
+  3. 返回指向该内存的指针
+
+delete p：
+  1. 调用 p 所指对象的析构函数（内置类型无此步）
+  2. operator delete 释放内存（底层调用 free）
+```
+
+### 对比：智能指针 vs 直接管理
+
+| 维度 | `shared_ptr` / `unique_ptr` | `new` / `delete` |
+| --- | --- | --- |
+| 内存释放时机 | 引用归零 / 离开作用域自动释放 | 必须手动 `delete` |
+| 异常安全 | ✅ 异常时自动释放 | ❌ 异常时跳过 `delete` |
+| 悬空指针风险 | 低（智能指针内部管理） | 高（delete 后需手动置空） |
+| 性能开销 | 控制块 + 原子引用计数 | 零额外开销 |
+| 适用场景 | 通用动态内存管理 | 内存池、嵌入式、性能极致敏感 |
+
+### 💡 工程权重：⭐⭐⭐⭐
+
+- **新代码优先用智能指针**，仅在以下场景考虑裸指针：
+  - 不拥有对象（观察者/非所有者）
+  - 性能关键路径中的内存池
+  - 与 C 接口交互
+- **delete 后立即置空**：`delete p; p = nullptr;` 对悬空指针是最后的防线
+- **RAII 是 C++ 的核心哲学**：将动态资源的生命周期绑定到栈对象的构造/析构
+
+---
+
+## 12.1.3 shared_ptr 和 new 的结合使用
+
+### 初始化规则
+
+```cpp
+#include <memory>
+
+int main() {
+    // ✅ 直接使用构造函数（explicit，不可隐式转换）
+    std::shared_ptr<int> p1(new int(42));    // 正确
+    // std::shared_ptr<int> p2 = new int(42); // ❌ 错误：不能隐式转换
+
+    // ✅ make_shared（推荐）
+    auto p3 = std::make_shared<int>(42);
+
+    // ✅ reset 重新绑定
+    p1.reset(new int(100));   // 释放原对象，指向新对象
+
+    return 0;
+}
+```
+
+### 自定义删除器
+
+```cpp
+#include <memory>
+#include <iostream>
+
+// 自定义删除器：文件句柄关闭
+struct FileCloser {
+    void operator()(std::FILE* fp) const {
+        if (fp) {
+            std::fclose(fp);
+            std::cout << "文件已关闭" << std::endl;
+        }
+    }
+};
+
+int main() {
+    // 方式 1：函数对象删除器
+    std::shared_ptr<std::FILE> fp(fopen("test.txt", "w"), FileCloser());
+
+    // 方式 2：lambda 删除器（更简洁）
+    auto file_deleter = [](std::FILE* f) {
+        if (f) { std::fclose(f); std::cout << "lambda 关闭文件" << std::endl; }
+    };
+    std::shared_ptr<std::FILE> fp2(fopen("test2.txt", "w"), file_deleter);
+
+    // ⚠️ 注意：shared_ptr 的删除器类型不是模板参数的一部分
+    // 因此不同删除器的 shared_ptr<FILE> 可放入同一容器
+
+    return 0;
+}
+// fp2 和 fp 析构时自动调用删除器关闭文件
+```
+
+### 陷阱：shared_ptr 与裸指针混用
+
+```cpp
+void danger() {
+    int* raw = new int(42);
+
+    // ⚠️ 错误用法
+    std::shared_ptr<int> sp1(raw);  // sp1 开始管理 raw
+    std::shared_ptr<int> sp2(raw);  // sp2 也开始管理 raw，但不知道 sp1 的存在
+    // sp1 和 sp2 各自引用计数为 1，两者都会 delete raw → double free
+
+    // ✅ 正确：直接从一个 shared_ptr 拷贝
+    std::shared_ptr<int> sp3 = std::make_shared<int>(42);
+    std::shared_ptr<int> sp4(sp3);  // 引用计数 = 2，安全
+}
+```
+
+---
+
+## 12.1.4 智能指针和异常
+
+### 异常安全对比
+
+```cpp
+#include <memory>
+#include <vector>
+#include <stdexcept>
+
+void unsafe_manage() {
+    // ❌ 裸指针版本：异常时泄漏
+    int* p = new int(42);
+    std::vector<int> v;
+    // 如果下面这行抛出 bad_alloc，p 永远不会被 delete
+    v.push_back(100);
+    delete p;  // 只有在正常执行时才会到这行
+}
+
+void safe_manage() {
+    // ✅ shared_ptr 版本：异常时自动释放
+    auto p = std::make_shared<int>(42);
+    std::vector<int> v;
+    v.push_back(100);
+    // 如果抛出异常，p 的析构函数会被调用，内存自动释放
+}
+
+int main() {
+    try {
+        safe_manage();   // 安全
+        unsafe_manage(); // 内存泄漏
+    } catch (...) {
+        std::cout << "捕获异常" << std::endl;
+    }
+    return 0;
+}
+```
+
+### 使用智能指针管理非内存资源
+
+智能指针的删除器机制使其可管理**任何 RAII 资源**：
+
+```cpp
+#include <memory>
+#include <mutex>
+
+// 管理 mutex 锁
+std::mutex mtx;
+
+void critical_section() {
+    mtx.lock();
+    // 使用 shared_ptr 的删除器自动解锁
+    std::shared_ptr<std::mutex> lock_guard(&mtx, [](std::mutex* m) {
+        m->unlock();
+        std::cout << "mutex 已解锁" << std::endl;
+    });
+    // 即使中间抛出异常，lock_guard 析构时也会调用删除器解锁
+    // ... 临界区代码 ...
+}
+```
+
+---
+
+## 12.1.5 unique_ptr
+
+### 核心定义
+
+`unique_ptr` 拥有对象的**独占所有权**：同一时刻只能有一个 `unique_ptr` 指向给定对象。当 `unique_ptr` 被销毁时，它所指向的对象也被销毁。
+
+### 支持操作
+
+| 操作 | 说明 |
+| --- | --- |
+| `unique_ptr<T> p` | 空 unique_ptr |
+| `unique_ptr<T, D> p` | 使用自定义删除器类型 D 的 unique_ptr |
+| `p = nullptr` | 释放对象并将 p 置空 |
+| `p.release()` | 放弃控制权，返回裸指针；p 被置空（**记得手动 delete**） |
+| `p.reset()` | 释放对象，将 p 置空 |
+| `p.reset(q)` | 释放原对象，令 p 指向 q（裸指针） |
+| `*p` / `p->mem` | 解引用，与 shared_ptr 相同 |
+
+### unique_ptr 的独占特性
+
+```cpp
+#include <memory>
+#include <iostream>
+
+int main() {
+    // 1. 创建 unique_ptr
+    auto p = std::make_unique<int>(42);
+    // C++11 没有 make_unique，需 C++14
+
+    // 2. 不能拷贝
+    // auto q = p; // ❌ 错误：unique_ptr 不能拷贝
+
+    // 3. 可以移动（转移所有权）
+    auto q = std::move(p);  // p 现在为空，q 拥有对象
+    if (!p) {
+        std::cout << "p 已为空" << std::endl;  // 输出此句
+    }
+    std::cout << "q 指向: " << *q << std::endl;  // 42
+
+    // 4. release：放弃所有权
+    int* raw = q.release();  // q 置空，raw 指向原对象
+    delete raw;              // 需要手动释放
+
+    // 5. reset：释放旧对象，指向新对象
+    auto r = std::make_unique<int>(100);
+    r.reset(new int(200));   // 释放原有 int(100)，接管 int(200)
+
+    return 0;
+}
+```
+
+### 自定义删除器
+
+```cpp
+#include <memory>
+#include <iostream>
+
+// unique_ptr 的删除器是类型的一部分
+// 因此 lambda 删除器必须用 decltype
+
+int main() {
+    // lambda 删除器
+    auto deleter = [](int* p) {
+        std::cout << "自定义删除器释放 int" << std::endl;
+        delete p;
+    };
+
+    // 删除器类型是 unique_ptr 模板参数的一部分
+    std::unique_ptr<int, decltype(deleter)> p(new int(42), deleter);
+
+    // 管理文件指针
+    auto file_deleter = [](std::FILE* fp) {
+        if (fp) {
+            std::fclose(fp);
+            std::cout << "文件自动关闭" << std::endl;
+        }
+    };
+    std::unique_ptr<std::FILE, decltype(file_deleter)> 
+        fp(fopen("test.txt", "w"), file_deleter);
+
+    return 0;
+}
+// p 和 fp 析构时自动调用删除器
+```
+
+### shared_ptr vs unique_ptr
+
+| 维度 | `shared_ptr` | `unique_ptr` |
+| --- | --- | --- |
+| 所有权 | 共享所有权，引用计数 | **独占所有权** |
+| 拷贝 | ✅ 可拷贝（引用计数递增） | ❌ 不可拷贝，只能移动 |
+| 性能开销 | 控制块 + 原子计数 | **零额外开销**（与裸指针同尺寸） |
+| 删除器类型 | 非模板参数（运行时多态） | **模板参数**（编译期确定） |
+| 适用场景 | 共享对象生命周期 | 专属所有权、工厂函数返回值 |
+
+### 💡 工程权重：⭐⭐⭐⭐⭐
+
+- **unique_ptr 是 C++ 的默认智能指针**，零开销抽象：`sizeof(unique_ptr<T>) == sizeof(T*)`
+- **优先使用 `unique_ptr`**，除非你真的需要共享所有权
+- **工厂函数应返回 `unique_ptr`**，调用者可按需转为 `shared_ptr`
+- 自定义删除器在 `unique_ptr` 中为**类型的一部分**，会增加对象尺寸；`shared_ptr` 则通过虚函数隐藏删除器类型
+
+```cpp
+// 工厂模式最佳实践
+std::unique_ptr<Base> createDerived() {
+    return std::make_unique<Derived>();
+    // 调用方：
+    // auto p = createDerived();           // unique_ptr
+    // std::shared_ptr<Base> sp = std::move(createDerived());  // 或转为 shared_ptr
+}
+```
+
+---
+
+## 12.1.6 weak_ptr
+
+### 核心定义
+
+`weak_ptr` 是一种**不控制所指向对象生存期**的智能指针，它指向一个 `shared_ptr` 管理的对象。`weak_ptr` 的绑定不会增加引用计数。一旦最后一个 `shared_ptr` 被销毁，对象即被释放，即使仍有 `weak_ptr` 指向该对象。
+
+### 支持操作
+
+| 操作 | 说明 |
+| --- | --- |
+| `weak_ptr<T> wp` | 空 weak_ptr |
+| `weak_ptr<T> wp(sp)` | 指向 shared_ptr sp 管理的对象 |
+| `wp = p` | p 可以是 shared_ptr 或 weak_ptr |
+| `wp.reset()` | 将 wp 置空 |
+| `wp.expired()` | 若 `use_count() == 0`，返回 true |
+| `wp.lock()` | 返回一个指向对象的 shared_ptr；若对象已释放，返回空 shared_ptr |
+| `wp.use_count()` | 返回共享对象的 shared_ptr 数量 |
+
+```cpp
+#include <memory>
+#include <iostream>
+
+int main() {
+    // 1. 创建 weak_ptr（从 shared_ptr）
+    auto sp = std::make_shared<int>(42);
+    std::weak_ptr<int> wp(sp);  // 不递增引用计数
+    // sp.use_count() 仍为 1
+
+    // 2. 检查对象是否存活
+    if (wp.expired()) {
+        std::cout << "对象已被释放" << std::endl;
+    } else {
+        // 3. lock() 获取 shared_ptr
+        auto shared = wp.lock();  // 返回 shared_ptr
+        if (shared) {
+            std::cout << "值: " << *shared << std::endl;  // 42
+        }
+    }
+
+    // 4. 释放原对象
+    sp.reset();  // 对象被释放，wp.expired() = true
+
+    auto tried = wp.lock();
+    if (!tried) {
+        std::cout << "对象已释放，lock 返回空指针" << std::endl;
+    }
+
+    return 0;
+}
+```
+
+### 典型应用：打破循环引用
+
+```cpp
+#include <memory>
+#include <iostream>
+#include <vector>
+
+// ⚠️ 错误设计：循环引用导致内存泄漏
+struct NodeBad {
+    std::shared_ptr<NodeBad> next;
+    ~NodeBad() { std::cout << "NodeBad 析构" << std::endl; }
+};
+
+// ✅ 正确设计：使用 weak_ptr 打破循环
+struct NodeGood {
+    std::shared_ptr<NodeGood> next;   // 正向链接：shared_ptr
+    std::weak_ptr<NodeGood> prev;     // 反向链接：weak_ptr，不增加引用计数
+
+    ~NodeGood() { std::cout << "NodeGood 析构" << std::endl; }
+
+    // 获取前置节点（安全访问）
+    std::shared_ptr<NodeGood> getPrev() {
+        return prev.lock();  // 返回 shared_ptr，若已释放则为空
+    }
+};
+
+void bad_cycle() {
+    // 循环引用导致内存泄漏
+    auto a = std::make_shared<NodeBad>();
+    auto b = std::make_shared<NodeBad>();
+    a->next = b;
+    b->next = a;  // 循环：a 和 b 的引用计数永远为 2
+    // 离开作用域后，各自引用计数减 1，但仍有对方持有的引用 → 内存泄漏
+}
+
+void good_design() {
+    auto a = std::make_shared<NodeGood>();
+    auto b = std::make_shared<NodeGood>();
+    a->next = b;
+    b->prev = a;  // weak_ptr，不增加引用计数
+    // 离开作用域后，a 和 b 的引用计数都能降到 0 → 正常析构
+}
+```
+
+### 典型应用：缓存/观察者
+
+```cpp
+#include <memory>
+#include <map>
+#include <string>
+#include <iostream>
+
+// 资源管理器：缓存对象，但不控制其生命周期
+class ResourceManager {
+    std::map<int, std::weak_ptr<std::string>> cache;
+public:
+    void cacheResource(int id, const std::shared_ptr<std::string>& res) {
+        cache[id] = res;  // weak_ptr 不增加引用计数
+    }
+
+    std::shared_ptr<std::string> getResource(int id) {
+        auto it = cache.find(id);
+        if (it == cache.end()) return nullptr;
+        auto sp = it->second.lock();  // 尝试获取 shared_ptr
+        if (!sp) {
+            cache.erase(it);  // 对象已释放，清理缓存项
+        }
+        return sp;
+    }
+};
+```
+
+### 💡 工程权重：⭐⭐⭐⭐
+
+- **weak_ptr 用于打破循环引用**：在树/图结构中，子→父链接使用 weak_ptr 是标准模式
+- **weak_ptr 用于缓存/观察者**：缓存不延长对象生命周期
+- **weak_ptr 在 std::enable_shared_from_this 中**：CRTP 基类内部使用 weak_ptr 实现安全的 `shared_from_this()`
+
+---
+
+# 12.2 动态数组
+
+## 12.2.1 new 和数组
+
+### 核心定义
+
+C++ 标准库提供了 `new[]` 来分配数组，`delete[]` 来释放。但现代 C++ 中**优先使用 `std::vector`** 或 **`std::array`**，仅在特殊场景用 `new[]`。
+
+### 分配与释放
+
+```cpp
+#include <iostream>
+#include <memory>
+
+int main() {
+    // ========== 分配数组 ==========
+
+    // 1. 基本分配：10 个 int，默认初始化（值未定义）
+    int* p = new int[10];
+
+    // 2. 值初始化：全部值为 0
+    int* p2 = new int[10]();
+
+    // 3. 列表初始化（C++11）
+    int* p3 = new int[10]{0, 1, 2, 3, 4};
+
+    // 4. typedef 定义数组类型
+    using ArrT = int[10];
+    int* p4 = new ArrT;   // 实际分配 int[10]
+
+    // ========== 释放数组 ==========
+    delete[] p;   // 必须使用 []，否则未定义行为
+    delete[] p2;
+    delete[] p3;
+    delete[] p4;
+
+    return 0;
+}
+```
+
+### unique_ptr 管理动态数组（C++11）
+
+```cpp
+#include <memory>
+#include <iostream>
+
+int main() {
+    // ✅ 现代 C++：unique_ptr 管理动态数组
+    std::unique_ptr<int[]> up(new int[10]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9});
+
+    // 访问元素：下标运算符（无需解引用）
+    for (size_t i = 0; i < 10; ++i) {
+        up[i] = i * 2;  // 直接使用 [] 访问
+    }
+
+    // unique_ptr<int[]> 会自动调用 delete[]
+    // 不需要手动释放
+
+    // ⚠️ 注意：shared_ptr 不支持管理数组
+    // std::shared_ptr<int[]> sp(new int[10]); // ❌ 错误
+    // shared_ptr 管理数组需要自定义删除器
+    std::shared_ptr<int> sp(new int[10], [](int* p) { delete[] p; });
+
+    return 0;
+}
+```
+
+### new[] 的底层原理
+
+```
+new int[10]：
+  1. operator new[] 分配 sizeof(int) * 10 字节（底层 malloc）
+  2. 对每个元素调用默认构造函数（内置类型无构造，为未定义值）
+  3. 返回首元素指针
+
+delete[] p：
+  1. 逆序调用每个元素的析构函数（内置类型跳过）
+  2. operator delete[] 释放整块内存（底层 free）
+```
+
+| 用法                                   | 释放方式          | 适用场景                   |
+| ------------------------------------ | ------------- | ---------------------- |
+| `int* p = new int[10];`              | `delete[] p;` | 容器的底层内存块（如 vector 的实现） |
+| `unique_ptr<int[]> up(new int[10]);` | 自动 `delete[]` | 现代 C++ 管理动态数组          |
+| `vector<int> v(10);`                 | 自动释放          | **首选**：最安全、最灵活         |
+
+### 💡 工程权重：⭐⭐⭐
+
+- **`new[]` 仅建议在实现容器时使用**（如自定义 `vector`），日常开发用 `vector`
+- **`unique_ptr<T[]>` 是管理动态数组的现代方式**，比 `vector` 轻量（无 resize 开销）
+- **`shared_ptr` 管理数组必须提供自定义删除器**（`[]` 的部分还需要注意类型）
+
+---
+
+## 12.2.2 allocator 类
+
+### 核心定义
+
+`allocator` 将**内存分配**与**对象构造**分离，这在需要**按需构造**或**批量预分配+延迟构造**时至关重要。
+
+与 `new[]` 的区别：
+- `new[]`：分配内存 + **全部默认构造**（即使你用不上）
+- `allocator`：仅分配裸内存，**等你需要时再构造对象**
+
+### allocator 操作
+
+| 操作                     | 说明                                                         |
+| ---------------------- | ---------------------------------------------------------- |
+| `allocator<T> a`       | 定义一个 allocator 对象，可分配 `T` 类型内存                             |
+| `a.allocate(n)`        | 分配一段原始内存，可容纳 n 个类型为 `T` 的对象                                |
+| `a.deallocate(p, n)`   | 释放从 p 开始、包含 n 个对象大小的内存；**必须先 destroy 元素**                  |
+| `a.construct(p, args)` | 在 p 指向的原始内存中构造一个 `T` 对象（C++17 起已弃用，改用 `std::construct_at`） |
+| `a.destroy(p)`         | 调用 p 指向对象的析构函数（C++17 起已弃用）                                 |
+
+### 完整示例
+
+```cpp
+#include <memory>
+#include <string>
+#include <iostream>
+
+int main() {
+    // 1. 定义 allocator，可分配 string 对象
+    std::allocator<std::string> alloc;
+
+    // 2. allocate：分配原始内存，可容纳 5 个 string（不构造）
+    auto p = alloc.allocate(5);   // p 为 string*，指向裸内存块
+    auto q = p;                   // q 指向第一个空闲位置
+
+    // 3. construct：在原始内存中按需构造对象
+    alloc.construct(q++, "Hello");   // 第 1 个位置构造 "Hello"
+    alloc.construct(q++, 10, 'x');   // 第 2 个位置构造 "xxxxxxxxxx"
+    alloc.construct(q++, "World");   // 第 3 个位置构造 "World"
+    // 还有 2 个位置空闲，尚未构造对象
+
+    // 4. 使用已构造的对象
+    for (size_t i = 0; i < 3; ++i) {
+        std::cout << p[i] << std::endl;
+    }
+
+    // 5. destroy：逆序析构已构造的对象
+    while (q != p) {
+        alloc.destroy(--q);  // 调用 string 的析构函数
+    }
+
+    // 6. deallocate：释放整块内存
+    alloc.deallocate(p, 5);
+
+    return 0;
+}
+// ★ 关键：construct 和 destroy 必须成对，且 deallocate 前必须 destroy 所有元素
+```
+
+### allocator 算法（uninitialized_*）
+
+标准库提供了一些算法，可在未初始化内存中批量构造对象：
+
+```cpp
+#include <memory>
+#include <vector>
+#include <iostream>
+
+int main() {
+    std::vector<int> src = {1, 2, 3, 4, 5};
+
+    // 1. allocate 原始内存
+    std::allocator<int> alloc;
+    auto p = alloc.allocate(src.size() * 2);
+
+    // 2. uninitialized_copy：拷贝构造
+    // 将 src 的全部元素拷贝构造到 p 开始的原始内存
+    auto q = std::uninitialized_copy(src.begin(), src.end(), p);
+
+    // 3. uninitialized_fill_n：填充构造
+    // 从 q 开始构造 5 个值为 42 的元素
+    std::uninitialized_fill_n(q, 5, 42);
+
+    // 内存布局：p → [1, 2, 3, 4, 5, 42, 42, 42, 42, 42]
+
+    // 4. 验证
+    for (size_t i = 0; i < 10; ++i) {
+        std::cout << p[i] << " ";
+    }
+    std::cout << std::endl;
+
+    // 5. 析构 + 释放
+    for (auto it = p; it != p + 10; ++it) {
+        std::destroy_at(it);  // C++17，等价于 alloc.destroy(it)
+    }
+    alloc.deallocate(p, 10);
+
+    return 0;
+}
+```
+
+### allocator 与 new[] 对比
+
+| 维度 | `new[]` | `allocator` |
+| --- | --- | --- |
+| 分配行为 | 分配 + 构造（所有元素） | **仅分配**，构造延迟 |
+| 构造时机 | 分配时全部构造 | 按需 `construct` |
+| 性能特征 | 即使元素不用也被构造了 | 零不必要的构造 |
+| 析构 | `delete[]` 统一析构+释放 | 手动 `destroy` + `deallocate` |
+| 典型场景 | 简单数组、小型容器 | 容器的 reserve / 内存池 |
+
+### 💡 工程权重：⭐⭐⭐⭐
+
+- **标准容器的底层实现**：`std::vector::reserve` 背后就是 `allocator` 的 `allocate` + 延迟构造
+- **游戏服务器内存池**：预先 `allocate` 一大块内存，按需 `construct`，避免重复 malloc/free
+- **C++17 起 `construct/destroy` 被弃用**：建议使用 `std::construct_at` / `std::destroy_at`（定义在 `<memory>` 中）
+- **`uninitialized_*` 算法是手动实现容器的核心工具**：`vector::reserve`、`vector::insert` 的实现都依赖它们
+
+```cpp
+// vector::reserve 的简化逻辑
+template <typename T>
+void SimpleVector<T>::reserve(size_t new_cap) {
+    // 1. allocate 新内存
+    auto new_data = alloc_.allocate(new_cap);
+    // 2. uninitialized_copy 旧元素到新内存
+    auto new_end = std::uninitialized_copy(data_, data_ + size_, new_data);
+    // 3. destroy 旧元素
+    for (auto p = data_; p != data_ + size_; ++p) {
+        std::destroy_at(p);
+    }
+    // 4. deallocate 旧内存
+    alloc_.deallocate(data_, capacity_);
+    // 5. 更新指针
+    data_ = new_data;
+    capacity_ = new_cap;
+}
+```

@@ -7,7 +7,7 @@ tags:
   - SIGN
 difficulty: 定时
 source: 自整理
-link: "[[markdown/csapp/第8章 异常控制流 | 系统级信号处理]]"
+link: "[[第10章 系统级 IO]]"
 ---
 
 # 前置知识 · SIGALRM信号与升序链表定时器

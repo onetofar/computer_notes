@@ -29,12 +29,12 @@ int setsockopt(int sockfd, int level, int option_name,
 - `option_len`：选项值的长度，`getsockopt`中为传入传出参数
 **返回值**：成功返回`0`，失败返回`-1`并设置`errno`。
 #### 选项层级分类表
-| level层级    | 选项类型                   | 代表选项                                         |
-| ------ | -------------------------- | ------------------------------------------------ |
+| level层级      | 选项类型             | 代表选项                                          |
+| ------------ | ---------------- | --------------------------------------------- |
 | SOL_SOCKET   | 通用socket选项（协议无关） | SO_REUSEADDR、SO_RCVBUF、SO_LINGER、SO_KEEPALIVE |
-| IPPROTO_IP   | IPv4协议选项               | IP_TOS（服务类型）、IP_TTL（存活时间）           |
-| IPPROTO_IPV6 | IPv6协议选项               | IPV6_NEXTHOP、IPV6_DONTFRAG                      |
-| IPPROTO_TCP  | TCP协议选项                | TCP_MAXSEG、TCP_NODELAY                          |
+| IPPROTO_IP   | IPv4协议选项         | IP_TOS（服务类型）、IP_TTL（存活时间）                     |
+| IPPROTO_IPV6 | IPv6协议选项         | IPV6_NEXTHOP、IPV6_DONTFRAG                    |
+| IPPROTO_TCP  | TCP协议选项          | TCP_MAXSEG、TCP_NODELAY                        |
 #### 详细表格
 <img src="./md_pict/image-20260623154252036.png" alt="image-20260623154252036" style="zoom: 80%;" />
 #### 设置时机与继承时序图
