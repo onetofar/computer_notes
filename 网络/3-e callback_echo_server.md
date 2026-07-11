@@ -3,7 +3,7 @@ title: "callback_echo_server"
 category: 计算机网络
 tags:
   - net/tcp
-  - networking
+  - net
 difficulty: 进阶
 source: "自整理"
 link: ["[[3-d blocking_echo_server|阻塞式Echo]]"]

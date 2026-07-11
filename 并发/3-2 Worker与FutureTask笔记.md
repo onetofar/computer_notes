@@ -3,7 +3,7 @@ title: "3-2 Worker与FutureTask笔记"
 category: 并发编程
 tags:
   - conc/pool
-  - concurrency
+  - conc
 difficulty: 深入
 source: "JCiP / Java并发编程的艺术"
 link:

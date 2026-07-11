@@ -3,7 +3,7 @@ title: "5-2-1 select poll epoll 源码分析"
 category: 计算机网络
 tags:
   - net/io
-  - networking
+  - net
 difficulty: 深入
 source: "Linux高性能服务器编程"
 link: ["[[5-2 IO复用相关技术|IO复用概念]]","[[5-2-2 epoll下LT和ET的具体差别|LT/ET模式]]"]

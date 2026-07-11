@@ -3,13 +3,13 @@ title: "3-1 TCP头部"
 category: 计算机网络
 tags:
   - net/tcp
-  - networking
+  - net
 difficulty: 进阶
 source: "TCP/IP详解"
 总览:
 link: ["[[3-2 TCP的连接建立与终止|TCP连接管理]]"]
 ---
-<img src="./md_pict/image-20260525225321684.png" alt="image-20260525225321684" style="zoom:67%;" />	
+![[md_pict/image-20260525225321684.png]]	
 ## 一、TCP连接唯一标识
 每个TCP头部都包含源端口号与目的端口号。这两个端口值，结合IP头部内的源IP地址、目的IP地址，可**唯一标识一条TCP连接**。
 在TCP相关技术文献中，IP地址与端口号的组合有时被称作**端点**或[[2-3 linux下的socket函数|套接字]]。”套接字”这一术语最早出自RFC0793文档，最终被沿用为伯克利体系网络通信编程接口的名称（如今常称”伯克利套接字”）。
@@ -193,7 +193,7 @@ TCP报文的数据段为**可选**：
 4. 部分超时场景，发送空数据报文
 
 示意图:
-<img src="./md_pict/image-20260526143715184.png" alt="image-20260526143715184" style="zoom:67%;" />
+![[md_pict/image-20260526143715184.png]]
 
 ## 基础对齐类选项
 

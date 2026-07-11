@@ -3,7 +3,7 @@ title: "游戏服务器架构设计"
 category: 计算机网络
 tags:
   - net/server
-  - networking
+  - net
 difficulty: 进阶
 source: "自整理"
 link: ["[[A skynet源码指南|Skynet框架]]"]

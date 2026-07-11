@@ -3,7 +3,7 @@ title: "4-5 JMM与并发安全发布"
 category: 并发编程
 tags:
   - conc/perf
-  - concurrency
+  - conc
 difficulty: 深入
 source: "JCiP / CSAPP"
 link: ["[[1-1 并发基础理论笔记|并发基础理论]]","[[1-2 DCL专题与内存模型笔记|DCL与内存模型]]"]

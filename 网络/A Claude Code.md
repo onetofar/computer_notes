@@ -3,7 +3,7 @@ title: "Claude Code 使用笔记"
 category: 常用工具
 tags:
   - net/practice
-  - networking
+  - net
 difficulty: 基础
 source: "自整理"
 ---

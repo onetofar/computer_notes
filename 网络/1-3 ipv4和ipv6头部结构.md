@@ -3,7 +3,7 @@ title: "1-3 IPv4和IPv6头部结构"
 category: 计算机网络
 tags:
   - net/ip
-  - networking
+  - net
 difficulty: 基础
 source: "TCP/IP详解"
 link: ["[[2-2 IP分片|IP分片]]"]
@@ -11,7 +11,7 @@ link: ["[[2-2 IP分片|IP分片]]"]
 ip：internet协议（尽力而为，不保证完整可靠）
 无连接：ipP不维护网络单元(即路由器)中数据报相关的任何链接状态信息。两个连续的数据报(A-》B）B可能在A之前到达， IP数据报也可能发生其他问题:它们 可能在传输过程中被复制,可能改变内容从而导致错误。此外, IP之上的一些协议(通常是 TCP)需要处理这些潜在问题,以便为应用提供无差错的交付。
 # ipv4和ipv6头部：
-<img src="./md_pict/image-20260514130200231.png" alt="image-20260514130200231" style="zoom: 67%;" /><img src="./md_pict/image-20260514145446773.png" alt="image-20260514145446773" style="zoom: 67%;" />
+![[md_pict/image-20260514130200231.png]]![[md_pict/image-20260514145446773.png]]
 ### 各个字段内容
 #### 版本字段：
 - IPv4为`4`，IPv6为`6`；IPv4头部和IPv6头部**除版本字段位置相同外，其余结构完全不同**
@@ -53,8 +53,8 @@ DS 字段（区分服务）
     1. 操作系统 / 应用手动配置了 QoS 策略（比如企业内网给办公网页设了优先级）
     2. 运营商 / 路由器做了 DSCP 重标记（比如把视频流量的 DSCP 改成 EF）
   - 你平时用 Chrome/Edge 刷网页，抓包看到的 DS 值几乎全是`0`，不用纠结。
-  <img src="./md_pict/image-20260515131018148.png" alt="image-20260515131018148" style="zoom:50%;" />
-  <img src="./md_pict/image-20260515131610885.png" alt="image-20260515131610885" style="zoom:50%;" />
+  ![[md_pict/image-20260515131018148.png]]
+  ![[md_pict/image-20260515131610885.png]]
 ---
 
 ------
@@ -158,7 +158,7 @@ TCP 在三次握手时会协商`MSS（最大分段大小）`，MSS = MTU - IP �
 
 IP模块是TCP/IP协议栈的「交通枢纽」，负责IP数据报的**接收、校验、路由转发、上层分发**，核心分为「输入处理」和「转发/输出」两大流程，路由表是它的核心**决策依据。**
 
-<img src="./md_pict/image-20260515165726673.png" alt="image-20260515165726673" style="zoom:50%;" />
+![[md_pict/image-20260515165726673.png]]
 
 ------
 

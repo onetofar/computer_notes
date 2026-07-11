@@ -4,7 +4,7 @@ category: 计算机网络
 tags:
   - net/socket
   - net/tcp
-  - networking
+  - net
 difficulty: 进阶
 source: "自整理"
 link: ["[[2-3 linux下的socket函数|Linux socket函数]]"]

@@ -3,7 +3,7 @@ title: 2-3 ConcurrentHashMap理论+架构笔记
 category: 并发编程
 tags:
   - conc/container
-  - concurrency
+  - conc
 difficulty: 深入
 source: Java并发编程的艺术
 link: ["[[2-b ConcurrentHashMap源码分析笔记|CHM源码分析]]","[[2-1 锁体系核心理论笔记|锁体系核心理论]]","[[2阶段-JDK1.7 HashMap 死循环的唯一根源：|JDK1.7 HashMap 死循环]]"]

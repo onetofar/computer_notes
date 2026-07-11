@@ -3,7 +3,7 @@ title: "Netty的演进 — IO模型核心原理"
 category: 计算机网络
 tags:
   - net/netty
-  - networking
+  - net
 difficulty: 深入
 source: "自整理"
 link: ["[[3-4 netty的eventloop模型衍生cpp|Netty EventLoop模型]]"]

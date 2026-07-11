@@ -3,7 +3,7 @@ title: "1-2 ARP笔记"
 category: 计算机网络
 tags:
   - net/link
-  - networking
+  - net
 difficulty: 基础
 source: "TCP/IP详解"
 link: ["[[1-1 链路层与网络基础|链路层]]"]
@@ -35,7 +35,7 @@ arp:地址解码协议 ARP仅用于IPv4, IPv6使用邻居发现协议,它被合�
 
 
 
-<img src="./md_pict/image-20260512191626534.png" alt="image-20260512191626534" style="zoom:25%;" />
+![[md_pict/image-20260512191626534.png]]
 
 
 
@@ -43,7 +43,7 @@ arp:地址解码协议 ARP仅用于IPv4, IPv6使用邻居发现协议,它被合�
 
  
 
-![image-20260512174759969](./md_pict/image-20260512174759969.png)
+![[md_pict/image-20260512174759969.png]]
 
 ---
 ### ARP 帧格式

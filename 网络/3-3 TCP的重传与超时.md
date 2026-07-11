@@ -3,7 +3,7 @@ title: "3-3 TCP的重传与超时"
 category: 计算机网络
 tags:
   - net/tcp-loss
-  - networking
+  - net
 difficulty: 深入
 source: "TCP/IP详解"
 link: ["[[4-1 流量控制以及滑动窗口|滑动窗口]]"]

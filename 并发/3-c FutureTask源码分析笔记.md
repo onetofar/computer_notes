@@ -3,7 +3,7 @@ title: "3-c FutureTask源码分析笔记"
 category: 并发编程
 tags:
   - conc/pool
-  - concurrency
+  - conc
 difficulty: 深入
 source: "Java并发编程的艺术"
 link: ["[[3-4 Executor框架与四大线程池笔记|Executor框架]]","[[3-2 Worker与FutureTask笔记|Worker与FutureTask]]","[[2-d AQS共享模式与实战笔记|AQS共享模式与实战]]"]

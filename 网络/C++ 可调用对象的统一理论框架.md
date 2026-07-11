@@ -3,7 +3,7 @@ title: C++ 可调用对象的统一理论框架
 category: C++底层
 tags:
   - net/socket
-  - networking
+  - net
 difficulty: 深入
 source: 自整理 / CSAPP
 link:

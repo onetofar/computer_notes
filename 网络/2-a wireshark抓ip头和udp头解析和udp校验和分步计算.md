@@ -4,7 +4,7 @@ category: 计算机网络
 tags:
   - net/practice
   - net/udp
-  - networking
+  - net
 difficulty: 基础
 source: "自整理"
 link: ["[[2-1 UDP头部|UDP头部]]"]

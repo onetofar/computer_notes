@@ -2,7 +2,7 @@
 title: "C++基础笔记（第一部分）"
 category: C++底层
 tags:
-  - networking
+  - net
 difficulty: 基础
 source: "自整理"
 link: ["[[A cpp第二部分_cpp标准库|C++标准库]]"]
@@ -125,8 +125,8 @@ int main() {
 }
 ```
 # 2.4 指针和const
-<img src="./md_pict/image-20260512200507565.png" alt="image-20260512200507565" style="zoom: 67%;" />
-<img src="./md_pict/image-20260512200953105.png" alt="image-20260512200953105" style="zoom:67%;" />
+![[md_pict/image-20260512200507565.png]]
+![[md_pict/image-20260512200953105.png]]
 **常量指针**：指针本身不能变 → `int *const`
 **指向常量的指针**：指向的值不能变 → `const int *` / `int const *`
 **双 const 指针**：都不能变 → `const int *const`

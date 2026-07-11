@@ -3,7 +3,7 @@ title: "Windows做服务器 MSYS2 C++ Docker做客户端"
 category: 计算机网络
 tags:
   - net/practice
-  - networking
+  - net
 difficulty: 进阶
 source: "自整理"
 ---

@@ -3,7 +3,7 @@ title: "AQS队列同步器（思想+极简源码流程版）"
 category: 并发编程
 tags:
   - conc/lock
-  - concurrency
+  - conc
 difficulty: 进阶
 source: "Java并发编程的艺术"
 ---

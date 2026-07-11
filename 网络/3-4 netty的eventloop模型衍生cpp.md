@@ -4,7 +4,7 @@ category: 计算机网络
 tags:
   - net/io
   - net/netty
-  - networking
+  - net
 difficulty: 深入
 source: "自整理"
 link: ["[[5-2 IO复用相关技术|IO复用]]"]

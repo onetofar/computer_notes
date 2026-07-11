@@ -2,7 +2,7 @@
 title: "4-7 AtomicStampedReference 与 AtomicMarkableReference"
 category: 并发编程
 tags:
-  - concurrency
+  - conc
 difficulty: 进阶
 source: "JCiP"
 link: ["[[4-4 原子变量与非阻塞算法|原子变量与非阻塞算法]]"]

@@ -3,7 +3,7 @@ title: "5-2-2 epoll LT 与 ET 触发模式"
 category: 计算机网络
 tags:
   - net/ip
-  - networking
+  - net
 difficulty: 进阶
 source: "Linux高性能服务器编程"
 link: ["[[5-2-3 epoll下EPOLLONESHOT 具体实现|EPOLLONESHOT]]"]

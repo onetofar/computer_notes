@@ -3,7 +3,7 @@ title: 2-4 AQS核心理论笔记
 category: 并发编程
 tags:
   - conc/lock
-  - concurrency
+  - conc
 difficulty: 深入
 source: Java并发编程的艺术
 link: ["[[2-c AQS独占模式源码分析笔记|AQS独占模式源码分析]]","[[2-d AQS共享模式与实战笔记|AQS共享模式与实战]]","[[2-1 锁体系核心理论笔记|锁体系核心理论]]"]

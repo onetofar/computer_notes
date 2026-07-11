@@ -3,7 +3,7 @@ title: "linux下的socket函数"
 category: 计算机网络
 tags:
   - net/socket
-  - networking
+  - net
 difficulty: 进阶
 source: "自整理"
 link: ["[[5-1 socket选项|socket选项]]"]

@@ -3,7 +3,7 @@ title: SIGALRM信号高性能定时器——时间轮
 category: 计算机网络
 tags:
   - net/io
-  - networking
+  - net
   - SIGN
 difficulty: 定时
 source: 自整理

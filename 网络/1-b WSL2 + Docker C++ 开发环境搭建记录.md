@@ -3,7 +3,7 @@ title: "WSL2 + Docker C++ 开发环境搭建记录"
 category: 常用工具
 tags:
   - net/practice
-  - networking
+  - net
 difficulty: 基础
 source: "自整理"
 ---

@@ -2,7 +2,7 @@
 title: "1-2 DCL专题与内存模型笔记"
 category: 并发编程
 tags:
-  - concurrency
+  - conc
 difficulty: 深入
 source: "JCiP / Java并发编程的艺术 / CSAPP"
 link: ["[[1-1 并发基础理论笔记|并发基础理论]]","[[markdown/csapp/第6章 存储器层次结构|CSAPP 缓存与MESI]]","[[markdown/小文章/Java的volatile 可见性如何实现|volatile可见性底层实现]]"]

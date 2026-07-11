@@ -3,7 +3,7 @@ title: "socket选项"
 category: 计算机网络
 tags:
   - net/socket
-  - networking
+  - net
 difficulty: 进阶
 source: "自整理"
 link: ["[[2-3 linux下的socket函数|socket函数]]"]
@@ -36,7 +36,7 @@ int setsockopt(int sockfd, int level, int option_name,
 | IPPROTO_IPV6 | IPv6协议选项         | IPV6_NEXTHOP、IPV6_DONTFRAG                    |
 | IPPROTO_TCP  | TCP协议选项          | TCP_MAXSEG、TCP_NODELAY                        |
 #### 详细表格
-<img src="./md_pict/image-20260623154252036.png" alt="image-20260623154252036" style="zoom: 80%;" />
+![[md_pict/image-20260623154252036.png]]
 #### 设置时机与继承时序图
 ```mermaid
 sequenceDiagram

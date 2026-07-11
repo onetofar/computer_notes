@@ -3,7 +3,7 @@ title: "Linux常用检测工具"
 category: 常用工具
 tags:
   - net/practice
-  - networking
+  - net
 difficulty: 基础
 source: "自整理"
 ---

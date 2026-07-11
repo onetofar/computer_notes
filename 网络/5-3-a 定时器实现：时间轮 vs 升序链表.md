@@ -2,7 +2,7 @@
 title: 定时器实现：时间轮 vs 升序链表
 date: 2026-06-28
 tags:
-  - network
+  - net
   - epoll
   - cpp
 cppfile: "`linked_scheduled.hpp`,`whell_scheduled.hpp`"

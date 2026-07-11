@@ -3,7 +3,7 @@ title: "拥塞控制 sh脚本观测解析"
 category: 计算机网络
 tags:
   - net/congestion
-  - networking
+  - net
 difficulty: 进阶
 source: "自整理"
 link: ["[[4-2 拥塞控制|拥塞控制]]"]

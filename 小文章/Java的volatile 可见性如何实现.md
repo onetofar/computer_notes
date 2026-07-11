@@ -2,7 +2,7 @@
 title: "Java volatile 可见性实现"
 category: 并发编程
 tags:
-  - concurrency
+  - conc
   - jmm
 difficulty: 进阶
 source: "自整理"

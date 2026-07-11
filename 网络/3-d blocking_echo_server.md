@@ -2,7 +2,7 @@
 title: "blocking_echo_server - 阻塞式多线程 vs Netty"
 category: 计算机网络
 tags:
-  - networking
+  - net
 difficulty: 进阶
 source: "自整理"
 link: ["[[2-3 linux下的socket函数|socket函数]]"]

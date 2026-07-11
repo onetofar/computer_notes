@@ -2,7 +2,7 @@
 title: "非阻塞 connect + epoll 深度分析"
 date: 2026-06-28
 tags:
-  - network
+  - net
   - tcp
   - epoll
   - nonblocking
