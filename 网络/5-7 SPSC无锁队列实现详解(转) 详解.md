@@ -1,6 +1,6 @@
 ---
 title: SPSC无锁队列实现详解
-date: 2026-07-03
+created: 2026-07-03
 tags:
   - cpp
   - cpp/mem
@@ -256,3 +256,7 @@ inline bool enqueue(const T &item) {
 ---
 
 > **Github 仓库**：[https://github.com/sinkinben/spsc-queue](https://github.com/sinkinben/spsc-queue)
+
+---
+
+**关联**：转载原文见 [[5-7 SPSC无锁队列实现详解(转)|SPSC 转载原文]]。

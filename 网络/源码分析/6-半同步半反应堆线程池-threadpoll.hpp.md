@@ -3,10 +3,10 @@ title: 半同步/半反应堆线程池实现
 category: 计算机网络
 tags:
   - net
-  - conc/pool
-  - conc/lock
+  - 并发/pool
+  - 并发/lock
   - cpp
-source: Linux高性能服务器编程 第15.5, locker.hpp, threadpoll.hpp
+source: Linux高性能服务器编程 第15.5, src/base/locker.hpp, src/base/threadpoll.hpp
 skills:
   - obsidian-markdown
 ---

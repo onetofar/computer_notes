@@ -604,7 +604,7 @@ flowchart LR
 
 - [[6-1 高性能服务器框架概述|Reactor/Proactor 事件处理模式]]
 - [[5-2-1 select poll epoll源码分析|epoll 底层实现]]
-- [[6-2 半同步半反应堆线程池实现|线程池实现]]
+- [[6-半同步半反应堆线程池-threadpoll.hpp|线程池实现]]
 
 ### ⚠️ 踩坑记录
 

@@ -1,11 +1,11 @@
 ---
 title: 定时器实现：时间轮 vs 升序链表
-date: 2026-06-28
+created: 2026-06-28
 tags:
   - net
   - epoll
   - cpp
-cppfile: "`linked_scheduled.hpp`,`whell_scheduled.hpp`"
+source: src/examples/net/schedule/linked_scheduled.hpp, src/examples/net/schedule/whell_scheduled.hpp
 status: complete
 link:
   - "[[5-3-b Linux 管道与信号处理核心笔记|管道与信号处理]]"

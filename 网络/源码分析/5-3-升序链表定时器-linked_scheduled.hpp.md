@@ -1,13 +1,13 @@
 ---
 title: 升序链表的定时器服务器源码分析
-date: 2026-06-28
+created: 2026-06-28
 tags:
   - net
   - tcp
   - epoll
-  - nonblocking
+  - 非阻塞
   - cpp
-cppfile: schedule_server.cpp
+source: src/examples/net/schedule/linked_scheduled.hpp
 status: complete
 link:
   - "[[markdown/csapp/第10章 系统级 IO | 系统级IO]]"

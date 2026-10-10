@@ -1,11 +1,11 @@
 ---
 title: sendfile 零拷贝文件传输 — 源码分析
-date: 2026-06-28
+created: 2026-06-28
 tags:
   - net
   - cpp
   - 操作系统
-cppfile: "`sendfile.hpp`"
+source: 自整理
 status: complete
 ---
 # sendfile 零拷贝文件传输 — 源码分析

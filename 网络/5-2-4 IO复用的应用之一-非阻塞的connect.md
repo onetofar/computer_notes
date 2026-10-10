@@ -2,7 +2,7 @@
 title: "5-2-4 非阻塞 connect 实现"
 category: 计算机网络
 tags:
-  - net/ip
+  - net/io
   - net
 difficulty: 进阶
 source: "Linux高性能服务器编程"

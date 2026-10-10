@@ -3,7 +3,7 @@ title: POSIX同步原语深度剖析
 category: 计算机网络
 tags:
   - net
-  - conc/lock
+  - 并发/lock
   - cpp
 source: "glibc NPTL + Linux futex 源码分析"
 skills:
@@ -14,7 +14,7 @@ skills:
 ### 基于 futex 的三种同步原语 — 从内核数据结构出发
 
 > 配套源码：`game-server-engine/src/include/locker.hpp`
-> 关联笔记：[[6-2 半同步半反应堆线程池实现|半同步/半反应堆线程池]]
+> 关联笔记：[[6-半同步半反应堆线程池-threadpoll.hpp|半同步/半反应堆线程池]]
 
 ### 0 统一框架：一切同步原语底层都是 futex
 
@@ -469,5 +469,5 @@ class cond   { /* 封装 POSIX 条件变量 */ };     → 第 3 节
 
 ### 关联笔记
 
-- [[6-2 半同步半反应堆线程池实现|半同步/半反应堆线程池]] — locker.hpp 的工程运用（完整线程池源码分析）
+- [[6-半同步半反应堆线程池-threadpoll.hpp|半同步/半反应堆线程池]] — locker.hpp 的工程运用（完整线程池源码分析）
 - [[6-1 高性能服务器框架概述|高性能服务器框架]] — 并发模式的理论基础

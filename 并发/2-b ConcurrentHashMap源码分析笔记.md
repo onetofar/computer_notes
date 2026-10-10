@@ -2,11 +2,11 @@
 title: 2-b ConcurrentHashMap源码分析笔记
 category: 并发编程
 tags:
-  - conc/container
-  - conc
+  - 并发/container
+  - 并发
 difficulty: 深入
 source: Java并发编程的艺术
-link: ["[[2-3 ConcurrentHashMap理论+架构笔记|CHM理论+架构]]","[[2-1 锁体系核心理论笔记|锁体系核心理论]]","[[2阶段-JDK1.7 HashMap 死循环的唯一根源：|JDK1.7 HashMap 死循环]]"]
+link: ["[[2-3 ConcurrentHashMap理论+架构笔记|CHM理论+架构]]","[[2-1 锁体系核心理论笔记|锁体系核心理论]]","[[2-5_JDK1.7_HashMap_死循环根源分析|JDK1.7 HashMap 死循环]]"]
 ---
 # 6 核心API：get / put / size 操作深度解析
 

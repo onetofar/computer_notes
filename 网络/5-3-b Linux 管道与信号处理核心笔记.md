@@ -1,11 +1,11 @@
 ---
 title: 升序链表的定时器服务器源码分析
-date: 2026-06-28
+created: 2026-06-28
 tags:
   - net
   - cpp
   - pipe
-cppfile: schedule_server.cpp
+source: 自整理
 status: complete
 link:
   - "[[markdown/csapp/第10章 系统级 IO | 系统级IO]]"

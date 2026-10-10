@@ -5,8 +5,8 @@ tags:
   - net/tcp
   - net
 difficulty: 进阶
-source: "自整理"
-link: ["[[3-d blocking_echo_server|阻塞式Echo]]"]
+source: src/examples/net/easyserver/callback_echo_server.cpp
+link: ["[[3-阻塞式echo服务器-blocking_echo_server.cpp|阻塞式Echo]]"]
 ---
 # 回调函数
 ```c++

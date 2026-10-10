@@ -2,8 +2,8 @@
 title: "3-a CompletionService与定时线程池"
 category: 并发编程
 tags:
-  - conc/pool
-  - conc
+  - 并发/pool
+  - 并发
 difficulty: 深入
 source: "JCiP / Java并发编程的艺术"
 link:

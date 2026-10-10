@@ -4,7 +4,7 @@ category: 计算机网络
 tags:
   - net
 difficulty: 进阶
-source: "自整理"
+source: src/examples/net/easyserver/blocking_echo_server.cpp
 link: ["[[2-3 linux下的socket函数|socket函数]]"]
 ---
 # C++ 阻塞式多线程 vs Netty EventLoop：深度对比与演进

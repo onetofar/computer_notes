@@ -2,8 +2,8 @@
 title: "4-3 AQS同步器与状态依赖管理"
 category: 并发编程
 tags:
-  - conc/perf
-  - conc
+  - 并发/perf
+  - 并发
 difficulty: 深入
 source: "JCiP / CSAPP"
 link: ["[[2-4 AQS核心理论笔记|AQS核心理论]]","[[2-c AQS独占模式源码分析笔记|AQS独占模式源码]]","[[2-d AQS共享模式与实战笔记|AQS共享模式与实战]]"]

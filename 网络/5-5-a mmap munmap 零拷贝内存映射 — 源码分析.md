@@ -1,11 +1,11 @@
 ---
 title: mmap / munmap 零拷贝内存映射 — 源码分析
-date: 2026-07-03
+created: 2026-07-03
 tags:
   - net
   - cpp
   - 操作系统
-cppfile: "`mmap_demo.hpp`"
+source: 自整理
 status: complete
 ---
 # mmap / munmap 零拷贝内存映射 — 源码分析

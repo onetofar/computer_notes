@@ -1,11 +1,11 @@
 ---
 title: "非阻塞 connect + epoll 深度分析"
-date: 2026-06-28
+created: 2026-06-28
 tags:
   - net
   - tcp
   - epoll
-  - nonblocking
+  - 非阻塞
   - performance
   - cpp
 aliases:
@@ -21,7 +21,7 @@ net use Z: \\wsl$\Ubuntu-22.04\root\game-server-engine /persistent:yes
 
 ## 1. 概述
 
-本文档基于 [[connect-benchmark.cpp]] 和 [[unblocking-connect.cpp]] 的源码与实测数据，分析 TCP 客户端建立连接时的四种策略及其延迟差异。
+本文档基于 `connect-benchmark.cpp` 和 `unblocking-connect.cpp` 的源码与实测数据，分析 TCP 客户端建立连接时的四种策略及其延迟差异。
 
 核心问题：**Connect 是否阻塞 与 是否使用 epoll，是两个正交维度。**
 
@@ -84,7 +84,7 @@ sequenceDiagram
 > - N 个连接严格串行：总耗时 ≈ N × 单次 RTT
 > - 单次延迟最低（没有 epoll 调度开销），但总吞吐最差
 
-**对应源码：** [[connect-benchmark.cpp#^blocking-bench|bench_blocking_connect()]]
+**对应源码：** `bench_blocking_connect()`（`connect-benchmark.cpp`）
 
 ### 场景二：并行非阻塞 connect + epoll
 
@@ -118,7 +118,7 @@ sequenceDiagram
 > - 总耗时 ≈ max(单次 RTT) + epoll 调度开销
 > - 单次延迟**看起来**更高（包含了在 epoll 队列中的等待时间），但总耗时碾压阻塞模式
 
-**对应源码：** [[connect-benchmark.cpp#^nonblocking-bench|bench_nonblocking_connect()]]
+**对应源码：** `bench_nonblocking_connect()`（`connect-benchmark.cpp`）
 
 > [!warning] 为什么单次延迟"变大"了？
 > 非阻塞模式下测量的是 `connect()` 发起到 `epoll_wait` 返回的时间。对于第 450 个被收集的连接（假设 500 个连接、events[64]），它的完成事件在内核中排队等待了前 7 轮 `epoll_wait`。所以**单个延迟的上升是批处理效应，不是真实的网络延迟增加**。
@@ -153,7 +153,7 @@ sequenceDiagram
 > - 这是阻塞 connect 做不到的——阻塞模式下超时由系统默认（通常数十秒）
 > - 建立后恢复阻塞模式，不影响后续 send/recv 的语义
 
-**对应源码：** [[unblocking-connect.cpp|unblocking_connect.cpp]]
+**对应源码：** `unblocking_connect.cpp`（`unblocking-connect.cpp`）
 
 > [!tip] 这是非阻塞 connect 最实用的场景
 > 大多数客户端只需要连一个服务器。非阻塞 connect 的核心价值不是并行吞吐，而是**超时控制**——用户等 3 秒比等 75 秒好得多。
@@ -180,7 +180,7 @@ graph LR
 > - 这是 **nginx / Redis / game_server** 的标准模型
 > - 优点：connect 阶段简单可靠，读写阶段高性能事件驱动
 
-**对应源码：** [[game_server.hpp|game_server.hpp]] 中的 `EventLoop`
+**对应源码：** `game_server.hpp`（`game_server.hpp`） 中的 `EventLoop`
 
 > [!success] 为什么这是最常见的生产模式？
 > - 服务端 outbound 连接少（通常只连上游几个服务），阻塞 connect 的开销可忽略
@@ -195,8 +195,8 @@ graph LR
 |------|-----|
 | OS | Linux 6.6 (WSL2) |
 | CPU | — |
-| 服务端 | [[game_server.hpp|game_server]] (4 workers, epoll 驱动) |
-| 客户端 | [[connect-benchmark.cpp|connect_bench]] |
+| 服务端 | `game_server`（`game_server.hpp`） (4 workers, epoll 驱动) |
+| 客户端 | `connect_bench`（`connect-benchmark.cpp`） |
 | 网络 | 127.0.0.1 (loopback) |
 
 ### 延迟对比表
@@ -253,7 +253,7 @@ cmd /c mklink /D "F:\wsl-code" "\\wsl$\Ubuntu-22.04\root\game-server-engine"
 
 ### 5.1 非阻塞 connect 的核心流程
 
-从 [[unblocking-connect.cpp|unblocking_connect.cpp]] 提取的关键路径：
+从 `unblocking_connect.cpp`（`unblocking-connect.cpp`） 提取的关键路径：
 
 ```cpp
 // 第 1 步：创建 socket + 显式设置非阻塞
@@ -299,7 +299,7 @@ if (nfds > 0) {
 
 ### 5.2 并行 epoll 的 while 循环
 
-从 [[connect-benchmark.cpp#^nonblocking-bench|bench_nonblocking_connect()]] 提取：
+从 `bench_nonblocking_connect()`（`connect-benchmark.cpp`） 提取：
 
 ```cpp
 size_t remaining = conns.size();

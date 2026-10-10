@@ -2,8 +2,8 @@
 title: "3-4 Executor框架与四大线程池笔记"
 category: 并发编程
 tags:
-  - conc/pool
-  - conc
+  - 并发/pool
+  - 并发
 difficulty: 深入
 source: "Java并发编程的艺术"
 link: ["[[3-c FutureTask源码分析笔记|FutureTask源码分析]]","[[3-1 线程池核心理论与执行流程|线程池核心理论]]","[[3-2 Worker与FutureTask笔记|Worker与FutureTask]]"]

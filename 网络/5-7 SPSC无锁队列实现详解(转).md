@@ -1,6 +1,6 @@
 ---
 title: SPSC无锁队列实现详解
-date: 2026-07-03
+created: 2026-07-03
 tags:
   - cpp
   - cpp/mem
@@ -244,5 +244,9 @@ Github: [https://github.com/sinkinben/spsc-queue](https://github.com/sinkinben/
 3 个版本的 `spsc_queue` 的吞吐量比较（均值，中位数，最大值，最小值）。在优化 Cache False Sharing 和优先从 Cache 读取 `head, tail` 之后，可得到 x2 的提升。
 
 ![[Pasted image 20260705195723.png]]
+
+---
+
+**关联**：本篇是转载原文；逐段拆解版见 [[5-7 SPSC无锁队列实现详解(转) 详解|SPSC 详解版]]。
 
 可进一步优化的地方：如果 `spsc_queue<T>` 中的数据类型 `T` 不是 POD 类型（比如 `std::string`），`dequeue/enqueue` 将会调用拷贝构造函数 `T(const T &)` 和赋值重载 `T& operator=(const T &)` 将会触发频繁的临时对象拷贝，改进的方法是使用类似 `vector::emplace_back` 的原地构造（通过 "Placement new" 和 `std::forward` 实现）。参考：[https://github.com/sinkinben/cpp-impl-something/blob/master/impl-stl/vector.cpp](https://github.com/sinkinben/cpp-impl-something/blob/master/impl-stl/vector.cpp)

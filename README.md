@@ -5,57 +5,6 @@
 
 ---
 
-## 📂 笔记导航
-
-### 🌏 网络协议与 Linux 网络编程 · 当前主线
-
-> 从 ARP 抓包、TCP 状态机到 epoll 源码、Reactor 框架，覆盖《TCP/IP 详解 卷一》+《Linux 高性能服务器编程》
-> 📁 [查看全部 53 篇笔记目录 →](./%E7%BD%91%E7%BB%9C/README.md)
-
-- [链路层与以太网帧结构](./%E7%BD%91%E7%BB%9C/1-1%20%E9%93%BE%E8%B7%AF%E5%B1%82%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80.md)
-- [IP 分片与重组机制](./%E7%BD%91%E7%BB%9C/2-2%20IP%E5%88%86%E7%89%87.md)
-- [TCP 头部字段全解](./%E7%BD%91%E7%BB%9C/3-1%20TCP%E5%A4%B4%E9%83%A8.md)
-- [三次握手与四次挥手](./%E7%BD%91%E7%BB%9C/3-2%20TCP%E7%9A%84%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B%E4%B8%8E%E7%BB%88%E6%AD%A2.md)
-- [滑动窗口与流量控制](./%E7%BD%91%E7%BB%9C/4-1%20%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E4%BB%A5%E5%8F%8A%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3.md)
-- [select / poll / epoll 源码分析](./%E7%BD%91%E7%BB%9C/5-2-1%20select%20poll%20epoll%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90.md)
-
-### 💻 CSAPP：深入理解计算机系统
-
-> 📁 [查看全部 12 篇笔记目录 →](./csapp/README.md)
-
-- [信息的表示和处理](./csapp/%E7%AC%AC2%E7%AB%A0%20%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86.md)
-- [程序的机器级表示](./csapp/%E7%AC%AC3%E7%AB%A0%20%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA.md)
-- [链接](./csapp/%E7%AC%AC7%E7%AB%A0%20%E9%93%BE%E6%8E%A5.md)
-- [异常控制流](./csapp/%E7%AC%AC8%E7%AB%A0%20%E5%BC%82%E5%B8%B8%E6%8E%A7%E5%88%B6%E6%B5%81.md)
-- [虚拟内存](./csapp/%E7%AC%AC9%E7%AB%A0%20%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98.md)
-
-### ☕ JVM：Java 虚拟机
-
-> 📁 [查看全部 22 篇笔记目录 →](./JVM/README.md)
-
-- [JVM 内存模型 ↔ CSAPP 存储器结构贯通](./JVM/JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%20%E2%86%94%20CSAPP%E5%AD%98%E5%82%A8%E5%99%A8%E7%BB%93%E6%9E%84%20%E8%B4%AF%E9%80%9A%E7%AC%94%E8%AE%B0.md)
-- [字节码执行引擎：方法调用全链路](./JVM/%E5%AD%97%E8%8A%82%E7%A0%81%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%E4%B8%8B%E7%9A%84%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%EF%BC%88%E6%9E%B6%E6%9E%84%E5%B8%88%E5%BA%95%E5%B1%82%E5%85%A8%E9%93%BE%E8%B7%AF%E7%AC%94%E8%AE%B0%EF%BC%89.md)
-- [经典收集器与 G1 深度全解](./JVM/%E7%BB%8F%E5%85%B8%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E4%B8%8EG1%E6%94%B6%E9%9B%86%E5%99%A8%E6%B7%B1%E5%BA%A6%E5%85%A8%E8%A7%A3.md)
-- [并发可达性与三色标记](./JVM/%E5%B9%B6%E5%8F%91%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E4%B8%8E%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E6%B7%B1%E5%BA%A6%E5%85%A8%E8%A7%A3.md)
-- [逃逸分析：JIT 核心优化](./JVM/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90%EF%BC%88Escape%20Analysis%EF%BC%89%E3%80%90%E5%AD%97%E8%8A%82%E7%A0%81%E6%89%A7%E8%A1%8C%E5%BC%95%E6%93%8E%C2%B7JIT%E6%A0%B8%E5%BF%83%E4%BC%98%E5%8C%96%E3%80%91.md)
-
-### 🔄 Java 并发
-
-> 📁 [查看全部 29 篇笔记目录 →](./%E5%B9%B6%E5%8F%91/README.md)
-
-- [并发基础理论](./%E5%B9%B6%E5%8F%91/1-1%2520%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%E7%AC%94%E8%AE%B0.md) — JMM、happens-before、volatile/final
-- [锁体系核心理论](./%E5%B9%B6%E5%8F%91/2-1%2520%E9%94%81%E4%BD%93%E7%B3%BB%E6%A0%B8%E5%BF%83%E7%90%86%E8%AE%BA%E7%AC%94%E8%AE%B0.md) — synchronized底层、AQS核心
-- [线程池核心理论与执行流程](./%E5%B9%B6%E5%8F%91/3-1%2520%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A0%B8%E5%BF%83%E7%90%86%E8%AE%BA%E4%B8%8E%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.md) — ThreadPoolExecutor源码全链路
-- [线程池核心理论与执行流程](./%E5%B9%B6%E5%8F%91/3-1%2520%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A0%B8%E5%BF%83%E7%90%86%E8%AE%BA%E4%B8%8E%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.md) — ThreadPoolExecutor 源码全链路
-- [并发性能优化全景图](./%E5%B9%B6%E5%8F%91/4-8%2520%E5%B9%B6%E5%8F%91%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%85%A8%E6%99%AF%E5%9B%BE.md)
-- [JMM与并发安全发布](./%E5%B9%B6%E5%8F%91/4-5%2520JMM%E4%B8%8E%E5%B9%B6%E5%8F%91%E5%AE%89%E5%85%A8%E5%8F%91%E5%B8%83.md)
-
-### 📝 小文章
-
-- [**挖穿 Java volatile 并发底层：一个 30 年前的历史妥协，如何坑了三代程序员**](./%E5%B0%8F%E6%96%87%E7%AB%A0/Java%E7%9A%84volatile%20%E5%8F%AF%E8%A7%81%E6%80%A7%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0.md)
-
----
-
 ## 写在最前：为什么要自底向上？
 
 AI 时代的到来，生产力工具正在变革，程序员的职能逐渐下放。vibe coding 让"人人都是程序员"成为可能，这是技术平权的一次巨大跨越。但这也逼着我们去追问一个更深层的问题：当"写代码"不再是壁垒，程序员的护城河是什么？
