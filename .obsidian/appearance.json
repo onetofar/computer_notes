@@ -1,0 +1,13 @@
+{
+  "cssTheme": "Everforest",
+  "baseFontSizeAction": true,
+  "theme": "moonstone",
+  "accentColor": "#6a7595",
+  "nativeMenus": false,
+  "baseFontSize": 13,
+  "enabledCssSnippets": [
+    "typora-solarized"
+  ],
+  "interfaceFontFamily": "Corbel",
+  "monospaceFontFamily": "Cascadia Code,Cascadia Mono"
+}

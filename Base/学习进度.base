@@ -1,0 +1,53 @@
+filters:
+  and:
+    - file.ext == "md"
+    - file.folder != "MOC"
+    - file.folder != "Excalidraw"
+    - file.folder != "Canvas"
+    - file.folder != "Base"
+    - file.folder != "Templates"
+    - file.folder != ".obsidian"
+formulas:
+  days_since_modified: (now() - file.mtime).days
+  is_recent: if((now() - file.mtime).days < 7, "🆕 本周", if((now() - file.mtime).days < 30, "📅 本月", "📦 更早"))
+properties:
+  category:
+    displayName: 领域
+  difficulty:
+    displayName: 难度
+  source:
+    displayName: 来源
+  formula.is_recent:
+    displayName: 活跃度
+views:
+  - type: table
+    name: 学习进度总览
+    groupBy:
+      property: category
+      direction: ASC
+    order:
+      - category
+      - difficulty
+      - file.name
+      - formula.is_recent
+      - file.mtime
+  - type: table
+    name: 进阶 & 深入
+    filters:
+      or:
+        - difficulty == "进阶"
+        - difficulty == "深入"
+    order:
+      - category
+      - difficulty
+      - file.name
+  - type: table
+    name: 最近活跃
+    filters:
+      and:
+        - (now() - file.mtime).days < 14
+    order:
+      - file.mtime
+      - file.name
+  - type: table
+    name: 视图

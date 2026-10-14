@@ -1,0 +1,29 @@
+# ── vault 根仓库的忽略规则（2026-10-14 建立）──────────────────────────
+# 本仓库只管 vault 根层：MOC / Excalidraw / md_pict / Base / Obsidian 配置。
+# 笔记正文在 markdown/，它有自己的仓库与远端（github.com/onetofar/computer_notes.git），
+# 不要在这里重复跟踪，否则会出现两个历史、两处 remote 打架。
+
+# 笔记正文层：有独立仓库，且已 push
+/markdown/
+
+# Obsidian 的可重下资产与易抖动状态
+# 注意：gitignore **不支持行尾注释**，`路径  # 说明` 里的「路径 + 空格 + #…」整体会被当成模式。
+# 所以下面每条说明都另起一行。写错的后果是静默失效——不报错，文件照旧被提交。
+# 第三方插件二进制，10.1 MB，装一次就行
+/.obsidian/plugins/
+# 主题文件，5.9 MB，可重新下载
+/.obsidian/themes/
+# 每个窗口的 UI 状态，每次打开都在变，提交它只会污染历史
+/.obsidian/workspace*.json
+# 同上
+/.obsidian/workspaces.json
+
+# 回收站
+/.trash/
+
+# 系统与编辑器垃圾
+Thumbs.db
+desktop.ini
+.DS_Store
+*.tmp
+~$*

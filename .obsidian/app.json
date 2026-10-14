@@ -1,0 +1,10 @@
+{
+  "showLineNumber": false,
+  "readableLineLength": false,
+  "promptDelete": false,
+  "alwaysUpdateLinks": true,
+  "strictLineBreaks": false,
+  "attachmentFolderPath": "./md_pict",
+  "tabSize": 2,
+  "defaultViewMode": "preview"
+}

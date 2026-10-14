@@ -1,0 +1,60 @@
+filters:
+  and:
+    - file.ext == "md"
+    - file.folder != "MOC"
+    - file.folder != "Excalidraw"
+    - file.folder != "Canvas"
+    - file.folder != "Base"
+    - file.folder != "Templates"
+    - file.folder != ".obsidian"
+formulas:
+  link_count: file.links.length
+  has_wikilinks: if(file.links.length > 0, "🔗 已链接", "⬜ 未链接")
+properties:
+  category:
+    displayName: 领域
+  difficulty:
+    displayName: 难度
+  formula.has_wikilinks:
+    displayName: 链接状态
+  file.mtime:
+    displayName: 最后修改
+views:
+  - type: table
+    name: 全部笔记
+    groupBy:
+      property: category
+      direction: ASC
+    order:
+      - file.name
+      - category
+      - difficulty
+      - formula.has_wikilinks
+      - file.mtime
+    sort:
+      - property: file.name
+        direction: DESC
+      - property: tags
+        direction: DESC
+      - property: difficulty
+        direction: DESC
+      - property: formula.has_wikilinks
+        direction: DESC
+  - type: cards
+    name: 按难度
+    groupBy:
+      property: difficulty
+      direction: ASC
+    order:
+      - file.name
+      - difficulty
+      - category
+  - type: table
+    name: 未建立链接的笔记
+    filters:
+      and:
+        - file.links.length == 0
+    order:
+      - file.name
+      - category
+      - file.mtime

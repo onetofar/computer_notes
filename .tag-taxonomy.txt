@@ -1,0 +1,44 @@
+--- 网络(net) ---
+net/link:       # 链路层|ARP|以太网|MAC
+net/ip:         # IP|IPv4|IPv6|ICMP|分片
+net/udp:        # UDP|校验和|数据报
+net/tcp:        # TCP连接|握手|挥手|状态机|头部
+net/tcp-loss:   # TCP重传|超时|SACK
+net/flow:       # 滑动窗口|流量控制|Nagle
+net/congestion: # 拥塞控制|慢启动|快速恢复
+net/socket:     # Socket API|选项|RAII封装
+net/io:         # IO复用|select|poll|epoll
+net/server:     # 服务器架构|Reactor|游戏服务器
+net/netty:      # Netty|EventLoop
+net/practice:   # 抓包|Docker|WSL|环境|工具
+net/ref:        # 书籍|翻译|参考
+
+--- CSAPP(csapp) ---
+csapp/data:   # 信息表示|补码|IEEE754|端序|位运算
+csapp/asm:    # x86-64|栈帧|ABI|缓冲区溢出
+csapp/mem:    # 存储器层次|缓存|MESI|伪共享
+csapp/link:   # ELF|链接|符号解析|动态库|PLT/GOT
+csapp/ecf:    # 异常|fork|exec|signal
+csapp/vm:     # 虚拟内存|页表|MMU|mmap
+csapp/io:     # Unix IO|文件描述符|重定向|管道
+
+--- 并发(conc) ---
+conc/jmm:      # JMM|volatile|happens-before|内存屏障
+conc/lock:     # synchronized|AQS|ReentrantLock|CAS
+conc/container:# ConcurrentHashMap|并发集合|阻塞队列
+conc/pool:     # 线程池|Executor|FutureTask|ForkJoin
+conc/perf:     # 死锁|性能|可伸缩性|Amdahl
+
+--- JVM(jvm) ---
+jvm/mem:     # 内存模型|堆|栈|对象生命周期|OOM
+jvm/class:   # 类加载|Class文件|常量池|双亲委派
+jvm/exec:    # 字节码|执行引擎|方法调用|invokedynamic
+jvm/gc:      # GC算法|三色标记|卡表|安全点|安全区域
+jvm/gc-impl: # CMS|G1|ZGC|Shenandoah|Parallel
+jvm/jit:     # JIT|逃逸分析|方法内联|分层编译
+jvm/thread:  # JVM线程模型|锁优化|biased-locking
+
+--- 跨领域 ---
+bridge/jvm-csapp:   # JVM↔CSAPP 贯通笔记
+bridge/conc-csapp:  # 并发↔CSAPP 贯通笔记
+meta:                # 项目|规范|索引|MOC
