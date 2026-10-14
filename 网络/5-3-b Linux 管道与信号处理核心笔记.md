@@ -5,8 +5,8 @@ tags:
   - net
   - cpp
   - pipe
+category: 操作系统
 source: 自整理
-status: complete
 link:
   - "[[markdown/csapp/第10章 系统级 IO | 系统级IO]]"
   - "[[5-3-b Linux 管道与信号处理核心笔记|管道与信号处理]]"

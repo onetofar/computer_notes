@@ -5,8 +5,8 @@ tags:
   - net
   - cpp
   - 操作系统
+category: 操作系统
 source: 自整理
-status: complete
 ---
 # mmap / munmap 零拷贝内存映射 — 源码分析
 

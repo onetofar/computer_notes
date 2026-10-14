@@ -13,8 +13,8 @@ aliases:
   - Epoll Connect 性能对比
 cssclasses:
   - wide
-status: complete
 link: ["[[5-2-4 IO复用的应用之一-非阻塞的connect|非阻塞connect]]"]
+category: 计算机网络
 ---
 net use Z: \\wsl$\Ubuntu-22.04\root\game-server-engine /persistent:yes
 # 非阻塞 connect + epoll 深度分析

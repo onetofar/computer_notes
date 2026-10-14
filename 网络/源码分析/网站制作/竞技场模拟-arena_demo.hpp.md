@@ -1,6 +1,6 @@
 ---
 title: 竞技场模拟—arena_demo.hpp
-category: 网络
+category: 计算机网络
 tags:
   - 源码分析
   - 网站制作

@@ -1,6 +1,6 @@
 ---
 title: Muduo 导读—连接生命周期
-category: 网络编程
+category: 计算机网络
 tags:
   - 源码分析
   - muduo

@@ -5,8 +5,8 @@ tags:
   - net
   - epoll
   - cpp
+category: 并发编程
 source: src/examples/net/schedule/linked_scheduled.hpp, src/examples/net/schedule/whell_scheduled.hpp
-status: complete
 link:
   - "[[5-3-b Linux 管道与信号处理核心笔记|管道与信号处理]]"
 ---

@@ -1,6 +1,6 @@
 ---
 title: Muduo 导读—Channel 与所有权链
-category: 网络编程
+category: 计算机网络
 tags:
   - 源码分析
   - muduo

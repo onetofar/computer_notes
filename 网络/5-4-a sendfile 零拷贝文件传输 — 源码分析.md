@@ -5,8 +5,8 @@ tags:
   - net
   - cpp
   - 操作系统
+category: 计算机网络
 source: 自整理
-status: complete
 ---
 # sendfile 零拷贝文件传输 — 源码分析
 

@@ -4,8 +4,8 @@ created: 2026-07-03
 tags:
   - cpp
   - cpp/mem
-source: 转自:"https://www.cnblogs.com/sinkinben/p/17949761/spsc-queue"
-status: complete
+category: C++底层
+source: '转自:"https://www.cnblogs.com/sinkinben/p/17949761/spsc-queue"'
 ---
 # 无锁队列 SPSC Queue：从基础实现到高性能优化
 

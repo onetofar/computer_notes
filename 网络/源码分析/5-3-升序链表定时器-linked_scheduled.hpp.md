@@ -7,8 +7,8 @@ tags:
   - epoll
   - 非阻塞
   - cpp
+category: 并发编程
 source: src/examples/net/schedule/linked_scheduled.hpp
-status: complete
 link:
   - "[[markdown/csapp/第10章 系统级 IO | 系统级IO]]"
   - "[[5-3-b Linux 管道与信号处理核心笔记|管道与信号处理]]"

@@ -1,6 +1,6 @@
 ---
 title: 前端 WS 客户端—ws.js
-category: 网络
+category: 计算机网络
 tags:
   - 源码分析
   - 网站制作
