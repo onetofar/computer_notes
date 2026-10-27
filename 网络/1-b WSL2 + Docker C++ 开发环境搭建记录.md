@@ -7,6 +7,12 @@ tags:
 difficulty: 基础
 source: "自整理"
 ---
+
+
+> ⚠️ **历史文档**。这套 WSL2 + Docker 方案已于 2026-10-28 整体退役。
+> 现役方案:开发环境在原生 Fedora 44(编译走系统 g++-16,19/19 测试全绿),
+> 推理留在 Windows(桌面已搬核显,3080 整卡归 Ollama)。
+> 见 [[4-2 WSL 退役与 Linux 迁移：开发环境搬去 Fedora，推理留在 Windows|4-2 WSL 退役与 Linux 迁移]]。
 # WSL2 + Docker C++ 开发环境搭建踩坑记录
 > **环境**：Windows 11 + WSL2 (Ubuntu 22.04) + Docker CE  
 > **目标**：搭建纯 Linux C++ 网络编程开发环境，用于游戏服务器引擎项目  

@@ -1,5 +1,5 @@
 ---
-title: SPSC无锁队列实现详解
+title: SPSC无锁队列实现详解（精读版）
 created: 2026-07-03
 tags:
   - cpp

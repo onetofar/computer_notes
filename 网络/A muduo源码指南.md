@@ -1597,3 +1597,8 @@ muduo 和其它网络库的异同：
 | **BlockingQueue** | ★★☆☆☆ | 用标准库替代 |
 | **Singleton** | ★☆☆☆☆ | 不推荐 |
 | **StringPiece** | ★☆☆☆☆ | 用 std::string_view 替代 |
+
+## 相关绘图
+- `Excalidraw/muduo源码设计/` —— 9 张 muduo 架构图（Excalidraw 源文件）
+  - 架构总览 / 多线程架构 / EventLoop 核心循环 / 事件分发链路
+  - 连接生命周期 / 跨线程任务投递 / Buffer 设计 / 连接所有权追踪 / 全量分析大图

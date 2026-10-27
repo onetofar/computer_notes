@@ -1,1 +1,7 @@
 其他/
+
+# 百度云同步临时文件 / 编辑器临时文件
+*.baiduyun.uploading.cfg
+*.tmp
+.tmp_*
+~$*

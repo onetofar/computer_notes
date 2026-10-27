@@ -1,5 +1,5 @@
 ---
-title: 升序链表的定时器服务器源码分析
+title: Linux 管道与信号处理核心笔记
 created: 2026-06-28
 tags:
   - net
