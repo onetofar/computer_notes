@@ -3,11 +3,11 @@
   "baseFontSizeAction": true,
   "theme": "moonstone",
   "accentColor": "#6a7595",
-  "nativeMenus": false,
+  "nativeMenus": true,
   "baseFontSize": 13,
   "enabledCssSnippets": [
     "typora-solarized"
   ],
-  "interfaceFontFamily": "Corbel",
+  "interfaceFontFamily": "Corbel,Arial",
   "monospaceFontFamily": "Cascadia Code,Cascadia Mono"
 }

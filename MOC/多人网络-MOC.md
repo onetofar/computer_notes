@@ -6,7 +6,7 @@ tags:
   - 多人网络
   - MOC
 difficulty: 进阶
-source: '分区导览｜落点：markdown/多人网络/｜服务项目：F:\game_project\otf-server'
+source: '分区导览｜落点：markdown/个人项目/Monster/｜服务项目：F:\game_project\otf-server'
 created: 2026-10-06
 skills:
   - obsidian-markdown
@@ -34,7 +34,11 @@ type: 领域MOC
 
 **当前服务对象**：**otf-game**（Godot 4 俯视角 4 人共斗狩猎游戏）。
 服务端 C++ 在 `F:\game_project\otf-server`，**K4–K8 全部完成并双环验收**
-（宿主 ctest 16/16 + 容器 verify 16/16，客户端回归 29/29，4 端同房 213 tick 逐字节一致）。
+（客户端回归 29/29，4 端同房 213 tick 逐字节一致）。
+> ⚠️ **服务端的宿主已经换过一次**：2026-10-28 把 WSL 退役、开发环境迁到原生 Fedora 44，
+> 工具链从 `g++-12` 换成系统 `g++-16`（toolchain.cmake 改为显式声明式选择），
+> **ctest 19/19 全绿**。原「宿主 16/16 + 容器 verify 16/16」的表述已随 WSL 一起失效。
+> 详见 [[4-2 WSL 退役与 Linux 迁移：开发环境搬去 Fedora，推理留在 Windows|4-2]]。
 **协议与设计规格以项目内 `技术参考.md` 为准**（它在项目仓库里，不在本库）。
 
 # 多人网络 · 领域MOC
