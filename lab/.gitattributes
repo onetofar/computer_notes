@@ -1,0 +1,11 @@
+# lab 代码必须在 Linux 上直接可用: 强制 LF, 禁止 CRLF
+# (git 默认在 Windows checkout 时把 LF 转成 CRLF, .sh 脚本会直接跑不起来)
+* text=auto eol=lf
+
+*.sh text eol=lf
+*.py text eol=lf
+*.c   text eol=lf
+*.cpp text eol=lf
+*.h   text eol=lf
+*.md  text eol=lf
+

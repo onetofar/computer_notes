@@ -1,0 +1,4 @@
+build/
+reports/
+*.bin
+*.o
