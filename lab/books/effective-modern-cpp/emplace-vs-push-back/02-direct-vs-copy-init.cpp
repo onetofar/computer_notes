@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: emplace-vs-push-back
-// @source: Effective Modern C++/8. Tweaks（讲义）.md §2.4 Item 42（explicit 构造函数：emplacement 会"多能编译"）
+// @source: Effective Modern C++/8. Tweaks（讲义）.md §Item 42 · 2.4 explicit 构造函数：emplacement 会"多能编译"
 // @expect: explicit 构造函数: is_constructible_v<Widget,int>=true 而 is_convertible_v<Widget,int>=false, 所以 emplace_back(1) 编译得过, push_back(1) 编译不过
 #include <cstdio>
 #include <type_traits>

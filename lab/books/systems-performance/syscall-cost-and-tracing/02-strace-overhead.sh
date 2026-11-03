@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # @book: Systems Performance
 # @topic: syscall-cost-and-tracing
-# @source: Chapter 4. Observability Tools（讲义）.md §4.2.3
+# @source: Chapter 4. Observability Tools（讲义）.md §4.2.3 Tracing：追踪
 # @expect: 被 strace 跟踪的程序自身测得的耗时明显变长; 差值除以被追踪的系统调用次数, 就是每次 syscall 的观测开销
 
 set -uo pipefail

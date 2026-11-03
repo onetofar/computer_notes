@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: perfect-forwarding
-// @source: Effective Modern C++/5. Rvalue References, Move Semantics, and Perfect Forwarding（讲义）.md §4 Item 26–27（完美转发构造函数会劫持拷贝构造）
+// @source: Effective Modern C++/5. Rvalue References, Move Semantics, and Perfect Forwarding（讲义）.md §Item 26 · 完美转发构造函数会劫持拷贝构造
 // @expect: 拷贝一个非 const Person 时走的是模板构造(模板1/拷贝0), 名字被改写; const Person 才走拷贝构造(模板0/拷贝1)
 #include <cstdio>
 #include <string>

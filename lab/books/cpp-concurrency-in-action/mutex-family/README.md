@@ -39,7 +39,7 @@
 
 > the vagaries of system scheduling and the varying precisions of OS clocks means that the time between the thread issuing the call and returning from it may be much longer than 35 ms.
 
-> 讲义附录 D 的锁族速查：`| \`std::recursive_mutex\` | 同一线程可重复 lock |`、`| \`std::timed_mutex\` | \`try_lock_for\` / \`try_lock_until\` |`
+> ⇒ **默认选 `std::mutex`。** 另外五个都是在「基础互斥不够用」时才换的。
 
 ## 跑法
 

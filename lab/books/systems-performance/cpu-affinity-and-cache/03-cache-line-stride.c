@@ -1,6 +1,6 @@
 // @book: Systems Performance
 // @topic: cpu-affinity-and-cache
-// @source: Chapter 6. CPUs（讲义）.md §6.4.1
+// @source: Chapter 6. CPUs（讲义）.md §6.4.1 Cache Line
 // @expect: 步长 64B 时预取器跟得上, 带宽约 300MB/s; 步长 4096B 时每次访问跨新页(TLB miss)且预取失效, 带宽掉到约 70MB/s
 
 #define _POSIX_C_SOURCE 200809L

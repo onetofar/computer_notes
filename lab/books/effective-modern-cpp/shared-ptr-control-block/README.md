@@ -12,12 +12,12 @@
 
 ## 结论
 
-教材原话：
-
-> A consequence of these rules is that constructing more than one std::shared_ptr from a single raw pointer gives you a complimentary ride on the particle accelerator of undefined behavior.
-
 一个裸指针 → 一个 `shared_ptr`，**不是**"计数变 1"，而是"开了第一块控制块"。
 再从同一个裸指针开第二个 `shared_ptr`，就是第二块控制块，两块互不知情，各自认为引用计数是 1。
+
+## 教材原话
+
+> A consequence of these rules is that constructing more than one std::shared_ptr from a single raw pointer gives you a complimentary ride on the particle accelerator of undefined behavior, because the pointed-to object will have multiple control blocks.
 
 ## 跑法
 

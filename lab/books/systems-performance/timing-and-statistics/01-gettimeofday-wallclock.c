@@ -1,6 +1,6 @@
 // @book: Systems Performance
 // @topic: timing-and-statistics
-// @source: Chapter 12. Benchmarking（讲义）.md §12.3.9
+// @source: Chapter 3. Operating Systems（讲义）.md §3.2.2 Kernel and User Modes：模式切换与上下文切换
 // @expect: gettimeofday 给出墙钟时间戳, 分辨率 1us; 当前与 CLOCK_MONOTONIC 的差值接近 0, 但墙钟会被 NTP 步进/校时改动
 
 #define _POSIX_C_SOURCE 200809L

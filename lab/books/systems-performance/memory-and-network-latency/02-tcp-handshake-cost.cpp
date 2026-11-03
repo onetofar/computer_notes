@@ -1,6 +1,6 @@
 // @book: Systems Performance
 // @topic: memory-and-network-latency
-// @source: Chapter 10. Network（讲义）.md §10.3.5
+// @source: Chapter 10. Network（讲义）.md §10.3.5 Latency：全章的核心概念
 // @expect: 回环上每次 connect() 的握手成本约几十 us; 连接建立延迟与连接寿命只差一个词, 含义差一个量级
 
 #include <arpa/inet.h>

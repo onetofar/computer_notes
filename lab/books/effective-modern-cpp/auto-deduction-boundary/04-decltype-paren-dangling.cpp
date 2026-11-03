@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: auto-deduction-boundary
-// @source: Effective Modern C++/1. Deducing Types（讲义）.md §3.2 Item 3（括号陷阱）
+// @source: Effective Modern C++/1. Deducing Types（讲义）.md §Item 3 · 3.2 括号陷阱
 // @expect: decltype(x)=int 而 decltype((x))=int&; 一对括号就让 decltype(auto) 把引用带出函数 -> 悬垂引用 -> 再释放一次触发 double free
 // @ub: yes
 #include <cstdio>

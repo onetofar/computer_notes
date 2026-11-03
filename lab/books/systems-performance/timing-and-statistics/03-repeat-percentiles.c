@@ -1,7 +1,7 @@
 // @book: Systems Performance
 // @topic: timing-and-statistics
-// @source: Chapter 12. Benchmarking（讲义）.md §12.3.9
-// @expect: 1000 次采样后, 首次单次值(first)与中位数可能差一个数量级; p95 与 max 把尾部暴露出来
+// @source: Chapter 2. Methodologies（讲义）.md §2.8.3 Standard Deviation, Percentiles, Median
+// @expect: 1000 次采样后, 首次单次值(first)与中位数可能差两个数量级(实测 3701 ns vs 35 ns); p95 与 max 把尾部暴露出来
 
 #define _POSIX_C_SOURCE 200809L
 #include <stdio.h>

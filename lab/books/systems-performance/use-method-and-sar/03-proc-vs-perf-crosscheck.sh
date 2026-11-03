@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # @book: Systems Performance
 # @topic: use-method-and-sar
-# @source: Chapter 4. Observability Tools（讲义）.md §4.6
+# @source: Chapter 4. Observability Tools（讲义）.md §4.6 Observing Observability：观测的观测
 # @expect: perf 报的上下文切换/缺页数与 /proc/self/stat 读到的累计计数同量级 —— 两个工具可以互相印证
 
 set -uo pipefail

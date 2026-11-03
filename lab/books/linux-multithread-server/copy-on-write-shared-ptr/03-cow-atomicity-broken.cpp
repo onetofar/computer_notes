@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: copy-on-write-shared-ptr
-// @source: 第2章 线程同步精要（讲义）.md §2.8
+// @source: 第2章 线程同步精要（讲义）.md §2.8 借shared_ptr实现copy-on-write
 // @expect: 复制—修改—替换拆到两个临界区, 两个写者都基于同一份旧值, 丢失更新, 最终 size=1
 #include <barrier>
 #include <cstdio>

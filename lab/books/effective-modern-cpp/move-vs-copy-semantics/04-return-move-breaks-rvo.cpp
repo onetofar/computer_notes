@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: move-vs-copy-semantics
-// @source: Effective Modern C++/5. Rvalue References, Move Semantics, and Perfect Forwarding（讲义）.md §3 Item 25（return std::move(w) 是反优化）
+// @source: Effective Modern C++/5. Rvalue References, Move Semantics, and Perfect Forwarding（讲义）.md §Item 25 · return std::move(w) 是反优化
 // @expect: return w 走 NRVO(拷贝0/移动0); return std::move(w) 挡掉 NRVO, 多一次移动构造(移动1)
 #include <cstdio>
 #include <utility>

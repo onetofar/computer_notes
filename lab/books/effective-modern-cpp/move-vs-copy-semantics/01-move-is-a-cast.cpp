@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: move-vs-copy-semantics
-// @source: Effective Modern C++/5. Rvalue References, Move Semantics, and Perfect Forwarding（讲义）.md §1 Item 23
+// @source: Effective Modern C++/5. Rvalue References, Move Semantics, and Perfect Forwarding（讲义）.md §Item 23
 // @expect: 只调用 std::move 对象一点没变; 真正搬东西的是被选中的移动构造(拷贝0/移动1), 源被掏空但仍是合法对象
 #include <cstdio>
 #include <cstddef>

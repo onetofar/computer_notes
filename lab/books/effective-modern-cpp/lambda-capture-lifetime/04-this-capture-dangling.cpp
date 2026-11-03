@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: lambda-capture-lifetime
-// @source: Effective Modern C++/6. Lambda Expressions（讲义）.md §1 Item 31（[=] 抓到的是 this 的一份拷贝）
+// @source: Effective Modern C++/6. Lambda Expressions（讲义）.md §Item 31 · [=] 抓到的是 this 的一份拷贝
 // @expect: [=] 抓到的 this 在对象被销毁后仍被调用: 读到已释放的对象(悬垂的 this), 并把已被释放的资源再释放一次 -> double free
 // @ub: yes
 #include <cstdio>

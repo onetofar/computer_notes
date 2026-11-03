@@ -1,6 +1,6 @@
 // @book: Systems Performance
 // @topic: cpu-affinity-and-cache
-// @source: Chapter 6. CPUs（讲义）.md §6.4.1
+// @source: Chapter 6. CPUs（讲义）.md §6.4.2 Software：调度器与亲和性
 // @expect: 共享辅助代码: 挑两个不同物理核 / 绑核 / 计时
 #ifndef SP_PICK_CORES_H
 #define SP_PICK_CORES_H

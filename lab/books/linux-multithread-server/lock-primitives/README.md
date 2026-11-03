@@ -16,11 +16,11 @@
 讲义 §2.1 讲 mutex 的四条主要原则：
 
 > **（1）用 RAII 手法封装 mutex 的创建、销毁、加锁、解锁这四个操作。**
->
+
 > **（2）只用非递归的 mutex（即不可重入的 mutex）。**
->
+
 > **（3）不手工调用 `lock()` 和 `unlock()` 函数，一切交给栈上的 Guard 对象的构造和析构函数负责。**
->
+
 > **（4）在每次构造 Guard 对象的时候，思考一路上（调用栈上）已经持有的锁，防止因加锁顺序不同而导致死锁（deadlock）。**
 
 讲义 §2.1 对第 (3) 条的理由：
@@ -38,9 +38,9 @@
 讲义 §2.4 批评 `boost::thread` 同步原语庞杂时列出的清单：
 
 > ·Concept有四种Lockable、TimedLockable、SharedLockable、UpgradeLockable。
->
+
 > ·Lock有六种：lock_guard、unique_lock、shared_lock、upgrade_lock、upgrade_to_unique_lock、scoped_try_lock。
->
+
 > ·Mutex有七种：mutex、try_mutex、timed_mutex、recursive_mutex、recursive_try_mutex、recursive_timed_mutex、shared_mutex。
 
 讲义 §2.4 的落点：

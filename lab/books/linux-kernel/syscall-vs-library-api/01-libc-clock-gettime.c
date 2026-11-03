@@ -1,6 +1,6 @@
 // @book: Linux Kernel Programming
 // @topic: syscall-vs-library-api
-// @source: Chapter 1. Kernel Workspace Setup（讲义）.md §3.1
+// @source: Chapter 1. Kernel Workspace Setup（讲义）.md §3（3.1 man page 的分区约定：man 2 = 系统调用，man 3 = 库 API）
 // @expect: glibc 的 clock_gettime 走 vDSO, 50 万次调用只花几十毫秒, 每次开销是纳秒级
 #define _POSIX_C_SOURCE 200809L
 #include <stdio.h>

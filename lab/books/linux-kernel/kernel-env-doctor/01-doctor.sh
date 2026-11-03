@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # @book: Linux Kernel Programming
 # @topic: kernel-env-doctor
-# @source: Chapter 1. Kernel Workspace Setup（讲义）.md §1.2 §2.1 §2.2
+# @source: Chapter 1. Kernel Workspace Setup（讲义）.md §3.7（另见讲义 1.2 / 2.1 / 2.2 节）
 # @expect: 逐项打印 7 项前置条件的体检结论, 缺项只报不失败, 退出码恒为 0
 
 set -uo pipefail

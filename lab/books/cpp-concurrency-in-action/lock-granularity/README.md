@@ -1,6 +1,7 @@
 # 锁粒度：同一份计数，三种并发策略
 
-> 来源讲义：`C++ Concurrency in Action/Chapter 4. Synchronizing concurrent operations（讲义）.md`
+> 来源讲义：`C++ Concurrency in Action/Chapter 3. Sharing data between threads（讲义）.md` §3.2.8
+> `C++ Concurrency in Action/Chapter 5. The C++ memory model and operations on atomic types（讲义）.md` §5.2.2
 
 ## 对照关系
 
@@ -20,6 +21,19 @@
 2. `02` 把可变状态切成互不相交的片，逻辑上退化成「每个线程只写自己的格子」，
    原子操作在这里只用于保证最终求和时能读到别的线程的写入。
 3. `03` 用自旋锁替代阻塞锁：临界区短时自旋更快，长时自旋会烧 CPU。
+
+## 教材原话
+
+> the lock granularity is a hand-waving term to describe the amount of data protected by a single lock
+
+> the extreme situation is a single global mutex that protects all shared data.
+
+> Where possible, lock a mutex only while accessing the shared
+> data; try to do any processing of the data outside the lock. In particular, don’t do any time-consuming activities like file
+> I/O while holding a lock.
+
+> File I/O is typically hundreds (if not thousands) of times slower than reading or writing the same
+> volume of data from memory.
 
 ## 跑法
 

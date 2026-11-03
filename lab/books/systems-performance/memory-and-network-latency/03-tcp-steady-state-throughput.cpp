@@ -1,6 +1,6 @@
 // @book: Systems Performance
 // @topic: memory-and-network-latency
-// @source: Chapter 10. Network（讲义）.md §10.3.5
+// @source: Chapter 10. Network（讲义）.md §10.3.5 Latency：全章的核心概念
 // @expect: 复用一条连接连续传 64MB, 稳态吞吐远高于"每次重连"的摊薄结果; 瓶颈从延迟变成带宽
 
 #include <arpa/inet.h>

@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: auto-deduction-boundary
-// @source: Effective Modern C++/1. Deducing Types（讲义）.md §2 Item 2 §3 Item 3
+// @source: Effective Modern C++/1. Deducing Types（讲义）.md §Item 1 §Item 2 §Item 3
 // @expect: 同一个左值四种写法推出四种类型: auto=Widget(拷贝), const auto&=const Widget&, decltype(auto)=Widget&(保留引用), 显式类型=Widget
 #include <cstdio>
 #include <type_traits>

@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: lock-primitives
-// @source: 第2章 线程同步精要（讲义）.md §2.4
+// @source: 第2章 线程同步精要（讲义）.md §2.4 封装MutexLock、MutexLockGuard、Condition
 // @expect: unique_lock 支持 defer_lock 与中途 unlock, 打印 提前解锁后锁已释放
 #include <chrono>
 #include <cstdio>

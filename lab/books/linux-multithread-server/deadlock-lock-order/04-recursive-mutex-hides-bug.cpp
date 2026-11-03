@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: deadlock-lock-order
-// @source: 第2章 线程同步精要（讲义）.md §2.1.1
+// @source: 第2章 线程同步精要（讲义）.md §2.1.1 只使用非递归的mutex
 // @expect: 递归 mutex 下不死锁, 但遍历期间 post 触发 vector 扩容, 迭代器失效造成双重释放
 // @ub: yes
 #include <cstdio>

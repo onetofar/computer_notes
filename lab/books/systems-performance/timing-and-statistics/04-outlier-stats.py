@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # @book: Systems Performance
 # @topic: timing-and-statistics
-# @source: Chapter 2. Methodologies（讲义）.md §2.8.2
+# @source: Chapter 2. Methodologies（讲义）.md §2.8.6 Outliers
 # @expect: 均值被少数离群点拉高, 中位数几乎不动; 去掉离群点后两者都回落 —— 说明"平均值藏细节"
 
 import sys

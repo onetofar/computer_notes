@@ -10,7 +10,7 @@
 | 文件 | 差异点 | 预期输出 |
 | --- | --- | --- |
 | `01-mutex-counter.cpp` | `std::mutex` + `lock_guard`: 每次加法都过一次锁 | `mutex-counter: counter=200000 (期望 200000) 耗时=… us` |
-| `02-atomic-counter.cpp` | 同一份计数器换成 `std::atomic<long long>` 的 `fetch_add(relaxed)` | `atomic-counter: counter=200000 (期望 200000) 耗时=… us` |
+| `02-atomic-counter-vs-mutex.cpp` | 同一份计数器换成 `std::atomic<long long>` 的 `fetch_add(relaxed)` | `atomic-counter: counter=200000 (期望 200000) 耗时=… us` |
 | `03-call-once-init.cpp` | `std::call_once`: 初始化**恰好一次**, 之后每次调用只查一次标志 | `Resource(7) 构造` 只出现一次 / `call_once: id=7 耗时=… us` |
 | `04-manual-once-flag.cpp` | 手工 once flag（`mutex` + `bool`）: 语义相同, 但**每次调用都要过一次锁** | `Resource(7) 构造` 只出现一次 / `manual-once: id=7 耗时=… us` |
 

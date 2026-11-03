@@ -1,6 +1,6 @@
 // @book: Linux Kernel Programming
 // @topic: syscall-vs-library-api
-// @source: Chapter 1. Kernel Workspace Setup（讲义）.md §3.1
+// @source: Chapter 1. Kernel Workspace Setup（讲义）.md §3（3.1 man page 的分区约定：man 2 = 系统调用，man 3 = 库 API）
 // @expect: 用 syscall() 绕过 glibc 封装后每次都进内核, 每次开销比 01 高一个数量级以上
 #define _DEFAULT_SOURCE
 #define _POSIX_C_SOURCE 200809L

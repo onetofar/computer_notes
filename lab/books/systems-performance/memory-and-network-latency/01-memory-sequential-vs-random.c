@@ -1,7 +1,7 @@
 // @book: Systems Performance
 // @topic: memory-and-network-latency
-// @source: Chapter 7. Memory（讲义）.md §7.3.1
-// @expect: 同一个 64MB 数组, 顺序访问每次约 1ns(带宽极高), 随机访问每次约 80ns; 差别就是 cache 与预取
+// @source: Chapter 7. Memory（讲义）.md §7.3.1 Hardware：DRAM、NUMA 和 TLB
+// @expect: 同一个 64MB 数组, 顺序访问每次约 0.6~1.0ns(带宽极高), 随机访问每次约 8~11ns; 差别就是 cache 与预取
 
 #define _POSIX_C_SOURCE 200809L
 #include <stdio.h>

@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: lambda-capture-lifetime
-// @source: Effective Modern C++/6. Lambda Expressions（讲义）.md §1 Item 31（[=] 的坑一：它抓的根本不是你想抓的那个东西）
+// @source: Effective Modern C++/6. Lambda Expressions（讲义）.md §Item 31 · [=] 的坑一：它抓的根本不是你想抓的那个东西
 // @expect: 成员函数里的 [=] 抓的是 this(闭包 sizeof=8), 成员改动后闭包看到新值; init capture [d=divisor] 抓值拷贝(sizeof=4), 外部改动不影响闭包
 #include <cstdio>
 

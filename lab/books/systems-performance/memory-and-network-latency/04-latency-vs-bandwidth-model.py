@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # @book: Systems Performance
 # @topic: memory-and-network-latency
-# @source: Chapter 10. Network（讲义）.md §10.3.5
+# @source: Chapter 10. Network（讲义）.md §10.3.5 Latency：全章的核心概念
 # @expect: 小包受延迟支配, 大包受带宽支配; 要跑满带宽, 在途字节数必须够一个 BDP —— 并发度不足就是延迟账没还清
 
 import sys

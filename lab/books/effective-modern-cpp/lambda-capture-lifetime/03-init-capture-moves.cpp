@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: lambda-capture-lifetime
-// @source: Effective Modern C++/6. Lambda Expressions（讲义）.md §2 Item 32（用 init capture 把对象搬进闭包）
+// @source: Effective Modern C++/6. Lambda Expressions（讲义）.md §Item 32 · 用 init capture 把对象搬进闭包
 // @expect: init capture 把 shared_ptr 搬进闭包, 闭包成了最后一个持有者(闭包活着对象就活着); 按引用捕获则所有权留在外面, 作用域一结束对象先死, 闭包悬垂
 #include <cstdio>
 #include <memory>

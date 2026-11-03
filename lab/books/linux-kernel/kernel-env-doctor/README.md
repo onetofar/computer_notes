@@ -1,7 +1,7 @@
 # 环境体检：这条机器能不能编译内核
 
-> 对照问题：讲义说「编译内核很吃内存和 CPU」、客机要先在 BIOS 里打开虚拟化、
-> eBPF 有四个前置条件 —— 这些**前置条件**怎么变成一条能跑的体检命令？
+对照问题：讲义说「编译内核很吃内存和 CPU」、客机要先在 BIOS 里打开虚拟化、
+eBPF 有四个前置条件 —— 这些**前置条件**怎么变成一条能跑的体检命令？
 
 | 文件 | 差异点 | 预期输出 |
 | --- | --- | --- |
@@ -12,36 +12,39 @@
 三个文件都**只读**：不写 `/proc` `/sys`、不改系统状态、不需要 root、跑完自己退出。
 缺项只报「MISS」，**不会**让程序失败退出（体检脚本的职责是给结论，不是当门禁）。
 
-> 本机实测（fedora，2026-11-03）：01 与 03 的**重叠 6 项输出逐字节相同** ——
-> 内核版本 OK、头文件 MISS、proc/version OK、虚拟化 vmx OK、编译器 OK、内存 OK。
-> 01 多出的 2 项（编译工具 / 磁盘）只在 shell 版里。
+本机实测（fedora，2026-11-03）：01 与 03 的**重叠 6 项输出逐字节相同** ——
+内核版本 OK、头文件 MISS、proc/version OK、虚拟化 vmx OK、编译器 OK、内存 OK。
+01 多出的 2 项（编译工具 / 磁盘）只在 shell 版里。
 
 ## 教材原话
 
 > **This is as performing tasks such as building a Linux kernel from source is a very memory- and CPU-intensive process.**
->
-> —— 《Linux Kernel Programming》第 1 章讲义 §1.2「为什么内核书要从搭环境写起」
+
+——《Linux Kernel Programming》第 1 章讲义 §1.2「为什么内核书要从搭环境写起」
 
 > **Installing a 64-bit Linux guest requires that CPU virtualization extension support (Intel VT-x or AMD-SV) be turned on within the host system's basic input/output system ( BIOS ) settings.**
->
-> —— 《Linux Kernel Programming》第 1 章讲义 §2.1「BIOS 里的虚拟化开关（第一个坑）」
+
+——《Linux Kernel Programming》第 1 章讲义 §2.1「BIOS 里的虚拟化开关（第一个坑）」
 
 > **However, when allocating space for the guest's disk, please be generous. Instead of the usual/default 8 GB suggested, I strongly recommend you make it 50 GB or even more.**
->
-> —— 《Linux Kernel Programming》第 1 章讲义 §2.2「磁盘要「给大方点」」
 
-> eBPF 的四个前置条件：
->
-> - **Linux kernel 4.0 or later**
-> - **Kernel support for BPF**
-> - **The BCC or bpftrace frontends installed**
-> - **Root access on the target system**
->
-> —— 《Linux Kernel Programming》第 1 章讲义 §3.7「eBPF：四个前置条件」
+——《Linux Kernel Programming》第 1 章讲义 §2.2「磁盘要「给大方点」」
+
+> To use eBPF, you will need a system with the following:
+
+> - Linux kernel 4.0 or later
+
+> - Kernel support for BPF ( https://github.com/iovisor/bcc/blob/master/INSTALL.md#kernel-configuration )
+
+> - The BCC or bpftrace frontends installed (link to install them on popular Linux distributions: https://github.com/iovisor/bcc/blob/master/INSTALL.md#installing-bcc )
+
+> - Root access on the target system
+
+——《Linux Kernel Programming》第 1 章讲义 §3.7「eBPF：四个前置条件」
 
 > **the installation of the BCC toolset includes (and depends upon) the installation of the linux-headers-$(uname -r) package; this linux-headers package exists only for distro kernels (and not for our custom 5.10 kernel that we shall often be running on the guest).**
->
-> —— 《Linux Kernel Programming》第 1 章讲义 §3.7
+
+——《Linux Kernel Programming》第 1 章讲义 §3.7
 
 ## 跑法
 

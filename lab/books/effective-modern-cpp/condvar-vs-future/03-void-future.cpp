@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: condvar-vs-future
-// @source: Effective Modern C++/7. The Concurrency API（讲义）.md §5 Item 39（方案四 · void future（一次性事件））
+// @source: Effective Modern C++/7. The Concurrency API（讲义）.md §Item 39 · 方案四 · void future（一次性事件）
 // @expect: promise<void>/future<void>: 一次性事件通知, 不用锁, 通知早于等待也不丢(先 set_value 再 wait 立刻返回), 等待方是真阻塞
 #include <chrono>
 #include <cstdio>

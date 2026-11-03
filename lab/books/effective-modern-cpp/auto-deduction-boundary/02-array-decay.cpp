@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: auto-deduction-boundary
-// @source: Effective Modern C++/1. Deducing Types（讲义）.md §1.5 Item 1（Array Arguments）
+// @source: Effective Modern C++/1. Deducing Types（讲义）.md §Item 1 · 1.5 Array Arguments
 // @expect: 数组按值接退化成指针(sizeof=8), 按引用接保留数组类型(sizeof=13); arraySize 把长度变成类型的一部分
 #include <array>
 #include <cstddef>

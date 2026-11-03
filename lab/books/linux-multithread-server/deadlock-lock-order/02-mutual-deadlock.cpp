@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: deadlock-lock-order
-// @source: 第2章 线程同步精要（讲义）.md §2.1.2
+// @source: 第2章 线程同步精要（讲义）.md §2.1.2 死锁
 // @expect: 两线程按相反顺序获取两把 mutex, 超时判定后打印 DEADLOCK DETECTED 与双方持锁/等待关系
 #include <chrono>
 #include <cstdio>

@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: object-lifetime-shared-ptr
-// @source: 第1章 线程安全的对象生命期管理（讲义）.md §1.11.1
+// @source: 第1章 线程安全的对象生命期管理（讲义）.md §1.11.1 enable_shared_from_this
 // @expect: enable_shared_from_this 让 this 变身为 shared_ptr, 同一个控制块, use_count 正确
 #include <cstdio>
 #include <functional>

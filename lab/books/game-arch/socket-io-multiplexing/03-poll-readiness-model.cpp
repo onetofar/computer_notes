@@ -1,7 +1,7 @@
 // @book: 网络多人游戏架构与编程
 // @topic: socket-io-multiplexing
-// @source: 第3章 伯克利套接字（讲义）.md §3.6 路二：非阻塞 I/O——绝不等待，问了就回
-// @expect: poll 用数组+事件掩码, 没有 1024 上限, 一轮一次系统调用问一批
+// @source: 第3章 伯克利套接字（讲义）.md §3.6 阻塞：游戏服务器的头号天敌
+// @expect: poll 用数组+事件掩码, 没有 1024 上限, 一轮一次系统调用问一批; 延伸演示(讲义 §3.6 只讲了 select 与 epoll, 全讲义未出现 poll( )), 本文件按路二"挨个问=O(N) 次系统调用, 大半是白问"补中间形态
 #include <cstdio>
 #include <vector>
 

@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: deadlock-lock-order
-// @source: 第2章 线程同步精要（讲义）.md §2.1.2
+// @source: 第2章 线程同步精要（讲义）.md §2.1.2 死锁
 // @expect: 同一线程二次 lock 非递归 mutex, 任务超时未完成, 打印 DEADLOCK DETECTED
 #include <chrono>
 #include <cstdio>

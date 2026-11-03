@@ -1,6 +1,6 @@
 // @book: 深入理解计算机系统
 // @topic: thread-vs-process
-// @source: 第12章 并发编程（讲义）.md §12.1.4
+// @source: 第12章 并发编程（讲义）.md §12.1
 // @expect: Linux 上创建 20 个子进程的成本比创建 20 个 pthread 高一个数量级; Windows 上本文件只作提示
 #define _DEFAULT_SOURCE 1        /* POSIX 扩展: clock_gettime 等, 必须在第一个系统头之前定义 */
 #include <stdio.h>

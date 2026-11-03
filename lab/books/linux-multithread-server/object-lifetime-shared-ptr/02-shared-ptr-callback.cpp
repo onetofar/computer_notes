@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: object-lifetime-shared-ptr
-// @source: 第1章 线程安全的对象生命期管理（讲义）.md §1.5
+// @source: 第1章 线程安全的对象生命期管理（讲义）.md §1.5 原始指针有何不妥
 // @expect: 回调里改存 shared_ptr 副本, 析构被推迟到回调销毁, 不再悬垂
 #include <cstdio>
 #include <functional>

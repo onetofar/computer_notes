@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: condvar-vs-future
-// @source: Effective Modern C++/7. The Concurrency API（讲义）.md §5 Item 39（方案一 · 条件变量）
+// @source: Effective Modern C++/7. The Concurrency API（讲义）.md §Item 39 · 方案一 · 条件变量
 // @expect: 条件变量必须配谓词: 带谓词立刻返回 true, 裸 wait 因通知早于等待而错过(只能超时返回 false)
 #include <chrono>
 #include <condition_variable>

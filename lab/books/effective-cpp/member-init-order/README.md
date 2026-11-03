@@ -24,7 +24,7 @@
 
 > 为了避免读者混淆，以及一些模糊不清的行为引起错误的可能性，initialization list（初始化列表）中的 members（成员）的排列顺序应该总是与它们在 class（类）中被声明的顺序保持一致。
 
-> 为了避免记忆什么时候 data members（数据成员）必须在 member initialization list（初始化列表）中初始化，而什么时候又是可选的，最简单的方法就是**总是使用 initialization list（初始化列表）**。它有时是必须的，而且它通常都比 assignments（赋值）更有效率。
+> 为了避免记忆什么时候 data members（数据成员）必须在 member initialization list（成员初始化列表）中初始化，而什么时候又是可选的，最简单的方法就是**总是使用 initialization list（初始化列表）**。它有时是必须的，而且它通常都比 assignments（赋值）更有效率。
 
 ## 跑法
 
@@ -41,5 +41,5 @@ bash tools/run_all.sh --ub     # 连 ub 一起跑, 期望检测器报错
 bash tools/check_one.sh books/effective-cpp/member-init-order/03-init-list-order-mismatch.cpp
 ```
 
-> `03-init-list-order-mismatch.cpp` 用局部 `#pragma GCC diagnostic ignored "-Wreorder"` 局部关掉了编译器自己的告警，
-> 以保证整个 lab 零警告构建。想看 GCC 的原始诊断，去掉那两行 pragma 再编译即可。
+`03-init-list-order-mismatch.cpp` 用局部 `#pragma GCC diagnostic ignored "-Wreorder"` 局部关掉了编译器自己的告警，
+以保证整个 lab 零警告构建。想看 GCC 的原始诊断，去掉那两行 pragma 再编译即可。

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # @book: Systems Performance
 # @topic: syscall-cost-and-tracing
-# @source: Chapter 15. BPF（讲义）.md §15.1
+# @source: Chapter 15. BPF（讲义）.md §15.1–15.1.8 BCC：一整套「开箱即用」的性能分析工具
 # @expect: 打印 tracefs / bpftrace / perf 的可用性; 用户态只能从 /proc 看到累计计数, 看不到逐次事件
 
 set -uo pipefail

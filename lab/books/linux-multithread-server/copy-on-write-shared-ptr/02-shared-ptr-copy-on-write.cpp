@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: copy-on-write-shared-ptr
-// @source: 第2章 线程同步精要（讲义）.md §2.8
+// @source: 第2章 线程同步精要（讲义）.md §2.8 借shared_ptr实现copy-on-write
 // @expect: 读者只在临界区内拷贝一次 shared_ptr, 遍历期间不持锁, 写者几乎不被阻塞
 #include <chrono>
 #include <cstdio>

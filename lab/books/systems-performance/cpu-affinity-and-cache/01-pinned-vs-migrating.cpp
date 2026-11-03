@@ -1,6 +1,6 @@
 // @book: Systems Performance
 // @topic: cpu-affinity-and-cache
-// @source: Chapter 6. CPUs（讲义）.md §6.4.2
+// @source: Chapter 6. CPUs（讲义）.md §6.4.2 Software：调度器与亲和性
 // @expect: 绑核与不绑核的均值可能接近, 但绑核后运行间波动更小; 迁移的代价是缓存变冷
 
 #include <pthread.h>

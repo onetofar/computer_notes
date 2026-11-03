@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: perfect-forwarding
-// @source: Effective Modern C++/5. Rvalue References, Move Semantics, and Perfect Forwarding（讲义）.md §5 Item 28（引用折叠）
+// @source: Effective Modern C++/5. Rvalue References, Move Semantics, and Perfect Forwarding（讲义）.md §Item 28 · 引用折叠
 // @expect: 折叠规则: int& & 与 int& && 与 int&& & 都折成 int&, 只有 int&& && 折成 int&&; 实参是左值时 T 推成引用, 是右值时 T 推成非引用
 #include <cstdio>
 #include <type_traits>

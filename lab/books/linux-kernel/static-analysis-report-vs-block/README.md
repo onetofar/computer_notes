@@ -1,7 +1,7 @@
 # 静态分析器：报告式 / 阻断式 / 驯化式
 
-> 对照问题：讲义说静态分析器「会误报」，要学会「驯」它们。
-> **同一套规则、同一个样本，三种接法分别长什么样？**
+对照问题：讲义说静态分析器「会误报」，要学会「驯」它们。
+**同一套规则、同一个样本，三种接法分别长什么样？**
 
 | 文件 | 差异点 | 预期输出 |
 | --- | --- | --- |
@@ -14,30 +14,30 @@
 扫的是**同一段内嵌 C 样本**，所以命中行号必须完全一致（第 14 / 21 / 23 行）。
 **样本里 3 条命中：R1 是真阳性，R2、R3 是误报** —— 这就是讲义说的「会误报」。
 
-> `02` / `03` 默认只打印判定、退出码仍是 0（好让三个实现能放在同一批里横着比）；
-> 加 `--strict` 才是真的阻断（退出码 1）：
->
-> ```bash
-> python3 02-block-mode.py --strict; echo "退出码=$?"   # 退出码=1
-> ```
+`02` / `03` 默认只打印判定、退出码仍是 0（好让三个实现能放在同一批里横着比）；
+加 `--strict` 才是真的阻断（退出码 1）：
+
+```bash
+python3 02-block-mode.py --strict; echo "退出码=$?"   # 退出码=1
+```
 
 ## 教材原话
 
 > **Static analysers are tools that, by examining the source code, attempt to identify potential errors within it. They can be tremendously useful to you as the developer, though you must learn how to "tame" them – in the sense that they can result in false positives.**
->
-> —— 《Linux Kernel Programming》第 1 章讲义 §3.4「静态分析：三个内核专用 + 两个通用 + 三个商业」
+
+——《Linux Kernel Programming》第 1 章讲义 §3.4「静态分析：三个内核专用 + 两个通用 + 三个商业」
 
 > **Static analysis tools can save the day. Time spent learning to use them effectively is time well spent!**
->
-> —— 《Linux Kernel Programming》第 1 章讲义 §3.4
 
-> **只报不改**（脚本输出命中行，由人判断），这与 `make C=1 CHECK=...` 的默认行为一致：**报告，不阻断。**
->
-> —— 《Linux Kernel Programming》第 1 章讲义 §4.1（讲义讲本仓静态检查脚本时写的）
+——《Linux Kernel Programming》第 1 章讲义 §3.4
 
-> **但要注意差别：`make C=1 CHECK=...` 是每次编译都跑（嵌进流程）；本批的纯度脚本是回归时跑（独立一步）。**
->
-> —— 同上；讲义紧接着补了一句：**嵌进流程的检查才是真检查** —— 因为它跑不掉。
+> 本仓现在的做法是**只报不改**（脚本输出命中行，由人判断）， 这与 `make C=1 CHECK=...` 的默认行为一致：**报告，不阻断。**
+
+——《Linux Kernel Programming》第 1 章讲义 §4.1（讲义讲本仓静态检查脚本时写的）
+
+> ⚠️ 但要注意差别：`make C=1 CHECK=...` 是**每次编译都跑**（嵌进流程）； 本仓的纯度脚本是**回归时跑**（独立一步）。
+
+——《Linux Kernel Programming》第 1 章讲义 §4.1；讲义紧接着补了一句：**嵌进流程的检查才是真检查** —— 因为它跑不掉。
 
 ## 跑法
 

@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: lock-primitives
-// @source: 第2章 线程同步精要（讲义）.md §2.1.2
+// @source: 第2章 线程同步精要（讲义）.md §2.1.2 死锁
 // @expect: scoped_lock 同时锁两把 mutex, 两线程以相反顺序请求也不死锁
 #include <chrono>
 #include <cstdio>

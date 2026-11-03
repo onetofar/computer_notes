@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: lock-primitives
-// @source: 第2章 线程同步精要（讲义）.md §2.4
+// @source: 第2章 线程同步精要（讲义）.md §2.4 封装MutexLock、MutexLockGuard、Condition
 // @expect: lock_guard 作用域结束即解锁, 打印 临界区耗时 与 解锁发生的位置
 #include <chrono>
 #include <cstdio>

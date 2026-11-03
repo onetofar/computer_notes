@@ -41,7 +41,7 @@
 
 讲义 §3.3.2 讲「线程池」：
 
-> 不过，对于**没有 IO 而光有计算任务**的线程，使用 event loop 有点浪费。作者用一种补充方案，即用blocking queue实现的任务队列（TaskQueue）。
+> 不过，对于**没有 IO 而光有计算任务**的线程，使用 event loop 有点浪费。作者用一种补充方案，即用 blocking queue 实现的任务队列（TaskQueue）：
 
 讲义 §3.3.3 讲「推荐模式」：
 

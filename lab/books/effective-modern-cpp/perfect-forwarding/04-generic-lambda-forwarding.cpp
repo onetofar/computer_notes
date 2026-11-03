@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: perfect-forwarding
-// @source: Effective Modern C++/6. Lambda Expressions（讲义）.md §3 Item 33（用 decltype(auto&&) 转发）
+// @source: Effective Modern C++/6. Lambda Expressions（讲义）.md §Item 33 · 用 decltype(auto&&) 转发
 // @expect: 通用 lambda 按值收参时永远把左值传下去(命中 lvalue 重载, 改的还是副本); 改成 auto&& + forward<decltype(x)> 后按实参的值类别命中
 #include <cstdio>
 #include <string>

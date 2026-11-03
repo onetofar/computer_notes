@@ -6,14 +6,14 @@
 
 | 文件 | 差异点 | 预期输出 |
 | --- | --- | --- |
-| `01-memory-sequential-vs-random.c` | 同一个 64MB 数组：**顺序**访问 vs **随机**访问 | 顺序约 1 ns/次（带宽数十 GB/s）；随机约 80 ns/次（带宽掉一个数量级） |
+| `01-memory-sequential-vs-random.c` | 同一个 64MB 数组：**顺序**访问 vs **随机**访问 | 顺序约 0.6~1.0 ns/次（带宽数十 GB/s）；随机约 8~11 ns/次（带宽掉一个数量级） |
 | `02-tcp-handshake-cost.cpp` | 回环上 500 次 `connect()`，量**连接建立**成本 | 每次握手几十 us；这是「连接建立延迟」，不是「连接寿命」 |
 | `03-tcp-steady-state-throughput.cpp` | 复用**一条**连接连续传 64MB | 吞吐约 4 GB/s；一次握手被摊到整个传输上 |
 | `04-latency-vs-bandwidth-model.py` | 把延迟与带宽分开建模，算并发度要多大才跑满带宽 | 小包被延迟支配；BDP 之上并发才有用；串行 8MB 比 64 并发慢 25 倍 |
 
 ## 教材原话
 
-> The access time of main memory can be measured by the column address strobe (CAS) latency: the time between sending a memory module the desired address (column) and when the data is available to be read.
+> The access time of main memory can be measured as the column address strobe (CAS) latency: the time between sending a memory module the desired address (column) and when the data is available to be read.
 
 > CPU 1 can perform I/O to DRAM A directly, via its memory bus. This is referred to as local memory . CPU 1 performs I/O to DRAM B via CPU 2 and the CPU interconnect (two hops). This is referred to as remote memory and has a higher access latency.
 
@@ -36,7 +36,7 @@ python3 04-latency-vs-bandwidth-model.py
 
 ## 结论
 
-- **访问模式比容量更决定性能**：同样的 64MB，顺序和随机的每次访问成本差两个数量级。
+- **访问模式比容量更决定性能**：同样的 64MB，顺序和随机的每次访问成本差**一个数量级**（本机实测：顺序 0.6~1.0 ns/次、随机 7.9~10.8 ns/次，约 13~16 倍；教材给的 80 ns 是 DRAM 延迟量级，不是本实验的实测值）。
 - **延迟是往返的属性，带宽是流的属性**：小包被 RTT 卡住时，加并发流就能救回来 —— 这是延迟账没还清，不是带宽不够（`04` 的 depth 表）。
 - **「连接延迟」和「连接寿命」只差一个词**：前者是握手（几十 us），后者是这条连接能活多久（分钟）。混用会得出完全相反的结论。
 - **离群点是网络的头号敌人**：重传造成的离群点会被平均值藏起来，只能靠分布和逐条记录看见。

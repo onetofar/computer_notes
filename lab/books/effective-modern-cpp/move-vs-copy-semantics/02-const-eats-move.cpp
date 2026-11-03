@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: move-vs-copy-semantics
-// @source: Effective Modern C++/5. Rvalue References, Move Semantics, and Perfect Forwarding（讲义）.md §1 Item 23（const 吃掉了移动）
+// @source: Effective Modern C++/5. Rvalue References, Move Semantics, and Perfect Forwarding（讲义）.md §Item 23 · const 吃掉了移动
 // @expect: 参数非 const 时 std::move 触发移动(拷贝0/移动1); 参数是 const 时静默退回拷贝(拷贝1/移动0)
 #include <cstdio>
 #include <utility>

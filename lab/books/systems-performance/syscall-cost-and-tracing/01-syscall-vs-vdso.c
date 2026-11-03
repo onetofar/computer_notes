@@ -1,6 +1,6 @@
 // @book: Systems Performance
 // @topic: syscall-cost-and-tracing
-// @source: Chapter 3. Operating Systems（讲义）.md §3.2.2
+// @source: Chapter 3. Operating Systems（讲义）.md §3.2.2 Kernel and User Modes：模式切换与上下文切换
 // @expect: getpid() 每次约几百 ns(真系统调用, 有模式切换), clock_gettime() 每次约几十 ns(vDSO, 不进内核); 两者差一个量级
 
 #define _POSIX_C_SOURCE 200809L

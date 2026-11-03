@@ -1,6 +1,6 @@
 // @book: Linux Kernel Programming
 // @topic: syscall-vs-library-api
-// @source: Chapter 1. Kernel Workspace Setup（讲义）.md §3.1
+// @source: Chapter 1. Kernel Workspace Setup（讲义）.md §3（3.1 man page 的分区约定：man 2 = 系统调用，man 3 = 库 API）
 // @expect: getpid 没有 vDSO 快路径, 虽是 man 3 库 API 却每次都要进内核, 开销与 02 同量级
 #define _POSIX_C_SOURCE 200809L
 #include <stdio.h>

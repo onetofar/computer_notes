@@ -1,8 +1,8 @@
 # Linux Kernel Programming · 教材对照实验
 
-> 讲义源：`书籍/教材讲义/Linux Kernel Programming/Chapter 1. Kernel Workspace Setup（讲义）.md`
-> （本书目前只整理出 **1 篇**讲义 —— 第 1 章「Kernel Workspace Setup」）
-> 原书：Kaiwan N. Billimoria, *Linux Kernel Programming* (Packt, 2022)
+讲义源：`书籍/教材讲义/Linux Kernel Programming/Chapter 1. Kernel Workspace Setup（讲义）.md`
+（本书目前只整理出 **1 篇**讲义 —— 第 1 章「Kernel Workspace Setup」）
+原书：Kaiwan N. Billimoria, *Linux Kernel Programming* (Packt, 2022)
 
 本目录是**对照讨论式**实验集：每个主题目录只问**一个问题**，
 给出 2~4 个**各自独立可运行**的实现文件，跑一遍就能横向比出差异。

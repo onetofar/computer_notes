@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: condition-variable-predicate
-// @source: 第2章 线程同步精要（讲义）.md §2.2
+// @source: 第2章 线程同步精要（讲义）.md §2.2 条件变量
 // @expect: 生产者发 3 条, 消费者用 while + 谓词等待, 全部收到且顺序正确
 #include <condition_variable>
 #include <cstdio>

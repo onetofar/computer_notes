@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: auto-deduction-boundary
-// @source: Effective Modern C++/1. Deducing Types（讲义）.md §2.1 Item 2（唯一的例外：花括号）
+// @source: Effective Modern C++/1. Deducing Types（讲义）.md §Item 2 · 2.1 唯一的例外：花括号
 // @expect: auto x={27} 推出 std::initializer_list<int>(元素1个); int x={27} 仍是 int; auto x={1,2,3} 是 initializer_list<int>(元素3个)
 #include <cstdio>
 #include <initializer_list>

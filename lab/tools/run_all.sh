@@ -10,8 +10,10 @@ if [ "${1:-}" = "--ub" ]; then WITH_UB=1; fi
 
 BUILD="${KB_LAB_BUILD:-/tmp/kb-lab-build}"
 REPORT_DIR="${KB_LAB_REPORT:-/tmp/kb-lab-reports}"
+# 报告按运行实例隔离: 两次 run_all 并发时不会互相覆盖同一份 last-run.txt
+RUN_TAG="${KB_LAB_RUN_TAG:-$$}"
 mkdir -p "$BUILD" "$REPORT_DIR"
-REPORT="$REPORT_DIR/last-run.txt"
+REPORT="$REPORT_DIR/last-run-$RUN_TAG.txt"
 : > "$REPORT"
 
 PASS=0; FAIL=0; SKIP=0
@@ -35,5 +37,6 @@ done < <(find books -type f \( -name "*.cpp" -o -name "*.c" -o -name "*.sh" -o -
 echo "----------------------------------------------"
 echo "PASS=$PASS  FAIL=$FAIL  SKIP(ub)=$SKIP"
 echo "报告: $REPORT"
+ln -sf "$REPORT" "$REPORT_DIR/last-run.txt" 2>/dev/null || true
 if [ "$FAIL" -gt 0 ]; then echo "---- 失败明细 ----"; grep -A20 "^FAIL" "$REPORT" | head -80; fi
 [ "$FAIL" -eq 0 ]

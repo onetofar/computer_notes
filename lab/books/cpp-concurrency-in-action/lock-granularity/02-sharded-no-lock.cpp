@@ -1,6 +1,6 @@
 // @book: C++ Concurrency in Action
 // @topic: lock-granularity
-// @source: C++ Concurrency in Action/Chapter 4. Synchronizing concurrent operations（讲义）.md
+// @source: C++ Concurrency in Action/Chapter 3. Sharing data between threads（讲义）.md §3.2.8
 // @expect: 分片无锁原子累加, 无数据竞争, 程序正常退出
 #include <atomic>
 #include <chrono>

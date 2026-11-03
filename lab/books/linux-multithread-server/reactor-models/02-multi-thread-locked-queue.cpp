@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: reactor-models
-// @source: 第3章 多线程服务器的适用场合与常用编程模型（讲义）.md §3.3.2
+// @source: 第3章 多线程服务器的适用场合与常用编程模型（讲义）.md §3.3.2 线程池
 // @expect: 多线程抢同一个带锁队列, 快任务先完成, 慢任务不阻塞别人
 #include <chrono>
 #include <condition_variable>

@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: lambda-capture-lifetime
-// @source: Effective Modern C++/6. Lambda Expressions（讲义）.md §0 开局 §1 Item 31（[&] 的坑）
+// @source: Effective Modern C++/6. Lambda Expressions（讲义）.md §Item 31 · [&] 的坑
 // @expect: 闭包逃出创建它的作用域后被调用: 读到已死的局部变量(悬垂引用), 并把已被释放的资源再释放一次 -> double free
 // @ub: yes
 #include <cstdio>

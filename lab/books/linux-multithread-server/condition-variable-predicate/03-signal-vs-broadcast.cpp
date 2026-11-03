@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: condition-variable-predicate
-// @source: 第2章 线程同步精要（讲义）.md §2.2
+// @source: 第2章 线程同步精要（讲义）.md §2.2 条件变量
 // @expect: 3 个消费者在等资源, notify_one 只唤醒 1 个, notify_all 唤醒全部 3 个
 #include <atomic>
 #include <chrono>

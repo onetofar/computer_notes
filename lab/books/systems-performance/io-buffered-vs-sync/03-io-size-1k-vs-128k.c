@@ -1,6 +1,6 @@
 // @book: Systems Performance
 // @topic: io-buffered-vs-sync
-// @source: Chapter 5. Applications（讲义）.md §5.2.1
+// @source: Chapter 5. Applications（讲义）.md §5.2.1 Selecting an I/O Size / Caching / Buffering
 // @expect: 同样的 8MB, 分成 1KB 写 8192 次与 128KB 写 64 次; 后者系统调用次数少 128 倍, 更快
 
 #define _DEFAULT_SOURCE

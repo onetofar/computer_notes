@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: condvar-vs-future
-// @source: Effective Modern C++/7. The Concurrency API（讲义）.md §5 Item 39（方案二 · 原子 flag（轮询））
+// @source: Effective Modern C++/7. The Concurrency API（讲义）.md §Item 39 · 方案二 · 原子 flag（轮询）
 // @expect: 原子 flag 轮询: 不用锁/不怕通知早到/不怕伪唤醒, 但等待期间线程仍在运行(统计轮询次数与耗时)
 #include <atomic>
 #include <chrono>

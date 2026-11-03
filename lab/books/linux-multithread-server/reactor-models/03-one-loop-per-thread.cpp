@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: reactor-models
-// @source: 第3章 多线程服务器的适用场合与常用编程模型（讲义）.md §3.3.1
+// @source: 第3章 多线程服务器的适用场合与常用编程模型（讲义）.md §3.3.1 one loop per thread
 // @expect: 每线程一个 loop, 任务按归属分派, 同一连接的事件固定在同一线程
 #include <chrono>
 #include <cstdio>

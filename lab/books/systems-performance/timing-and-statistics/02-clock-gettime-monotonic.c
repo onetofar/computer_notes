@@ -1,6 +1,6 @@
 // @book: Systems Performance
 // @topic: timing-and-statistics
-// @source: Chapter 2. Methodologies（讲义）.md §2.8.3
+// @source: Chapter 3. Operating Systems（讲义）.md §3.2.2 Kernel and User Modes：模式切换与上下文切换
 // @expect: CLOCK_MONOTONIC 分辨率 1ns; 与 MONOTONIC_RAW 的差只反映 NTP 平滑率(ppm 级), 两者都不会因步进而跳变
 
 #define _POSIX_C_SOURCE 200809L

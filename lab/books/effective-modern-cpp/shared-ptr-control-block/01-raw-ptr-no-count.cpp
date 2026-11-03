@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: shared-ptr-control-block
-// @source: Effective Modern C++/4. Smart Pointers（讲义）.md §2 Item 19
+// @source: Effective Modern C++/4. Smart Pointers（讲义）.md §Item 19
 // @expect: 裸指针没人负责 delete -> 泄漏; 程序正常退出
 #include <cstdio>
 

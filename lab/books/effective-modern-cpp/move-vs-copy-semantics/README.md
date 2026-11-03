@@ -15,13 +15,13 @@
 
 教材原话：
 
-> **std::move performs an unconditional cast to an rvalue. In and of itself, it doesn't move anything.**
+> **std::move performs an unconditional cast to an rvalue. In and of itself, it doesn’t move anything.**
 
 > **Neither std::move nor std::forward do anything at runtime.**
 
 `std::move` 生成的机器码是零条——它只是告诉编译器「把 `a` 当成右值看待」。真正搬东西的是**被选中的那个构造函数**，所以 `01` 文件把计数器挂在构造函数上，而不是挂在 `std::move` 上。
 
-> **The only thing you know for sure about the result of applying std::move to an object is that it's an rvalue.**
+> **The only thing you know for sure about the result of applying std::move to an object is that it’s an rvalue.**
 
 仅此而已：它不保证发生移动，也不保证移动便宜，更不保证源对象变空。
 
@@ -33,7 +33,7 @@
 
 > **Assume that move operations are not present, not cheap, and not used.**
 
-> **Moving small strings using an SSO-based implementation is no faster than copying them, because the copy-only-a-pointer trick that generally underlies the performance advantage of moves over copies isn't applicable.**
+> **Moving small strings using an SSO-based implementation is no faster than copying them, because the copy-only-a-pointer trick that generally underlies the performance advantage of moves over copies isn’t applicable.**
 
 `03` 文件把「移动不一定更便宜」变成可观测的指针比较：短串的 `data()` 移动前后不变——SSO 把字符内联在对象里，根本没有堆指针可以搬，于是移动和拷贝一样贵。
 

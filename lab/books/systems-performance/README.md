@@ -1,7 +1,7 @@
 # Systems Performance
 
 > 讲义来源：`书籍/教材讲义/Systems Performance/`（Chapter 1~16 + 附录 A~E）
-> 原书：Brendan Gregg, *Systems Performance* (O'Reilly, 2019)
+原书：Brendan Gregg, *Systems Performance: Enterprise and the Cloud*（第二版，Addison-Wesley，2020）
 
 ## 主题目录
 

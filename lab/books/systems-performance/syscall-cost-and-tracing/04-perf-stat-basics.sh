@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # @book: Systems Performance
 # @topic: syscall-cost-and-tracing
-# @source: Chapter 13. perf（讲义）.md §13.8
+# @source: Chapter 13. perf（讲义）.md §13.8 perf stat：数事件，不落盘
 # @expect: perf stat 打印出软件事件计数; 若 perf_event_paranoid 限制导致不可用, 打印说明并以 0 退出
 
 set -uo pipefail

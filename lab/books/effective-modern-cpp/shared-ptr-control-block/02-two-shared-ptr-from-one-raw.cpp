@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: shared-ptr-control-block
-// @source: Effective Modern C++/4. Smart Pointers（讲义）.md §2 Item 19
+// @source: Effective Modern C++/4. Smart Pointers（讲义）.md §Item 19
 // @expect: 同一裸指针造两个 shared_ptr -> 两块控制块 -> double free, ASan 报错
 // @ub: yes
 #include <cstdio>

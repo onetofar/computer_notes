@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: move-vs-copy-semantics
-// @source: Effective Modern C++/5. Rvalue References, Move Semantics, and Perfect Forwarding（讲义）.md §6 Item 29（别高估移动）
+// @source: Effective Modern C++/5. Rvalue References, Move Semantics, and Perfect Forwarding（讲义）.md §Item 29 · 别高估移动
 // @expect: 短串没有堆指针可搬(移动前后 data 指针不变), 长串移动后目的接管源的同一块堆内存且源被掏空
 #include <cstdio>
 #include <string>

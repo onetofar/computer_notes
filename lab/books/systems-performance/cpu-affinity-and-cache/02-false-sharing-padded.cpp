@@ -1,6 +1,6 @@
 // @book: Systems Performance
 // @topic: cpu-affinity-and-cache
-// @source: Chapter 6. CPUs（讲义）.md §6.4.1
+// @source: Chapter 6. CPUs（讲义）.md §6.4.1 Cache Coherency
 // @expect: 两个线程改同一 cache line 的相邻计数器明显更慢; 隔到不同 cache line 后恢复
 //          (两个线程必须落在**不同物理核**上才有效果, 同核共享 L1 就没有一致性流量)
 

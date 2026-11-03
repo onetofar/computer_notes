@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: condvar-vs-future
-// @source: Effective Modern C++/7. The Concurrency API（讲义）.md §5 Item 39（用 void future 挂起一个线程 / shared_future 放行多个线程）
+// @source: Effective Modern C++/7. The Concurrency API（讲义）.md §Item 39 · 用 void future 挂起一个线程 / shared_future 放行多个线程
 // @expect: void future 可以"先创建线程、后放行"(线程先建好, 此刻挂起); shared_future 一次放行多个线程
 #include <chrono>
 #include <cstdio>

@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: condition-variable-predicate
-// @source: 第2章 线程同步精要（讲义）.md §2.2
+// @source: 第2章 线程同步精要（讲义）.md §2.2 条件变量
 // @expect: 消费者误用 if 而非 while, 虚假唤醒后读到已被取空的槽位 -> 重复释放同一块内存
 // @ub: yes
 #include <chrono>

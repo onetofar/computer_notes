@@ -1,6 +1,6 @@
 // @book: Linux Kernel Programming
 // @topic: kernel-env-doctor
-// @source: Chapter 1. Kernel Workspace Setup（讲义）.md §1.2 §2.1
+// @source: Chapter 1. Kernel Workspace Setup（讲义）.md §3.7（另见讲义 1.2 / 2.1 节）
 // @expect: 用 C 复刻 01-doctor.sh 的 6 项内核侧体检, 逐项结论与 shell 版一致
 #define _POSIX_C_SOURCE 200809L
 #include <stdio.h>

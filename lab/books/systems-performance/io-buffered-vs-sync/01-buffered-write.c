@@ -1,6 +1,6 @@
 // @book: Systems Performance
 // @topic: io-buffered-vs-sync
-// @source: Chapter 5. Applications（讲义）.md §5.2.1
+// @source: Chapter 5. Applications（讲义）.md §5.2.1 Selecting an I/O Size / Caching / Buffering
 // @expect: 2000 次 1KB write() 全部被 page cache 吸收, 吞吐极高; 数据此刻还在内存里, 未落盘
 //          (落在 tmpfs 上 fsync 不要钱, 看不出同步代价; 用 SP_IO_DIR 指向真实磁盘)
 

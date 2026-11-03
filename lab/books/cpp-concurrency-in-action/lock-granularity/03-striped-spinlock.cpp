@@ -1,6 +1,6 @@
 // @book: C++ Concurrency in Action
 // @topic: lock-granularity
-// @source: C++ Concurrency in Action/Chapter 4. Synchronizing concurrent operations（讲义）.md
+// @source: C++ Concurrency in Action/Chapter 5. The C++ memory model and operations on atomic types（讲义）.md §5.2.2
 // @expect: 自旋锁分片, 无数据竞争, 程序正常退出
 #include <atomic>
 #include <chrono>

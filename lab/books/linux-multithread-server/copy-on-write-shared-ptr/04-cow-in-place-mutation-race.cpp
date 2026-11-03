@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: copy-on-write-shared-ptr
-// @source: 第2章 线程同步精要（讲义）.md §2.8
+// @source: 第2章 线程同步精要（讲义）.md §2.8 借shared_ptr实现copy-on-write
 // @expect: 写端无视 unique() 原地修改, 读者持有的迭代器因 vector 扩容而失效 -> 悬垂读
 // @ub: yes
 #include <condition_variable>

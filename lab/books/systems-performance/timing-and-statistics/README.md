@@ -1,6 +1,6 @@
 # timing-and-statistics: 一次操作要多久, 取决于你拿哪个钟、测几次、报哪个数
 
-> 来源讲义：`Chapter 2. Methodologies（讲义）.md` §2.8.2–2.8.6、`Chapter 12. Benchmarking（讲义）.md` §12.3.9
+> 来源讲义：`Chapter 2. Methodologies（讲义）.md` §2.8.2–2.8.6、`Chapter 3. Operating Systems（讲义）.md` §3.2.2、`Chapter 12. Benchmarking（讲义）.md` §12.3.6–12.3.9
 
 ## 对照表
 
@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | `01-gettimeofday-wallclock.c` | 用 `gettimeofday()` 取墙钟；接口是 us 粒度，值会被 NTP 步进/校时改动 | 打印墙钟时间戳 + 与 `CLOCK_MONOTONIC` 的差值（当前约几百 ns）；附一句「墙钟不单调」 |
 | `02-clock-gettime-monotonic.c` | 用 `clock_gettime(CLOCK_MONOTONIC)`；并与 `CLOCK_MONOTONIC_RAW` 对比 | 分辨率 1 ns；两者差值即 NTP 平滑率（ppm 级）；两者都不因步进而跳变 |
-| `03-repeat-percentiles.c` | 同一操作跑 1000 次，排序后取分位数 | `op_ns_first`（单次基准会报的数字）可能比中位数大一个数量级；`p95`/`max` 把尾部暴露出来 |
+| `03-repeat-percentiles.c` | 同一操作跑 1000 次，排序后取分位数 | `op_ns_first`（单次基准会报的数字）可能比中位数大两个数量级（实测 3701 ns vs 35 ns）；`p95`/`max` 把尾部暴露出来 |
 | `04-outlier-stats.py` | 给定一组样本，比均值 / 中位数 / 截尾均值 / 变异系数 | 均值被 2% 的离群点拉高到 3.3，中位数只有 0.9；`mean - median` 的差就是离群点藏身处 |
 
 ## 教材原话

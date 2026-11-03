@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # @book: Systems Performance
 # @topic: use-method-and-sar
-# @source: 附录 A. USE Method： Linux（讲义）.md §附录 A
+# @source: 附录 A. USE Method： Linux（讲义）.md §附录 A 方法本身（方法出自 §2.5.9）
 # @expect: 按 U/S/E 三类分别采集 CPU/内存/网络/磁盘指标; 缺失的工具打印说明而不报错退出
 
 set -uo pipefail

@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: epoll-echo-server
-// @source: 第3章 多线程服务器的适用场合与常用编程模型（讲义）.md §3.5
+// @source: 第3章 多线程服务器的适用场合与常用编程模型（讲义）.md §3.5 多线程服务器的适用场合
 // @expect: 阻塞 IO + 每连接一线程, 20 个连接全部回显成功, 线程数=21
 #include <cstdio>
 

@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: deadlock-lock-order
-// @source: 第2章 线程同步精要（讲义）.md §2.1.2
+// @source: 第2章 线程同步精要（讲义）.md §2.1.2 死锁
 // @expect: 两线程改为同一加锁顺序, 正常完成, 打印耗时
 #include <chrono>
 #include <cstdio>

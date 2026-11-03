@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: reactor-models
-// @source: 第3章 多线程服务器的适用场合与常用编程模型（讲义）.md §3.2
+// @source: 第3章 多线程服务器的适用场合与常用编程模型（讲义）.md §3.2 单线程服务器的常用编程模型
 // @expect: 单线程串行处理队列, 慢任务拖住后续所有任务, 打印每任务延迟
 #include <chrono>
 #include <cstdio>

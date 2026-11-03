@@ -17,7 +17,7 @@
 
 > **Default by-reference capture can lead to dangling references.**
 
-> **Long-term, it's simply better software engineering to explicitly list the local variables and parameters that a lambda depends on.**
+> **Long-term, it’s simply better software engineering to explicitly list the local variables and parameters that a lambda depends on.**
 
 `[&divisor]` 和 `[&]` 的代码一样错，但可读性完全不同：前者里那个 `divisor` 是一根记忆锚，每次读到它你都会想起「这东西得比闭包活得久」。
 
@@ -31,7 +31,7 @@
 
 > **The scope on the left is that of the closure class.**
 
-> **Use C++14's init capture to move objects into closures.**
+> **Use C++14’s init capture to move objects into closures.**
 
 init capture 的 `=` 左右两边作用域不同：左边是闭包类的数据成员名，右边是定义处那个局部变量。`03` 文件用它把 `shared_ptr` 的所有权真正搬进闭包（用 `weak_ptr` 观察：闭包活着对象就活着）。
 

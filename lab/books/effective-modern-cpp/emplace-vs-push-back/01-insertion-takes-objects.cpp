@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: emplace-vs-push-back
-// @source: Effective Modern C++/8. Tweaks（讲义）.md §2.1 Item 42（push_back("xyzzy") 到底发生了什么）
+// @source: Effective Modern C++/8. Tweaks（讲义）.md §Item 42 · 2.1 push_back("xyzzy") 到底发生了什么
 // @expect: push_back("xyzzy") 先造临时再移动进去(构造1/移动1/析构1), emplace_back("xyzzy") 直接原地构造(构造1/移动0/析构0)
 #include <cstdio>
 #include <string>

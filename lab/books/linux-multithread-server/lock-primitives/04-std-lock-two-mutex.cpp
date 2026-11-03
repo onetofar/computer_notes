@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: lock-primitives
-// @source: 第2章 线程同步精要（讲义）.md §2.1.2
+// @source: 第2章 线程同步精要（讲义）.md §2.1.2 死锁
 // @expect: std::lock 一次获取两把锁后仍由调用方负责 unlock, 对照 scoped_lock 的自动释放
 #include <chrono>
 #include <cstdio>

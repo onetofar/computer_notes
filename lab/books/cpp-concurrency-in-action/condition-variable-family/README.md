@@ -39,7 +39,7 @@
 
 > These are basic-level synchronization mechanisms that allow a thread to block until notified that some condition is true or a timeout period has elapsed.
 
-> 讲义附录 D 的对照表：`condition_variable` 只能配 `std::unique_lock<std::mutex>`，`condition_variable_any` 配任何 `BasicLockable`。
+> D.2 只有两小节：`std::condition_variable` 和 `std::condition_variable_any`。
 
 ## 跑法
 

@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: epoll-echo-server
-// @source: 第8章 muduo网络库设计与实现（讲义）.md §8.13
+// @source: 第8章 muduo网络库设计与实现（讲义）.md §8.13 epoll
 // @expect: 单线程 epoll reactor 在 127.0.0.1 上完成 20 个连接的回显, 线程数=1
 #include <cstdio>
 

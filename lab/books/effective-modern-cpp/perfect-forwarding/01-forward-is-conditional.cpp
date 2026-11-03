@@ -1,6 +1,6 @@
 // @book: Effective Modern C++
 // @topic: perfect-forwarding
-// @source: Effective Modern C++/5. Rvalue References, Move Semantics, and Perfect Forwarding（讲义）.md §1 Item 23 §3 Item 25
+// @source: Effective Modern C++/5. Rvalue References, Move Semantics, and Perfect Forwarding（讲义）.md §Item 23 §Item 25
 // @expect: 传左值时 std::move 仍把结果变成右值, std::forward 保持左值; 传右值时两者都是右值; 万能引用上无脑 move 会掏空调用方的对象
 #include <cstdio>
 #include <string>

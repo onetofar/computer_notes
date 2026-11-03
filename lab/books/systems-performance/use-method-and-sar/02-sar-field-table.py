@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # @book: Systems Performance
 # @topic: use-method-and-sar
-# @source: 附录 B. sar Summary（讲义）.md §附录 B
+# @source: Chapter 4. Observability Tools（讲义）.md §4.2.4 Monitoring：监控（字段表出自 附录 B. sar Summary（讲义）.md）
 # @expect: 打印 sar 选项 -> 指标 -> 含义的对照表, 并给出"症状 -> 查哪一项"的映射; 无 sar 也可运行
 
 import sys

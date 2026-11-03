@@ -17,11 +17,11 @@
 
 教材原话：
 
-> **During the time the task is waiting for the flag to be set, the task is essentially blocked, yet it's still running.**
+> **During the time the task is waiting for the flag to be set, the task is essentially blocked, yet it’s still running.**
 
 这是原子 flag 轮询的全部代价：它占着一个硬件线程，每次时间片切换都有上下文切换的开销，还可能让一个本可以关掉的核一直开着。真正被阻塞的任务（`cv.wait`）这些**全都没有**。`02` 文件把「还在跑」量化成轮询次数。
 
-> **Using std::promise s and futures dodges these issues, but the approach uses heap memory for shared states, and it's limited to one-shot communication.**
+> **Using std::promise s and futures dodges these issues, but the approach uses heap memory for shared states, and it’s limited to one-shot communication.**
 
 条件变量的三个毛病——多余的锁、通知早于等待会永久挂死、伪唤醒——`void future` 一次全绕开：不用锁、不怕通知早到（共享状态记住了值）、免疫伪唤醒。代价是共享状态通常在堆上，而且 **promise 只能 set 一次**。
 

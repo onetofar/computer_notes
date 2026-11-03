@@ -1,6 +1,6 @@
 // @book: Linux多线程服务端编程
 // @topic: object-lifetime-shared-ptr
-// @source: 第1章 线程安全的对象生命期管理（讲义）.md §1.1
+// @source: 第1章 线程安全的对象生命期管理（讲义）.md §1.1 当析构函数遇到多线程
 // @expect: 回调里保存裸 this 并再次释放它, 对象已析构 -> 双重释放
 // @ub: yes
 #include <cstdio>

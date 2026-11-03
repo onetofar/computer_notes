@@ -1,6 +1,6 @@
 // @book: Systems Performance
 // @topic: io-buffered-vs-sync
-// @source: Chapter 5. Applications（讲义）.md §5.2.3
+// @source: Chapter 5. Applications（讲义）.md §5.2.3 Buffering
 // @expect: 与 01 同样的 1KB 写, 但每次都 fsync; 真实磁盘上吞吐掉一到两个数量级, 比 01 慢得多
 //          (落在 tmpfs 上 fsync 几乎不要钱, 差别看不出来; 用 SP_IO_DIR 指向真实磁盘)
 

@@ -22,7 +22,7 @@
 
 > 最终结果就是无故地将所有 destructors（析构函数）声明为 virtual（虚拟），和从不把它们声明为 virtual（虚拟）一样是错误的。实际上，很多人总结过这条规则：declare a virtual destructor in a class if and only if that class contains at least one virtual function（当且仅当一个类中包含至少一个虚拟函数时，则在类中声明一个虚拟析构函数）。
 
-> 在一个 64-bit 架构中，它们可能从 64 bits 长到 128 bits，因为在这样的架构中指针的大小是 64 bits。
+> 在一个 64-bit 架构中，它们可能从 64 bits 长到 128 bits，因为在这样的架构中指针的大小是 64 bits 的。
 
 > polymorphic base classes（多态基类）应该声明 virtual destructor（虚拟析构函数）。如果一个 class（类）有任何 virtual functions（虚拟函数），它就应该有一个 virtual destructor（虚拟析构函数）。
 
@@ -41,8 +41,8 @@ bash tools/run_all.sh          # 跳过 ub 文件
 bash tools/run_all.sh --ub     # 连 ub 一起跑, 期望检测器报错
 ```
 
-> `01` 标了 `@ub: yes`，默认构建时会被跳过，避免污染正常构建。
-> 它自己会检测「派生析构有没有跑」，检测到就打印 `runtime error:` 并以退出码 1 结束，
-> 所以在没装 valgrind 的机器上 `--ub` 也能给出确定结论。
-> `01` 另外用局部 `#pragma GCC diagnostic ignored "-Wdelete-non-virtual-dtor"` 关掉了 GCC 自己的告警，
-> 以保证整个 lab 零警告构建 —— 那个告警恰恰就是本文件要演示的东西。
+`01` 标了 `@ub: yes`，默认构建时会被跳过，避免污染正常构建。
+它自己会检测「派生析构有没有跑」，检测到就打印 `runtime error:` 并以退出码 1 结束，
+所以在没装 valgrind 的机器上 `--ub` 也能给出确定结论。
+`01` 另外用局部 `#pragma GCC diagnostic ignored "-Wdelete-non-virtual-dtor"` 关掉了 GCC 自己的告警，
+以保证整个 lab 零警告构建 —— 那个告警恰恰就是本文件要演示的东西。
