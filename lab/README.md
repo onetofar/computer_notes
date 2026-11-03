@@ -67,18 +67,28 @@ lab/
 6. 教材引文只放 README，代码里不写引文
 7. 零编译警告（`-Wall -Wextra`）
 
-## 跑法
+## 三道门禁
 
 ```bash
 # 本地 / 服务器通用
-python3 tools/lab_check.py     # 守卫: 结构 / 元信息 / 颗粒度
+bash tools/check_all.sh         # 三合一: 结构 + 内容 + 语法, 全过才 GATE: PASS
+python3 tools/lab_check.py      # 1/3 结构: 目录 / 元信息 / 颗粒度
+python3 tools/verify_content.py # 2/3 内容: 引文逐字 / @source 可解析
+bash tools/build_all.sh         # 3/3 语法: 只编译不运行
 bash tools/run_all.sh           # 编译并运行全部（跳过 @ub）
 bash tools/run_all.sh --ub      # 连 @ub 一起跑，期望检测器报错
-bash tools/build_all.sh         # 只做语法检查
 
-# 部署到服务器
+# 部署到服务器（同时带上讲义源，内容门禁需要它比对原文）
 bash tools/deploy.sh fedora     # -> /home/xier/dev/kb-lab/
 ```
+
+**内容门禁的契约**：主题 README 里每一段 `> ` 引用块都必须是**教材讲义的逐字原文**
+（归一化后是讲义文件的一整段子串）；lab 自己的说明一律写普通段落。
+每个主题至少要有一条逐字引文；每个实现文件的 `@source` 必须指向真实存在的讲义文件
+和真实存在的小节标记（`§2.1.4` / `§Item 18` / `§D.2`）。
+
+> 这道门禁做过变异验证：故意改一个字 / 塞自写说明 / 伪造小节号 / 指向不存在的讲义 /
+> 删掉主题全部引文 —— 5 个场景全部变红。
 
 ## 运行环境
 
