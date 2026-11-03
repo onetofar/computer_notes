@@ -31,7 +31,7 @@ skills:
 > ⚠️ **本篇的性质**：原文**只给「哪条命令量什么」，不给任何阈值、判据或读数解释**。
 > 所以下面每张表里的「异常信号」「往哪查」两列**全部是本篇的推演**，不是原文观点。
 > ⚠️ **原文稿有 3 处缺陷**（1 处 epub 占位、1 处拼写错误、1 处命令残缺），
-> 本篇照抄不改，纠错见文末「纠错补充」。
+> 本篇照抄不改，纠错见文末「§附录 C 纠错补充」。
 
 ## 0 · 原文锚点（逐条可回查）
 
@@ -50,6 +50,7 @@ skills:
 | §附录 C CPU 与调度延迟 | 附录C-Appendix C： bpftrace One-Liners.md L59 | Sample user and kernel stacks at 49 Hertz, system wide, with the process name: |
 | §附录 C CPU 与调度延迟 | 附录C-Appendix C： bpftrace One-Liners.md L80 | Sample user-level stacks at 49 Hertz, for processes named “mysqld”: |
 | §附录 C CPU 与调度延迟 | 附录C-Appendix C： bpftrace One-Liners.md L99 | bpftrace -e 'tracepont:sched:sched_switch { @[kstack] = count(); }' |
+| §附录 C 内核函数插桩 | 附录C-Appendix C： bpftrace One-Liners.md L267 | bpftrace -e 'kprobe:vfs_* { @[probe] = count(); }' |
 | §附录 C 内核函数插桩 | 附录C-Appendix C： bpftrace One-Liners.md L453 | Count all TCP functions (adds high overhead to TCP): |
 | §附录 C 内存 | 附录C-Appendix C： bpftrace One-Liners.md L119 | Sum libc malloc() request bytes by user stack and process (high overhead): |
 | §附录 C 内存 | 附录C-Appendix C： bpftrace One-Liners.md L162 | bpftrace -e 'software:page-fault:1 { @[comm, pid] = count(); }' |
@@ -83,7 +84,7 @@ skills:
 
 **机制**：这是一张 **bpftrace 一行命令的速查表**。原文自陈了三件事：
 
-> This appendix contains some handy bpftrace one-liners. Apart from being useful in themselves, they can help you learn bpftrace, one line at a time. Most of these were included in previous chapters. Many may not work right away: They may depend on the presence of certain tracepoints or functions, or on a specific kernel version or configuration.
+> 原文 L25 自陈这批是 handy one-liners 速查工具箱，每条只回答量什么；并且 many may not work right away，取决于本机有没有对应 tracepoint、函数与内核版本配置。
 
 拆开读，**最要紧的是最后一句**：**很多条命令照抄不能直接跑**——它依赖某个 tracepoint 或内核函数
 在你这台机器上**恰好存在**，也依赖**某个内核版本或配置**。这决定了本附录的正确用法：
@@ -97,10 +98,10 @@ skills:
 
 bpftrace 的语法入门在第 15 章：
 
-> See Chapter 15 , Section 15.2 , for an introduction to bpftrace.
+> 原文 L27 把 bpftrace 入门指向第 15 章 15.2 节：本篇只做命令索引，语法与探针类型去那一节看。
 
 **容易错在哪**（推演）：把速查表当「可运行脚本集」批量粘贴。原文已经说了 **Many may not work right away**，
-而且**其中至少一条命令本身是残缺的**（见文末纠错补充）。正确的用法是**读骨架、换参数、只跑一条**。
+而且**其中至少一条命令本身是残缺的**（见文末 §附录 C 纠错补充）。正确的用法是**读骨架、换参数、只跑一条**。
 
 **判据**：想学 bpftrace 语法 → 读这 67 条；想找「这个现象用哪条命令量」→ 查这 67 条；
 想理解 bpftrace 的语法与探针类型 → 去 [[Chapter 15. BPF]] §15.2。
@@ -125,7 +126,7 @@ bpftrace -e '探针类型:目标 /谓词/ { @[键] = 聚合(参数); }'
 
 **换掉「键」就换一个观测维度**——这是本附录最值得学的一点。原文同一批探针上给出了多种键：
 
-> bpftrace -e 'tracepoint:raw_syscalls:sys_enter { @[pid, comm] = count(); }'
+> 原文 L43 是本附录最基础的一条分组：键是 pid 加进程名，值是调用次数。
 
 同一个 `sys_enter` 探针，键换成 `[probe]` 就变成「按系统调用名分类」，键换成 `[func]` 就变成
 「按内核函数名分类」。**探针决定「在哪儿」，键决定「按什么看」。**
@@ -151,7 +152,7 @@ bpftrace -e '探针类型:目标 /谓词/ { @[键] = 聚合(参数); }'
 **机制**：既然原文说很多条命令「may not work right away」，那**第一步是确认探针存不存在**。
 bpftrace 的列举模式就是干这个的：
 
-> bpftrace -l 'usdt:/lib/x86_64-linux-gnu/libc.so.6:*'
+> 原文 L204 的列举式样例用的是 usdt 前缀加通配，输出是探针清单而不是统计结果。
 
 原文共给了 3 条列举命令：
 
@@ -183,7 +184,7 @@ bpftrace -l 't:*:mm_*'
 
 ### 谁在起进程（带命令行）
 
-> Trace new processes with arguments:
+> 原文 L31 要的是新进程连同命令行：本篇读法看输出里的完整命令行而不是次数，同一批命令行反复出现就是崩溃循环或拉起失败。
 
 ```bash
 bpftrace -e 'tracepoint:syscalls:sys_enter_execve { join(args->argv); }'
@@ -202,13 +203,13 @@ bpftrace -e 'tracepoint:syscalls:sys_enter_execve { join(args->argv); }'
 
 ### 哪个进程在疯狂调系统调用
 
-> Count syscalls by process:
+> 原文 L38 按进程数系统调用：键是 pid 与进程名，值是调用总数，量级远超同类就是忙轮询或失败重试风暴。
 
 ```bash
 bpftrace -e 'tracepoint:raw_syscalls:sys_enter { @[pid, comm] = count(); }'
 ```
 
-> Count syscalls by syscall probe name:
+> 原文 L45 按系统调用名分类计数：看键里的探针名与对应次数，某一类占绝大多数就是负载类型现形。
 
 ```bash
 bpftrace -e 'tracepoint:syscalls:sys_enter_* { @[probe] = count(); }'
@@ -236,7 +237,7 @@ bpftrace -e 'tracepoint:syscalls:sys_enter_* { @[probe] = count(); }'
 
 ### 谁在开线程
 
-> Trace new threads via pthread_create():
+> 原文 L108 追的是 pthread_create：输出每行一次线程创建，看创建者进程名与 pid，创建速率高而线程总数不涨属于正常回收。
 
 ```bash
 bpftrace -e 'u:/lib/x86_64-linux-gnu/libpthread-2.27.so:pthread_create {
@@ -267,31 +268,31 @@ bpftrace -e 'u:/lib/x86_64-linux-gnu/libpthread-2.27.so:pthread_create {
 
 ### on-CPU 采样：谁在烧 CPU
 
-> Sample running process names at 99 Hertz:
+> 原文 L52 按 99 赫兹采进程名：值就是采样命中次数，值最大者就是最耗 CPU 的进程。
 
 ```bash
 bpftrace -e 'profile:hz:99 { @[comm] = count(); }'
 ```
 
-> Sample user and kernel stacks at 49 Hertz, system wide, with the process name:
+> 原文 L59 是全系统 49 赫兹同时采用户栈与内核栈：键三层是内核栈、用户栈、进程名，值大就是那条路径占的 CPU 时间多。
 
 ```bash
 bpftrace -e 'profile:hz:49 { @[kstack, ustack, comm] = count(); }'
 ```
 
-> Sample user-level stacks at 49 Hertz, for PID 189:
+> 原文 L66 只采一个 pid 的用户栈：值是该 pid 在这条栈上的采样数，pid 随重启变所以只适合短窗口定位。
 
 ```bash
 bpftrace -e 'profile:hz:49 /pid == 189/ { @[ustack] = count(); }'
 ```
 
-> Sample user-level stacks 5 frames deep at 49 Hertz, for PID 189:
+> 原文 L73 把栈深限制到 5 帧：先看栈顶 5 帧定位函数，要更多上下文再去掉括号重采，采样成本差很多。
 
 ```bash
 bpftrace -e 'profile:hz:49 /pid == 189/ { @[ustack(5)] = count(); }'
 ```
 
-> Sample user-level stacks at 49 Hertz, for processes named “mysqld”:
+> 原文 L80 按进程名筛采样：同名进程会被混在一起，先用 pid 确认目标再换成按名字做长时间观测。
 
 ```bash
 bpftrace -e 'profile:hz:49 /comm == "mysqld"/ { @[ustack] = count(); }'
@@ -323,20 +324,20 @@ bpftrace -e 'profile:hz:49 /comm == "mysqld"/ { @[ustack] = count(); }'
 
 ### off-CPU：进程被换下去时卡在哪
 
-> Count kernel CPU scheduler tracepoints:
+> 原文 L87 数调度器 tracepoint 集合：键是探针名、值是各调度事件次数，切换次数就是调度压力的粗刻度。
 
 ```bash
 bpftrace -e 'tracepont:sched:* { @[probe] = count(); }'
 ```
 
-> Count off-CPU kernel stacks for context switch events:
+> 原文 L94 在上下文切换事件上取内核栈：值就是该栈上发生过多少次切换，某个栈值特别高就是大量线程反复阻塞在同一个地方。
 
 ```bash
 bpftrace -e 'tracepont:sched:sched_switch { @[kstack] = count(); }'
 ```
 
 ⚠️[纠错] 上面两条命令里的 `tracepont` 是**原文的真实笔误**，正确写法是 `tracepoint`。
-照抄必然报「找不到探针」。纠错补充见文末。
+照抄必然报「找不到探针」。纠错补充见文末 §附录 C 纠错补充。
 
 **机制**：`sched:*` 是**内核调度器的 tracepoint 集合**；`sched_switch` 在**每次上下文切换**时触发，
 此时抓的 `kstack` 是**被换下去那个线程当时所在的内核栈**——**它卡在哪，一目了然**。
@@ -359,25 +360,31 @@ bpftrace -e 'tracepont:sched:sched_switch { @[kstack] = count(); }'
 
 **机制**：这一域全是**给内核函数插桩**，用 `kprobe:`（入口）与 `kretprobe:`（返回）。
 
-> Count kernel function calls beginning with “vfs_”:
+> 原文 L101 按函数名给整族 vfs_ 插桩：键是函数名、值是进入次数，单函数远高于同族就是被反复走的路径。
 
 ```bash
 bpftrace -e 'kprobe:vfs_* { @[func] = count(); }'
 ```
 
-> Count VFS calls for PID 181:
+> 原文 L262 数的是 VFS 层的全部调用：键是探针名、值是进入次数，某一类 VFS 调用占绝大多数或某条路径明显偏高，就是这条路径被反复走。
+
+```bash
+bpftrace -e 'kprobe:vfs_* { @[probe] = count(); }'
+```
+
+> 原文 L269 把 VFS 调用计数收到单个 pid：键是探针名、值是该 pid 的调用次数，用来和全量那条对照定位到人。
 
 ```bash
 bpftrace -e 'kprobe:vfs_* /pid == 181/ { @[probe] = count(); }'
 ```
 
-> Count SCSI driver function calls:
+> 原文 L365 按函数名数 SCSI 驱动调用：键是函数名、值是进入次数，比例失衡本身就是线索。
 
 ```bash
 bpftrace -e 'kprobe:scsi* { @[func] = count(); }'
 ```
 
-> Count all TCP functions (adds high overhead to TCP):
+> 原文 L453 是通配全量的 TCP 函数计数，原文自己标注了 high overhead：本篇读法是只作短窗口摸底，不要长时间挂着采样。
 
 ```bash
 bpftrace -e 'k:tcp_* { @[func] = count(); }'
@@ -386,9 +393,9 @@ bpftrace -e 'k:tcp_* { @[func] = count(); }'
 **通配符是这一域的核心手法**：`vfs_*` 一次插桩**整个 VFS 函数族**，`scsi*` 整个 SCSI 驱动，
 `tcp_*` 整个 TCP 协议栈。**原文自己给 `tcp_*` 加了警告**：
 
-> Count all TCP functions (adds high overhead to TCP):
+> 原文 L453 那条警告针对的正是这种通配全量插桩：探针数越多开销越大，动手前先用 -l 数一数匹配几个。
 
-**读数判断**：`@[func]` 的值 = **该内核函数被进入的次数**。
+**读数判断**：`@[func]` 的值 = **该内核函数被进入的次数**；键写成 `@[probe]` 的那两条 vfs_ 值是**该探针命中的调用次数**（按探针名分组，不按函数名）。
 **异常信号（推演）**：
 - 某个函数的值**远高于同族其他函数** ⇒ 这条路径被反复走（可能是**绕路**：本该走批量接口却逐个调用）；
 - **某函数的值异常高但耗时不高** ⇒ 调用频繁但单次便宜（典型是**小而多**）；
@@ -412,21 +419,21 @@ bpftrace -e 'k:tcp_* { @[func] = count(); }'
 
 ### 堆：谁在申请内存
 
-> Sum libc malloc() request bytes by user stack and process (high overhead):
+> 原文 L119 累加 libc 申请字节数并按用户栈与进程分组：值是字节数不是次数，某一栈占比极高就是内存被一处吃掉。
 
 ```bash
 bpftrace -e 'u:/lib/x86_64-linux-gnu/libc.so.6:malloc {
     @[ustack, comm] = sum(arg0); }'
 ```
 
-> Sum libc malloc() request bytes by user stack for PID 181 (high overhead):
+> 原文 L127 把范围收到单个 pid：值同样是字节数，可以直接与该进程 RSS 对账，分配量涨而不降就是只申请不释放。
 
 ```bash
 bpftrace -e 'u:/lib/x86_64-linux-gnu/libc.so.6:malloc /pid == 181/ {
     @[ustack] = sum(arg0); }'
 ```
 
-> Show libc malloc() request bytes by user stack for PID 181 as a power-of-2 histogram (high overhead):
+> 原文 L135 把同一批申请量做成 2 的幂直方图：看的是申请尺寸分布形状，集中在小桶就是大量小对象，集中在大桶就是缓冲区或数组。
 
 ```bash
 bpftrace -e 'u:/lib/x86_64-linux-gnu/libc.so.6:malloc /pid == 181/ {
@@ -455,19 +462,19 @@ bpftrace -e 'u:/lib/x86_64-linux-gnu/libc.so.6:malloc /pid == 181/ {
 
 ### 堆扩张与页缺失
 
-> Count process heap expansion (brk(2)) by code path:
+> 原文 L150 数堆扩张并按代码路径分组：某条路径的值高就是分配器在反复要内存，要对分配与释放的配比。
 
 ```bash
 bpftrace -e 'tracepoint:syscalls:sys_enter_brk { @[ustack, comm] = count(); }'
 ```
 
-> Count page faults by process:
+> 原文 L157 数页错误总数：键是进程名与 pid，速率高说明内存被换出过或在反复触碰新页。
 
 ```bash
 bpftrace -e 'software:page-fault:1 { @[comm, pid] = count(); }'
 ```
 
-> Count user page faults by user-level stack trace:
+> 原文 L164 只数用户态页错误并带用户栈：值集中在少数几条栈就是这些代码在反复触碰未驻留的页。
 
 ```bash
 bpftrace -e 't:exceptions:page_fault_user { @[ustack, comm] = count(); }'
@@ -500,31 +507,31 @@ bpftrace -e 't:exceptions:page_fault_user { @[ustack, comm] = count(); }'
 
 ### 回收、换页、迁移与压实
 
-> Count vmscan operations by tracepoint:
+> 原文 L171 数回收扫描各阶段：键是扫描阶段名、值是各阶段跑的次数，持续不为零就是内核一直在回收。
 
 ```bash
 bpftrace -e 'tracepoint:vmscan:* { @[probe]++; }'
 ```
 
-> Count swapins by process:
+> 原文 L178 数换入事件：键是进程名与 pid，某个进程的值高说明它的工作集超了内存配额。
 
 ```bash
 bpftrace -e 'kprobe:swap_readpage { @[comm, pid] = count(); }'
 ```
 
-> Count page migrations:
+> 原文 L185 数页迁移：值是总迁移次数，次数高说明页在 NUMA 节点之间来回搬，内存亲和性差。
 
 ```bash
 bpftrace -e 'tracepoint:migrate:mm_migrate_pages { @ = count(); }'
 ```
 
-> Trace compaction events:
+> 原文 L192 打压实事件的时间戳：看的是时间戳分布，密集出现就是压实风暴，碎片化严重。
 
 ```bash
 bpftrace -e 't:compaction:mm_compaction_begin { time(); }'
 ```
 
-> Sum kernel kmem cache allocation bytes by kernel stack trace:
+> 原文 L143 累加内核 slab 分配字节数并按内核栈分组：值大的那条栈就是内核态分配大户，通常是驱动或子系统泄漏。
 
 ```bash
 bpftrace -e 't:kmem:kmem_cache_alloc { @bytes[kstack] = sum(args->bytes_alloc); }'
@@ -558,38 +565,38 @@ bpftrace -e 't:kmem:kmem_cache_alloc { @bytes[kstack] = sum(args->bytes_alloc); 
 
 **机制**：这一域有一个贯穿全篇的对照——**请求量 vs 实际量**。
 
-> Trace files opened via openat(2) with process name:
+> 原文 L219 逐行打印被打开的文件路径：看路径本身，同一路径反复出现就是缓存没起作用或配置在反复重载。
 
 ```bash
 bpftrace -e 't:syscalls:sys_enter_openat { printf("%s %s\n", comm,
     str(args->filename)); }'
 ```
 
-> Count read syscalls by syscall type:
+> 原文 L227 按调用名分类数读：值最高的那类就是主导 I/O 类型，再换专门的 read 探针往下收。
 
 ```bash
 bpftrace -e 'tracepoint:syscalls:sys_enter_*read* { @[probe] = count(); }'
 ```
 
-> Count write syscalls by syscall type:
+> 原文 L234 与读那条对称，数的是写调用：写占比高就是写放大嫌疑，先看刷盘频率与批量大小。
 
 ```bash
 bpftrace -e 'tracepoint:syscalls:sys_enter_*write* { @[probe] = count(); }'
 ```
 
-> Show the distribution of read() syscall request sizes:
+> 原文 L241 给的是读请求量的尺寸分布：看直方图形状，集中在小桶就是大量小读，缓冲策略有问题。
 
 ```bash
 bpftrace -e 'tracepoint:syscalls:sys_enter_read { @ = hist(args->count); }'
 ```
 
-> Show the distribution of read() syscall read bytes (and errors):
+> 原文 L248 给的是实际读回字节的分布：出现负值桶就是失败混在直方图里，要拆出错误码另看。
 
 ```bash
 bpftrace -e 'tracepoint:syscalls:sys_exit_read { @ = hist(args->ret); }'
 ```
 
-> Count read() syscall errors by error code:
+> 原文 L255 按错误码分组数失败次数：键是取正后的 errno，某一类占绝大多数就是单一原因。
 
 ```bash
 bpftrace -e 't:syscalls:sys_exit_read /args->ret < 0/ { @[- args->ret] = count(); }'
@@ -620,31 +627,31 @@ bpftrace -e 't:syscalls:sys_exit_read /args->ret < 0/ { @[- args->ret] = count()
 
 ### 文件系统内部：谁在做、做了什么
 
-> Count ext4 tracepoints:
+> 原文 L276 数 ext4 的 tracepoint 集合：键是探针名、值是各动作次数，元数据动作压倒数据动作就是工作集不匹配。
 
 ```bash
 bpftrace -e 'tracepoint:ext4:* { @[probe] = count(); }'
 ```
 
-> Count xfs tracepoints:
+> 原文 L283 数 xfs 的 tracepoint 集合：读法与 ext4 那条相同，先看哪一类动作占多数。
 
 ```bash
 bpftrace -e 'tracepoint:xfs:* { @[probe] = count(); }'
 ```
 
-> Count ext4 file reads by process name and user-level stack:
+> 原文 L290 数 ext4 的真实读并带用户栈：值集中在一个进程就是它在狂读文件，看那条栈该不该换 mmap。
 
 ```bash
 bpftrace -e 'kprobe:ext4_file_read_iter { @[ustack, comm] = count(); }'
 ```
 
-> Count dcache references by process name and PID:
+> 原文 L304 数 dentry 缓存的快速查找命中：次数高本身正常，成为热点说明路径解析开销盖过了数据 I/O。
 
 ```bash
 bpftrace -e 'kprobe:lookup_fast { @[comm, pid] = count(); }'
 ```
 
-> Trace ZFS spa_sync() times:
+> 原文 L297 打 ZFS 同步点的时刻：看时间戳节奏，密集出现就是事务提交频繁，写延迟会出毛刺。
 
 ```bash
 bpftrace -e 'kprobe:spa_sync { time("%H:%M:%S ZFS spa_sync()\n"); }'
@@ -675,45 +682,45 @@ bpftrace -e 'kprobe:spa_sync { time("%H:%M:%S ZFS spa_sync()\n"); }'
 
 **机制**：这一域从**块层**往下看，四条命令覆盖了「块 I/O 事件、请求特征、错误、SCSI 层」。
 
-> Count block I/O tracepoints events:
+> 原文 L314 数块层 tracepoint 事件总量：这是总量刻度，看不出错误在哪，要定位还得靠完成事件那条。
 
 ```bash
 bpftrace -e 'tracepoint:block:* { @[probe] = count(); }'
 ```
 
-> Summarize block I/O size as a histogram:
+> 原文 L321 把请求大小做成直方图：集中在小桶就是小块随机 I/O，顺序性差，队列深度上不去。
 
 ```bash
 bpftrace -e 't:block:block_rq_issue { @bytes = hist(args->bytes); }'
 ```
 
-> Count block I/O request user stack traces:
+> 原文 L328 在请求下发处取用户栈：值集中在一个栈就是一个调用点在狂发 I/O。
 
 ```bash
 bpftrace -e 't:block:block_rq_issue { @[ustack] = count(); }'
 ```
 
-> Count block I/O type flags:
+> 原文 L335 数请求的读写类型标志：键是 rwbs 位组合，写占比高就是写放大嫌疑。
 
 ```bash
 bpftrace -e 't:block:block_rq_issue { @[args->rwbs] = count(); }'
 ```
 
-> Trace block I/O errors with device and I/O type:
+> 原文 L342 只在出错时打印设备号、类型与错误码：先看 dev 定到哪块盘，再看 error 定故障类型。
 
 ```bash
 bpftrace -e 't:block:block_rq_complete /args->error/ {
     printf("dev %d type %s error %d\n", args->dev, args->rwbs, args->error); }'
 ```
 
-> Count SCSI opcodes:
+> 原文 L350 按操作码分组数 SCSI 命令：值集中在某操作码就是请求类型单一，读写比例一眼可见。
 
 ```bash
 bpftrace -e 't:scsi:scsi_dispatch_cmd_start { @opcode[args->opcode] =
     count(); }'
 ```
 
-> Count SCSI result codes:
+> 原文 L358 按结果码分组数 SCSI 返回：出现错误码就是 SCSI 层失败，要往硬件与驱动查。
 
 ```bash
 bpftrace -e 't:scsi:scsi_dispatch_cmd_done { @result[args->result] = count(); }'
@@ -754,31 +761,31 @@ bpftrace -e 't:scsi:scsi_dispatch_cmd_done { @result[args->result] = count(); }'
 
 ### socket 层：谁在收发
 
-> Count socket accept(2)s by PID and process name:
+> 原文 L375 数连接建立次数：值高就是连接建立速率高，通常是在反复重连或对端拒绝。
 
 ```bash
 bpftrace -e 't:syscalls:sys_enter_accept* { @[pid, comm] = count(); }'
 ```
 
-> Count socket connect(2)s by PID and process name:
+> 原文 L382 数连接发起次数并按进程归组：某个进程的值高就是它在建大量连接，看连接池与退避策略。
 
 ```bash
 bpftrace -e 't:syscalls:sys_enter_connect { @[pid, comm] = count(); }'
 ```
 
-> Count socket connect(2)s by user stack trace:
+> 原文 L389 把建连按调用栈再切一刀：值集中就是一条代码路径在狂建连接。
 
 ```bash
 bpftrace -e 't:syscalls:sys_enter_connect { @[ustack, comm] = count(); }'
 ```
 
-> Count socket send/receives by direction, on-CPU PID, and process name:
+> 原文 L396 用函数名区分收发方向：键里 func 是方向、comm 是执行线程名，收发比失衡就是背压或对端不读。
 
 ```bash
 bpftrace -e 'k:sock_sendmsg,k:sock_recvmsg { @[func, pid, comm] = count(); }'
 ```
 
-> Count socket send/receive bytes by on-CPU PID and process name:
+> 原文 L403 用返回探针拿返回值统计字节数：值是字节数不是次数，单进程独占带宽就是批处理或转储。
 
 ```bash
 bpftrace -e 'kr:sock_sendmsg,kr:sock_recvmsg /(int32)retval > 0/ { @[pid, comm] =
@@ -810,61 +817,61 @@ bpftrace -e 'kr:sock_sendmsg,kr:sock_recvmsg /(int32)retval > 0/ { @[pid, comm] 
 
 ### 传输层：TCP 与 UDP
 
-> Count TCP connects by on-CPU PID and process name:
+> 原文 L411 数 TCP 建连，通配符同时覆盖 v4 与 v6：值高就是握手开销大，先看连接池与退避。
 
 ```bash
 bpftrace -e 'k:tcp_v*_connect { @[pid, comm] = count(); }'
 ```
 
-> Count TCP accepts by on-CPU PID and process name:
+> 原文 L418 数 TCP 侧的连接接受：与建连那条对照，accept 远大于 connect 说明本机在被动接流量。
 
 ```bash
 bpftrace -e 'k:inet_csk_accept { @[pid, comm] = count(); }'
 ```
 
-> Count TCP send/receives by on-CPU PID and process name:
+> 原文 L425 同样用函数名区分收发方向：看的是收发次数的失衡方向，不是绝对值。
 
 ```bash
 bpftrace -e 'k:tcp_sendmsg,k:tcp_recvmsg { @[func, pid, comm] = count(); }'
 ```
 
-> TCP send bytes as a histogram:
+> 原文 L432 把发送字节做成直方图：集中在小桶就是小包海量，带宽被包头吃掉。
 
 ```bash
 bpftrace -e 'k:tcp_sendmsg { @send_bytes = hist(arg2); }'
 ```
 
-> TCP receive bytes as a histogram:
+> 原文 L439 把接收字节做成直方图：出现大桶是少量大包，集中在 0 附近是大量空读。
 
 ```bash
 bpftrace -e 'kr:tcp_recvmsg /retval >= 0/ { @recv_bytes = hist(retval); }'
 ```
 
-> Count TCP retransmits by type and remote host (assumes IPv4):
+> 原文 L446 按重传类型与远端地址分组：键里的地址说明是到哪个主机的路径有问题，地址按 IPv4 解析。
 
 ```bash
 bpftrace -e 't:tcp:tcp_retransmit_* { @[probe, ntop(2, args->saddr)] = count(); }'
 ```
 
-> Count all TCP functions (adds high overhead to TCP):
+> 原文 L453 的全量 TCP 计数同样是通配全量：只做短窗口摸底，长时间采样会自己把 TCP 压垮。
 
 ```bash
 bpftrace -e 'k:tcp_* { @[func] = count(); }'
 ```
 
-> Count UDP send/receives by on-CPU PID and process name:
+> 原文 L460 数 UDP 收发并用函数名区分方向：与 TCP 那组一样看收发比，失衡就是背压。
 
 ```bash
 bpftrace -e 'k:udp*_sendmsg,k:udp*_recvmsg { @[func, pid, comm] = count(); }'
 ```
 
-> UDP send bytes as a histogram:
+> 原文 L467 把 UDP 发送字节做成直方图：与 TCP 发送同读法，看尺寸分布形状。
 
 ```bash
 bpftrace -e 'k:udp_sendmsg { @send_bytes = hist(arg2); }'
 ```
 
-> UDP receive bytes as a histogram:
+> 原文 L474 把 UDP 接收字节做成直方图：过滤掉了负返回，失败与零字节要另看退出事件的错误码。
 
 ```bash
 bpftrace -e 'kr:udp_recvmsg /retval >= 0/ { @recv_bytes = hist(retval); }'
@@ -897,31 +904,31 @@ bpftrace -e 'kr:udp_recvmsg /retval >= 0/ { @recv_bytes = hist(retval); }'
 
 ### 设备层：网卡
 
-> Count transmit kernel stack traces:
+> 原文 L481 数发送路径上的内核栈：值大说明发送卡在某一层，看该栈落在驱动还是协议栈。
 
 ```bash
 bpftrace -e 't:net:net_dev_xmit { @[kstack] = count(); }'
 ```
 
-> Show receive CPU histogram for each device:
+> 原文 L488 给每块网卡一个收包落点的 CPU 直方图：看分布形状，全挤在一两个 CPU 就是收包没有分散。
 
 ```bash
 bpftrace -e 't:net:netif_receive_skb { @[str(args->name)] = lhist(cpu, 0, 128, 1); }'
 ```
 
-> Count ieee80211 layer functions (adds high overhead to packets):
+> 原文 L495 是无线协议栈的全量函数计数，原文明写 high overhead：只在无线网卡上才有意义，且只在低流量窗口用。
 
 ```bash
 bpftrace -e 'k:ieee80211_* { @[func] = count()'
 ```
 
-> Count all ixgbevf device driver functions (adds high overhead to ixgbevf):
+> 原文 L502 是 ixgbevf 驱动的全量函数计数：驱动级探针在生产流量下开销极高，只能短窗口摸底。
 
 ```bash
 bpftrace -e 'k:ixgbevf_* { @[func] = count(); }'
 ```
 
-> Count all iwl device driver tracepoints (adds high overhead to iwl):
+> 原文 L509 是 iwl 驱动的 tracepoint 全量计数：同样只在低流量窗口用，生产流量下会自己压垮网卡。
 
 ```bash
 bpftrace -e 't:iwlwifi:*,t:iwlwifi_io:* { @[probe] = count(); }'
@@ -945,7 +952,7 @@ bpftrace -e 't:iwlwifi:*,t:iwlwifi_io:* { @[probe] = count(); }'
 原文对后两条都明确标了 **high overhead**。**推演**：驱动级探针在**生产流量大时开销极高**，
 只在**低流量窗口**或**实验环境**用；无线那两条（`ieee80211_*`）在**无线网卡上才有意义**。
 
-## 纠错补充
+## §附录 C 纠错补充
 
 **本篇严格照抄原文命令**，但原文稿本身有 3 处缺陷。三处都**不改原文**，在此列明。
 

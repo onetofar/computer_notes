@@ -19,13 +19,12 @@ skills:
 
 > **小节地图**：本篇是**一张速查表**，不是理论章。原文只有一级标题（`# Appendix B: sar Summary`），
 > 正文是一张三列表——**Option / Metrics / Description**，共 20 行，把 `sar(1)` 的选项与它打印的指标一一对上。
-> **源章形态（决定锚点怎么挑）**：本章原文是**一张扁平对照表**，整章**没有可挑的「机制句」**——
-> 正文就是 Option / Metrics / Description 三列的机械转写。所以锚点表不按「机制句」挑，
-> 而是**按资源域各取一条代表行**（共 12 条）：取原文 Description 列里
-> 「这条选项回答什么问题」的那一格（如 `Memory utilization`、`Disk statistics`、`TCP errors`）。
-> **字段级明细（Metrics 列整行）一律不进锚点表**，它们完整保留在
-> §附录 B 三列读法与选项索引 的「全部 20 行索引」表与各节的指标表里；
-> 本章仅有的两句散文（本章是什么、有什么前提）留在 §附录 B 定位与边界 的正文引用里，同样逐字。
+> **源章形态（决定本篇怎么写）**：本章原文是**一张扁平对照表**，整章**没有可挑的「机制句」**——
+> 正文就是 Option / Metrics / Description 三列的机械转写，散文只有四句。
+> 所以本篇**不复刻那三列**，只压成**判断层**：每个 sar 子命令 → **它回答什么问题** → **异常时看哪** → **原文行号指针**。
+> 源稿的 20 行 Metrics 字段清单在本篇**只以行号指针的形式被指到，不逐字搬运**；
+> 要逐字对照，就按指针回原文那一行取。
+> **12 条逐字锚点**是本篇与原文唯一逐字对齐的部分，留在下方「原文锚点」表（各资源域一条代表行）。
 > 本篇按**资源域**重组为十一节：§附录 B 定位与边界、§附录 B 三列读法与选项索引、
 > §附录 B CPU 利用率与频率、§附录 B CPU 调度与上下文切换、§附录 B 内存占用、
 > §附录 B 分页与大页、§附录 B 交换区、§附录 B 磁盘 I/O、§附录 B 网络接口、
@@ -34,8 +33,8 @@ skills:
 > 底层依赖：USE 方法的框架见 [[附录A-Appendix A： USE Method： Linux]]，方法论见
 > [[Chapter 2. Methodologies]]；各资源的机制分别在 [[Chapter 6. CPUs]]、[[Chapter 7. Memory]]、
 > [[Chapter 8. File Systems]]、[[Chapter 9. Disks]]、[[Chapter 10. Network]]；
-> 观测工具链见 [[Chapter 13. perf]] 与 [[Chapter 14. Ftrace]]。
-> ⚠️ **第 4 章 Observability Tools 与第 15 章在本库尚无同层笔记**，故只作文字提及，不造链接。
+> `sar(1)` 本身在 [[Chapter 4. Observability Tools]] 的 4.4 节引入，
+> 内核侧的可编程观测路径见 [[Chapter 13. perf]]、[[Chapter 14. Ftrace]]、[[Chapter 15. BPF]]。
 > ⚠️ **本篇的性质**：原文**只给「哪个指标挂在哪个选项下」，不给任何阈值**。
 > 所以下面每张表里的「异常的样子」「往哪查」两列**全部是本篇的推演**，不是原文观点。
 
@@ -45,9 +44,9 @@ skills:
 用 `kb_anchor_check.py` 可以把每条引文回查所在行；对不上就是这里错了。
 **源章是扁平对照表，没有机制句可挑**：原文整章就是 Option / Metrics / Description 三列的转写，
 所以锚点表**只收各资源域各一条的代表行**——取 Description 列里「这条选项回答什么问题」的那一格。
-本章仅有的两句散文（本章是什么、有什么前提）留在 §附录 B 定位与边界 的正文引用里，同样逐字。
-**字段级明细（Metrics 列整行）不留在锚点表**：
-它们完整保留在下方「全部 20 行索引」表与各节的「指标 → 怎么读 → 什么值算异常 → 往哪查」表里。
+**字段级明细（Metrics 列整行）既不留在锚点表，也不留在正文**：本篇只保留判断层与定位指针，
+字段清单按指针回原文那一行取。
+散文四句里只有一句在 §附录 B 定位与边界 逐字保留（sar 版本与内核特性前提），其余三句在本篇是**中文转述**。
 
 | 本篇小节 | 原文位置 | 该处原文（逐字摘录） |
 |---|---|---|
@@ -68,11 +67,11 @@ skills:
 > - **原文是一张「选项 → 指标」对照表，不含任何阈值、判据或处置建议**。本篇各表里
 >   「异常的样子」「往哪查」两列是本篇按 USE 方法的框架补的（框架见
 >   [[附录A-Appendix A： USE Method： Linux]]），**不是原文陈述**。
-> - **「指标清单按资源域重排」是本篇的重组**：原文的 20 行是按 sar 选项排的，
->   本篇按 CPU / 内存 / 磁盘 / 网络归堆，指标清单本身逐字照抄原文。
+> - **「按资源域归堆」是本篇的重组**：原文的 20 行是按 sar 选项排的，
+>   本篇按 CPU / 内存 / 磁盘 / 网络归堆；**但指标清单本身本篇不照抄**，只给判断层与定位指针。
 > - **「单位后缀（`/s`、`kb`、`kB`、`%`）决定读数口径」是本篇的补充**：
 >   原文只给字段名，没有解释速率与存量的区别。
-> - **「作者加粗了哪些关键指标」在本文本里无法核实**：原文说了加粗（见 §附录 B 定位与边界 引的那句），
+> - **「作者加粗了哪些关键指标」在本文本里无法核实**：原文说了加粗，
 >   但 epub 抽取后加粗标记丢失，本篇**不猜**哪些指标被加粗。
 > - **原文逐核 CPU 那一行的选项写作 `-u-P ALL`、频率那一行写作 `-m CPU-P ALL`**，
 >   两个参数之间没有空格。实际命令行需要拆成 `sar -u -P ALL` 与 `sar -m CPU -P ALL`（推演）。
@@ -83,22 +82,19 @@ skills:
 
 **机制**：这份附录是 **`sar(1)` 的选项—指标对照表**，用途是「帮你回忆哪个指标挂在哪个选项下」。
 
-> This is a summary of options and metrics from the system activity reporter, sar(1). You can use this to jog your memory about which metrics are under which options. See the man page for the full list.
+**本篇转述（原文开篇）**：这是一份关于系统活动报告器 `sar(1)` 选项与指标的**摘要**，
+作用是帮读者回忆「哪些指标挂在哪些选项下」；**完整列表要看 man page**。
 
 注意最后半句：**完整列表看 man page**。本表是**记忆辅助**，不是权威定义。
 
-原文也交代了它在全书里的位置：
+**本篇转述（原文的章节关系）**：`sar(1)` 在第 4 章 [[Chapter 4. Observability Tools]] 的 4.4 节引入，
+第 6/7/8/9/10 章（CPU、内存、文件系统、磁盘、网络）各自挑了相关选项展开；
+本附录是那五章的**横向索引**。
 
-> sar(1) is introduced in Chapter 4 , Observability Tools , Section 4.4 , and selected options are summarized in later chapters ( 6 , 7 , 8 , 9 , 10 ).
+**本篇转述**：作者把「自己会看的关键指标」加了粗。**本篇提示**：加粗标记在抽取时已丢失，
+无法确认是哪些指标被加粗。
 
-即：`sar(1)` 本身在第 4 章（Observability Tools）介绍，第 6/7/8/9/10 章（CPU、内存、文件系统、
-磁盘、网络）各自挑了相关选项展开。本附录是那五章的**横向索引**。
-
-**两条使用前提**（原文明说）：
-
-> I have highlighted in bold the key metrics that I look for.
-
-作者把「自己会看的关键指标」加了粗。**本篇提示**：加粗标记在抽取时已丢失，无法确认是哪些指标（见上面「书里没说的」）。
+**两个版本前提**（原文 L157，逐字引用）：
 
 > Some sar(1) options may require kernel features enabled (e.g., huge pages), and some metrics were added in later versions of sar(1) (version 12.0.6 is shown here).
 
@@ -117,46 +113,52 @@ skills:
 - **Metrics**：这个选项会打印哪些指标——**逐字字段名**，带单位后缀。
 - **Description**：这个选项组的用途，一句话。
 
+**本篇不复制这三列**：本篇把 20 行压成**判断层**——每个子命令**回答什么问题**、**异常时看哪**，
+再给一组行号指针回原文。字段清单要逐字对照时，按指针回原文那一行取。
+下面表里「它回答什么问题」「异常时看哪」两列**是本篇的转述与判断，不是原文措辞**；
+原文那一格用途说明，同样按指针回取。
+
 **单位后缀是读数的前提**（推演）：`pswpout/s` 是速率、`kbswpused` 是存量，
 混着看会得出相反的结论（换出速率高但 swap 占用低 = 刚换出就换回，和「swap 用满」完全不是一回事）。
 
 **两类修饰符**（推演）：`ALL` 表示「扩展字段集或全部设备」，`P`（per-CPU）表示「逐 CPU 拆开」。
 
-### 全部 20 行索引（按资源域重排，指标清单逐字照抄原文）
+### 全部 20 行选项索引（判断层：选项 → 回答什么问题 → 异常时看哪 → 原文定位）
 
-| 选项 | 指标（原文列） | 这组指标回答什么问题 | 本篇哪一节 |
+**「原文定位」列的三个行号依次是该行在源稿里的 Option / Metrics / Description 三格**，
+同一份源稿：教材原文/Systems Performance/附录B-Appendix B： sar Summary.md。
+
+| 选项 | 它回答什么问题 | 异常时看哪 | 原文定位 |
 |---|---|---|---|
-| `sar -u` | %user %nice %system %iowait %steal %idle | CPU 被谁占住了 | §附录 B CPU 利用率与频率 |
-| `sar -u ALL` | ... %irq %soft %guest %gnice | 多出来的 irq/soft/guest 是谁 | §附录 B CPU 利用率与频率 |
-| `sar -u -P ALL` | （同 `-u` 的六项，逐 CPU 列出） | 是不是有单核热点 | §附录 B CPU 利用率与频率 |
-| `sar -m CPU -P ALL` | MHz | 每核实际跑在多少 MHz | §附录 B CPU 利用率与频率 |
-| `sar -q` | runq-sz plist-sz ldavg-1 ldavg-5 ldavg-15 blocked | 有多少任务在排队等 CPU | §附录 B CPU 调度与上下文切换 |
-| `sar -w` | proc/s cswch/s | 进程创建与上下文切换有多频繁 | §附录 B CPU 调度与上下文切换 |
-| `sar -r` | kbmemfree kbavail kbmemused %memused kbbuffers kbcached kbcommit %commit kbactive kbinact kbdirty | 内存用在哪、还剩多少可用 | §附录 B 内存占用 |
-| `sar -B` | pgpgin/s pgpgout/s fault/s majflt/s pgfree/s pgscank/s pgscand/s pgsteal/s %vmeff | 缺页与内存回收压力 | §附录 B 分页与大页 |
-| `sar -H` | kbhugfree kbhugused %hugused | 大页占了多少 | §附录 B 分页与大页 |
-| `sar -S` | kbswpfree kbswpused %swpused kbswpcad %swpcad | 交换区占用了多少 | §附录 B 交换区 |
-| `sar -W` | pswpin/s pswpout/s | 是否正在换入 / 换出 | §附录 B 交换区 |
-| `sar -d` | tps rkB/s wkB/s areq-sz aqu-sz await svctm %util | 磁盘忙不忙、请求有没有排队 | §附录 B 磁盘 I/O |
-| `sar -n DEV` | rxpck/s txpck/s rxkB/s txkB/s rxcmp/s txcmp/s rxmcst/s %ifutil | 网卡吞吐与利用率 | §附录 B 网络接口 |
-| `sar -n EDEV` | rxerr/s txerr/s coll/s rxdrop/s txdrop/s txcarr/s rxfram/s rxfifo/s txfifo/s | 网卡丢包与错误在哪一层 | §附录 B 网络接口 |
-| `sar -n IP` | irec/s fwddgm/s idel/s orq/s asmrq/s asmok/s fragok/s fragcrt/s | IP 层收了多少、碎了多少 | §附录 B 网络协议栈 |
-| `sar -n EIP` | ihdrerr/s iadrerr/s iukwnpr/s idisc/s odisc/s onort/s asmf/s fragf/s | IP 层的错在哪 | §附录 B 网络协议栈 |
-| `sar -n TCP` | active/s passive/s iseg/s oseg/s | TCP 连接与数据段的形态 | §附录 B 网络协议栈 |
-| `sar -n ETCP` | atmptf/s estres/s retrans/s isegerr/s orsts/s | TCP 层的失败与重传 | §附录 B 网络协议栈 |
-| `sar -n SOCK` | totsck tcpsck udpsck rawsck ip-frag tcp-tw | socket 存量与 TIME_WAIT | §附录 B 网络协议栈 |
-| `sar -v` | dentunusd file-nr inode-nr pty-nr | 内核表项用到什么程度 | §附录 B 内核表 |
+| `sar -u -P ALL` | 每个 CPU 各自被占用了多少 | 某一个核明显高于其余 ⇒ 单核热点 | L35 / L37 / L39 |
+| `sar -u` | CPU 的时间被谁占住了 | `%idle` 与 `%iowait` 的组合 | L41 / L43 / L45 |
+| `sar -u ALL` | 基本分项之外，中断与客户机时间各占多少 | `%irq` 高 ⇒ 中断风暴 | L47 / L49 / L51 |
+| `sar -m CPU -P ALL` | 每核实际跑在多少 MHz | 满载时频率反而下降 ⇒ 降频 | L53 / L55 / L57 |
+| `sar -q` | 有多少任务在排队等 CPU | `runq-sz` 与 `blocked` 的对比 | L59 / L61 / L63 |
+| `sar -w` | 进程创建与上下文切换有多频繁 | `proc/s` 与 `cswch/s` 是否同时高 | L65 / L67 / L69 |
+| `sar -B` | 缺页与内存回收压力有多大 | `majflt/s` 与 `pgscank/s` | L71 / L73 / L75 |
+| `sar -H` | 大页占了多少 | 输出为空 ⇒ 内核没开这个特性 | L77 / L79 / L81 |
+| `sar -r` | 内存用在哪、还剩多少可用 | `kbavail` 与 `%commit` | L83 / L85 / L87 |
+| `sar -S` | 交换区存量占用了多少 | `%swpused` 高但换出速率为 0 | L89 / L91 / L93 |
+| `sar -W` | 是否正在换入 / 换出 | `pswpout/s` 是否持续为正 | L95 / L97 / L99 |
+| `sar -v` | 内核表项用到什么程度 | `file-nr` 是否逼近上限 | L101 / L103 / L105 |
+| `sar -d` | 磁盘忙不忙、请求有没有排队 | `aqu-sz` + `await` + `%util` | L107 / L109 / L111 |
+| `sar -n DEV` | 网卡吞吐与利用率 | `%ifutil` 对上链路标称速率 | L113 / L115 / L117 |
+| `sar -n EDEV` | 网卡的丢包与错误出在哪一层 | drop 与 error 分开看 | L119 / L121 / L123 |
+| `sar -n IP` | IP 层收了多少、碎了多少 | `fragcrt/s` 是否持续非零 | L125 / L127 / L129 |
+| `sar -n EIP` | IP 层的错在哪 | `idisc/s` 与 `odisc/s` | L131 / L133 / L135 |
+| `sar -n TCP` | TCP 连接与数据段的形态 | `active/s` 与 `passive/s` 的比例 | L137 / L139 / L141 |
+| `sar -n ETCP` | TCP 层的失败与重传 | `retrans/s` 是否持续大于 0 | L143 / L145 / L147 |
+| `sar -n SOCK` | socket 存量与 TIME_WAIT | `tcp-tw` 是否持续很高 | L149 / L151 / L153 |
 
 ## §附录 B CPU 利用率与频率
 
-**机制**：`-u` 给 CPU 利用率分项，`-u ALL` 追加 irq / soft / guest / gnice，
+**机制**：`sar -u` 给 CPU 利用率分项，`-u ALL` 追加 irq / soft / guest / gnice，
 `-u -P ALL` 把同样的分项拆到每个 CPU，`-m CPU -P ALL` 给每核的实际频率。
 
-> %user %nice %system %iowait %steal %idle
-
-> ... %irq %soft %guest %gnice
-
-`-u` 给的是这一组六项：
+**本篇转述**：基本那一组是用户态、nice、内核态、iowait、steal、idle 六个占比；
+`-u ALL` 在其后追加 irq、soft、guest、gnice 四项；`-m CPU -P ALL` 给的是每核的 MHz。
+字段清单见原文 L37 / L43 / L49 / L55。
 
 ```bash
 sar -u
@@ -195,9 +197,8 @@ sar -m CPU -P ALL
 **机制**：`-q` 给**排队情况**（有多少任务在等 CPU、负载均值、有多少卡在 I/O），
 `-w` 给**切换频率**（每秒新建多少进程、每秒切换多少次上下文）。
 
-> runq-sz plist-sz ldavg-1 ldavg-5 ldavg-15 blocked
-
-> proc/s cswch/s
+**本篇转述**：`-q` 给运行队列长度、进程表长度、一到十五分钟三个负载均值、阻塞任务数；
+`-w` 给每秒创建进程数与每秒上下文切换数。字段清单见原文 L61 / L67。
 
 ```bash
 sar -q
@@ -227,7 +228,8 @@ sar -w
 
 **机制**：`-r` 给内存的**存量视图**（多少空闲、多少缓存、多少已承诺、多少脏页）。
 
-> kbmemfree kbavail kbmemused %memused kbbuffers kbcached kbcommit %commit kbactive kbinact kbdirty
+**本篇转述**：这一组给的是空闲量、可用量、已用量与占用率、缓冲区与缓存、提交量与提交率、
+活跃与非活跃页、以及脏页。字段清单见原文 L85。
 
 ```bash
 sar -r
@@ -253,9 +255,8 @@ sar -r
 
 **机制**：`-B` 给**缺页与回收**的活动速率，`-H` 给大页的占用。
 
-> pgpgin/s pgpgout/s fault/s majflt/s pgfree/s pgscank/s pgscand/s pgsteal/s %vmeff
-
-> kbhugfree kbhugused %hugused
+**本篇转述**：`-B` 给页面读入与写出速率、缺页与主要缺页速率、回收速率、扫描速率、
+换出速率与回收效率；`-H` 给大页的空闲量、已用量与占用率。字段清单见原文 L73 / L79。
 
 ```bash
 sar -B
@@ -279,15 +280,14 @@ sar -H
 `majflt/s` 非零 = **已经在读磁盘**，问题从「内存分配」变成「工作集装不下」。
 
 **大页的前提**：原文明确提醒有些选项要内核特性支持（举的就是大页），
-所以 `sar -H` 的输出可能为空——那是**特性没开**，不是「没有大页使用」（见 §附录 B 定位与边界 引的那句）。
+所以 `sar -H` 的输出可能为空——那是**特性没开**，不是「没有大页使用」（见 §附录 B 定位与边界 逐字引的那句）。
 
 ## §附录 B 交换区
 
 **机制**：`-S` 给交换区的**存量**，`-W` 给**换入换出的速率**。
 
-> kbswpfree kbswpused %swpused kbswpcad %swpcad
-
-> pswpin/s pswpout/s
+**本篇转述**：`-S` 给交换区空闲量、已用量与占用率，以及 swap cache 的绝对值与占比；
+`-W` 给每秒换入与换出的页数。字段清单见原文 L91 / L97。
 
 ```bash
 sar -S
@@ -313,7 +313,8 @@ sar -W
 **机制**：`-d` 给每个设备的**吞吐（tps、kB/s）、请求形态（areq-sz）、
 排队（aqu-sz、await）、忙碌程度（%util）**。
 
-> tps rkB/s wkB/s areq-sz aqu-sz await svctm %util
+**本篇转述**：这一组给每秒 I/O 次数、读写千字节速率、平均请求大小、平均队列深度、
+平均延迟、设备服务时间与忙碌占比。字段清单见原文 L109。
 
 ```bash
 sar -d
@@ -345,9 +346,9 @@ sar -d
 
 **机制**：`-n DEV` 给每个网卡的**吞吐与利用率**，`-n EDEV` 给**错误与丢包**。
 
-> rxpck/s txpck/s rxkB/s txkB/s rxcmp/s txcmp/s rxmcst/s %ifutil
-
-> rxerr/s txerr/s coll/s rxdrop/s txdrop/s txcarr/s rxfram/s rxfifo/s txfifo/s
+**本篇转述**：`DEV` 给收包与发包速率、收发千字节速率、组播包速率与网卡利用率；
+`EDEV` 给收发错误、冲突、收发丢弃、载波与帧错误、收发 FIFO 溢出。
+字段清单见原文 L115 / L121。
 
 ```bash
 sar -n DEV
@@ -377,11 +378,11 @@ sar -n EDEV
 **机制**：`-n IP` / `-n EIP` 看 IP 层，`-n TCP` / `-n ETCP` 看 TCP 层，
 `-n SOCK` 看 socket 存量。**这三个层次必须分开读**（推演）：同一件事在三层各有各的指纹。
 
-> ihdrerr/s iadrerr/s iukwnpr/s idisc/s odisc/s onort/s asmf/s fragf/s
-
-> atmptf/s estres/s retrans/s isegerr/s orsts/s
-
-> totsck tcpsck udpsck rawsck ip-frag tcp-tw
+**本篇转述**：`IP` 给 IP 层的收包、转发、丢弃、出队、重组与分片计数；
+`EIP` 给 IP 层的头错、地址错、未知协议、收发丢弃与分片失败计数；
+`TCP` 给主动/被动连接数与收发段数；`ETCP` 给连接失败、连接重置、重传与段错误计数；
+`SOCK` 给 socket 总数、分协议计数、IP 分片数与 TIME_WAIT 数。
+字段清单见原文 L127 / L133 / L139 / L145 / L151。
 
 ```bash
 sar -n IP
@@ -415,7 +416,8 @@ sar -n SOCK
 
 **机制**：`-v` 给内核维护的**全局表项**的使用量。
 
-> dentunusd file-nr inode-nr pty-nr
+**本篇转述**：给的是 dentry 缓存条目数、文件句柄与文件结构数、inode 数、伪终端数。
+字段清单见原文 L103。
 
 ```bash
 sar -v
