@@ -2,3 +2,5 @@ build/
 reports/
 *.bin
 *.o
+__pycache__/
+*.pyc
